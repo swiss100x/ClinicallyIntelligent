@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clinically Intelligent — AI for Healthcare Professionals</title>
+<meta name="description" content="A weekly newsletter on AI in healthcare. Written by an NHS Clinical Lead. IG-safe. Free to start." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+
+:root {
+  --bg:     #0e0e0c;
+  --bg2:    #141412;
+  --bg3:    #1c1c19;
+  --white:  #f2ede6;
+  --mid:    rgba(242,237,230,0.5);
+  --faint:  rgba(242,237,230,0.2);
+  --border: rgba(242,237,230,0.08);
+  --amber:  #c8824a;
+  --amber2: #e09a62;
+  --serif:  'Cormorant Garamond', Georgia, serif;
+  --sans:   'Geist', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  background: linear-gradient(to bottom, rgba(14,14,12,0.96) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 400; font-style: italic;
+  color: var(--white); letter-spacing: 0.01em;
+}
+.nav-cta {
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 500;
+  color: var(--bg); background: var(--white);
+  padding: 8px 20px; border-radius: 100px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--amber2); color: #fff; }
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+}
+.hero-canvas {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 65% 35%, rgba(100,80,50,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 20% 80%, rgba(200,130,74,0.06) 0%, transparent 50%),
+    linear-gradient(160deg, #0e0e0c 0%, #181714 40%, #0e0e0c 100%);
+}
+.hero-canvas::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px);
+  pointer-events: none;
+}
+.hero-bg-text {
+  position: absolute; bottom: -0.1em; left: -0.02em;
+  font-family: var(--serif);
+  font-size: clamp(160px, 28vw, 340px);
+  font-weight: 300; font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242,237,230,0.04);
+  line-height: 1; pointer-events: none; user-select: none;
+  white-space: nowrap; z-index: 1;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 40px 64px; max-width: 1000px;
+}
+.hero-issue {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-issue::before {
+  content: ''; display: inline-block;
+  width: 20px; height: 1px; background: var(--amber);
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8.5vw, 110px);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.02em; color: var(--white);
+  margin-bottom: 32px; max-width: 840px;
+}
+.hero-h1 em { font-style: italic; color: var(--amber2); }
+.hero-bottom {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 40px; flex-wrap: wrap;
+}
+.hero-tagline {
+  font-size: 17px; line-height: 1.7;
+  color: var(--mid); max-width: 400px; font-weight: 300;
+}
+.hero-tagline strong { color: var(--white); font-weight: 500; }
+.hero-form-wrap { flex-shrink: 0; }
+.hero-form-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 10px;
+}
+.hero-form { display: flex; gap: 6px; }
+.hero-input {
+  background: rgba(242,237,230,0.07);
+  border: 1px solid rgba(242,237,230,0.12);
+  border-radius: 100px; padding: 12px 20px;
+  font-family: var(--sans); font-size: 14px; color: var(--white);
+  outline: none; width: 240px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.hero-input::placeholder { color: rgba(242,237,230,0.3); }
+.hero-input:focus { border-color: var(--amber); background: rgba(242,237,230,0.1); }
+.hero-btn {
+  background: var(--amber); color: #fff; border: none;
+  border-radius: 100px; padding: 12px 22px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.15s;
+}
+.hero-btn:hover { background: var(--amber2); transform: translateY(-1px); }
+.hero-fine { font-size: 11px; color: var(--faint); margin-top: 8px; }
+.hero-success {
+  display: none; font-size: 14px; font-weight: 500;
+  color: var(--amber2); padding: 12px 0;
+}
+.hero-scroll {
+  position: absolute; bottom: 28px; right: 40px; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--faint), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.hero-scroll-text {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--faint); writing-mode: vertical-rl;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+
+/* STATEMENT */
+.statement {
+  padding: 120px 40px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.statement-inner { max-width: 900px; margin: 0 auto; }
+.statement-kicker {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.statement-kicker::before {
+  content: ''; width: 28px; height: 1px;
+  background: var(--amber); flex-shrink: 0;
+}
+.statement-text {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 300; line-height: 1.25;
+  letter-spacing: -0.01em; color: var(--white);
+}
+.statement-text em { font-style: italic; color: var(--amber2); }
+.statement-text strong { font-weight: 500; }
+
+/* PILLARS */
+.pillars {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-bottom: 1px solid var(--border);
+}
+.pillar {
+  padding: 64px 40px; border-right: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.pillar:last-child { border-right: none; }
+.pillar:hover { background: var(--bg2); }
+.pillar-num {
+  font-family: var(--serif); font-size: 13px; font-style: italic;
+  color: var(--amber); margin-bottom: 24px; display: block;
+}
+.pillar-heading {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 300; line-height: 1.2;
+  color: var(--white); margin-bottom: 16px; letter-spacing: -0.01em;
+}
+.pillar-heading em { font-style: italic; color: var(--amber2); }
+.pillar-body { font-size: 14px; line-height: 1.8; color: var(--mid); font-weight: 300; }
+
+/* INSIDE */
+.inside { padding: 100px 40px; border-bottom: 1px solid var(--border); }
+.inside-header { max-width: 560px; margin-bottom: 56px; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 16px;
+}
+.section-heading {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 300; line-height: 1.15;
+  letter-spacing: -0.015em; color: var(--white);
+}
+.section-heading em { font-style: italic; color: var(--amber2); }
+.inside-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.inside-card {
+  background: var(--bg); padding: 36px 32px 40px;
+  transition: background 0.25s;
+}
+.inside-card:hover { background: var(--bg3); }
+.inside-card-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+}
+.inside-card-title {
+  font-family: var(--serif);
+  font-size: 26px; font-weight: 300;
+  line-height: 1.2; color: var(--white); margin-bottom: 12px;
+}
+.inside-card-title em { font-style: italic; }
+.inside-card-body { font-size: 13px; line-height: 1.8; color: var(--mid); font-weight: 300; }
+
+/* BIO */
+.bio {
+  padding: 100px 40px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.bio-pull {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300; font-style: italic;
+  line-height: 1.25; color: var(--white);
+  letter-spacing: -0.01em; margin-bottom: 32px;
+}
+.bio-pull strong { font-style: normal; font-weight: 500; color: var(--amber2); }
+.bio-details { display: flex; flex-direction: column; gap: 10px; }
+.bio-detail {
+  font-size: 13px; color: var(--mid); font-weight: 300;
+  display: flex; align-items: center; gap: 12px;
+}
+.bio-detail::before {
+  content: ''; width: 16px; height: 1px;
+  background: var(--amber); flex-shrink: 0;
+}
+.bio-text {
+  font-size: 17px; line-height: 1.85;
+  color: var(--mid); font-weight: 300; margin-bottom: 24px;
+}
+.bio-text strong { color: var(--white); font-weight: 500; }
+
+/* BOTTOM CTA */
+.bottom-cta {
+  padding: 120px 40px 100px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.bottom-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,130,74,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bottom-cta-inner { position: relative; z-index: 1; }
+.bottom-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 24px;
+}
+.bottom-heading {
+  font-family: var(--serif);
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.02em; color: var(--white); margin-bottom: 20px;
+}
+.bottom-heading em { font-style: italic; color: var(--amber2); }
+.bottom-sub {
+  font-size: 17px; line-height: 1.75; color: var(--mid);
+  max-width: 480px; margin: 0 auto 48px; font-weight: 300;
+}
+.bottom-sub strong { color: var(--amber2); }
+.bottom-form {
+  display: flex; gap: 8px; justify-content: center;
+  max-width: 440px; margin: 0 auto; flex-wrap: wrap;
+}
+.bottom-input {
+  flex: 1; min-width: 200px;
+  background: rgba(242,237,230,0.07);
+  border: 1px solid rgba(242,237,230,0.12);
+  border-radius: 100px; padding: 14px 22px;
+  font-family: var(--sans); font-size: 15px; color: var(--white);
+  outline: none; transition: border-color 0.2s, background 0.2s;
+}
+.bottom-input::placeholder { color: rgba(242,237,230,0.25); }
+.bottom-input:focus { border-color: var(--amber); background: rgba(242,237,230,0.1); }
+.bottom-btn {
+  background: var(--amber); color: #fff; border: none;
+  border-radius: 100px; padding: 14px 28px;
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.02em; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.bottom-btn:hover { background: var(--amber2); transform: translateY(-1px); }
+.bottom-fine { font-size: 12px; color: var(--faint); margin-top: 16px; }
+.bottom-success {
+  display: none; font-family: var(--serif);
+  font-size: 22px; font-style: italic; color: var(--amber2); padding: 12px 0;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 28px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-logo {
+  font-family: var(--serif); font-size: 16px;
+  font-style: italic; font-weight: 300; color: var(--mid);
+}
+.footer-tagline { font-size: 12px; color: var(--faint); letter-spacing: 0.04em; }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 0 24px; }
+  .hero-content { padding: 0 24px 56px; }
+  .hero-bg-text { font-size: 28vw; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-input { width: 100%; }
+  .hero-scroll { display: none; }
+  .statement { padding: 72px 24px; }
+  .pillars { grid-template-columns: 1fr; }
+  .pillar { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 24px; }
+  .pillar:last-child { border-bottom: none; }
+  .inside { padding: 72px 24px; }
+  .inside-grid { grid-template-columns: 1fr; }
+  .bio { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
+  .bottom-cta { padding: 80px 24px 72px; }
+  footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 46px; }
+  .hero-form { flex-direction: column; }
+  .hero-input { width: 100%; }
+  .bottom-form { flex-direction: column; }
+  .bottom-btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Clinically Intelligent</div>
+  <a href="#signup" class="nav-cta">Subscribe free</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-canvas"></div>
+  <div class="hero-bg-text">CI</div>
+  <div class="hero-content">
+    <div class="hero-issue">Weekly newsletter — AI in healthcare</div>
+    <h1 class="hero-h1">
+      The clinicians<br>
+      who understand AI<br>
+      <em>will lead what comes next.</em>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-tagline">
+        A weekly newsletter on AI in healthcare.<br>
+        <strong>Written by an NHS Clinical Lead.</strong><br>
+        For the professionals who want to stay ahead.
+      </p>
+      <div class="hero-form-wrap">
+        <div class="hero-form-label">Join free — one email a week</div>
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+        <iframe src="https://subscribe-forms.beehiiv.com/59fa341d-4d61-4a62-ba99-00cc78004bae" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;max-width:500px;height:160px;margin:0;border-radius:0px;background-color:transparent;box-shadow:0 0 #0000;"></iframe>
+        <div class="hero-fine">Free to read. No card. Unsubscribe any time.</div>
+        <div class="hero-fine" style="margin-top:10px;">Issue 01 is live — <a href="https://www.clinicallyintelligent.com/p/clinically-intelligent" style="color:var(--amber);text-decoration:underline;text-underline-offset:3px;" target="_blank">read it here</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <div class="hero-scroll-text">Scroll</div>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="statement-inner">
+    <div class="statement-kicker">Why this exists</div>
+    <p class="statement-text">
+      Your Trust is not going to train you on this.<br>
+      <em>Nobody is.</em> The gap between what AI can do<br>
+      and what most clinicians know about it<br>
+      <strong>is only getting wider.</strong>
+    </p>
+  </div>
+</section>
+
+<div class="pillars">
+  <div class="pillar">
+    <span class="pillar-num">01</span>
+    <h3 class="pillar-heading">Written by<br><em>a clinician.</em></h3>
+    <p class="pillar-body">Not a tech blogger. A Band 7 NHS Occupational Therapist at Barts Health, East London. With a caseload, MDTs, and a genuine interest in making AI work in clinical practice.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-num">02</span>
+    <h3 class="pillar-heading"><em>IG-safe</em><br>by default.</h3>
+    <p class="pillar-body">Every tool, tip, and prompt is written with Information Governance front of mind. Not a disclaimer. Built into every issue from the start.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-num">03</span>
+    <h3 class="pillar-heading">Free<br><em>to read.</em></h3>
+    <p class="pillar-body">No credit card. No catch. No paywall. Just one email a week with everything you need to stay ahead.</p>
+  </div>
+</div>
+
+<section class="inside">
+  <div class="inside-header">
+    <div class="section-eyebrow">What's inside</div>
+    <h2 class="section-heading">Five things.<br>Every week.<br><em>No noise.</em></h2>
+  </div>
+  <div class="inside-grid">
+    <div class="inside-card">
+      <div class="inside-card-label">Tools</div>
+      <div class="inside-card-title">One AI tool,<br><em>reviewed honestly.</em></div>
+      <p class="inside-card-body">Worth your time or not. What it actually does in a clinical context. No affiliate links. No hype.</p>
+    </div>
+    <div class="inside-card">
+      <div class="inside-card-label">IG Guidance</div>
+      <div class="inside-card-title"><em>Plain English.</em><br>What you can use.</div>
+      <p class="inside-card-body">What the DCB standards actually mean in practice. The stuff your DPO might not have read yet.</p>
+    </div>
+    <div class="inside-card">
+      <div class="inside-card-label">Opinion</div>
+      <div class="inside-card-title">A direct take.<br><em>No fence sitting.</em></div>
+      <p class="inside-card-body">Written by someone who has an opinion and is not worried about upsetting a comms team.</p>
+    </div>
+    <div class="inside-card">
+      <div class="inside-card-label">The Prompt</div>
+      <div class="inside-card-title"><em>Ready to use</em><br>this week.</div>
+      <p class="inside-card-body">One clinical prompt you can copy, adapt, and deploy safely. Tested. Notes included.</p>
+    </div>
+    <div class="inside-card">
+      <div class="inside-card-label">Digital Health News</div>
+      <div class="inside-card-title">What matters.<br><em>Nothing else.</em></div>
+      <p class="inside-card-body">NHSX, NHS England, MHRA — the week's signal, stripped of the press release language.</p>
+    </div>
+    <div class="inside-card">
+      <div class="inside-card-label">Free to read</div>
+      <div class="inside-card-title">Every issue.<br><em>No paywall.</em></div>
+      <p class="inside-card-body">Everything in Clinically Intelligent is free. No tier you are missing. No content locked away. Just subscribe and read.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bio">
+  <div class="bio-left">
+    <div class="section-eyebrow" style="margin-bottom:24px;">Who writes it</div>
+    <p class="bio-pull">
+      "Let's be real — <strong>nobody in your Trust</strong> is going to train you on this."
+    </p>
+    <div class="bio-details">
+      <div class="bio-detail">Band 7 NHS Occupational Therapist, Barts Health</div>
+      <div class="bio-detail">Trained in professional football academies before healthcare</div>
+      <div class="bio-detail">East London. Grew up here.</div>
+      <div class="bio-detail">Building in health technology</div>
+    </div>
+  </div>
+  <div class="bio-right">
+    <p class="bio-text">
+      I work in the NHS. I have a caseload. I sit in MDTs. I know what it is like to be told to use a new digital system with <strong>zero training and no time</strong>.
+    </p>
+    <p class="bio-text">
+      I have been that clinician staying late to finish notes, chasing referrals that should take five minutes, and sitting in handovers where half the information is missing. <strong>AI does not fix the NHS. But it can give you time back.</strong>
+    </p>
+    <p class="bio-text">
+      This newsletter is not written from a co-working space. It comes from the wards, the ward rounds, the referrals and from someone who has always been willing to say the thing out loud that everyone else is thinking quietly.
+    </p>
+  </div>
+</section>
+
+<section class="bottom-cta" id="signup">
+  <div class="bottom-cta-inner">
+    <div class="bottom-eyebrow">Join the newsletter</div>
+    <h2 class="bottom-heading">
+      Read it before<br>
+      <em>the room does.</em>
+    </h2>
+    <p class="bottom-sub">
+      Free to start. One email a week. Written by someone who still has a caseload.
+    </p>
+    <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+    <iframe src="https://subscribe-forms.beehiiv.com/59fa341d-4d61-4a62-ba99-00cc78004bae" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;max-width:500px;height:160px;margin:0 auto;display:block;border-radius:0px;background-color:transparent;box-shadow:0 0 #0000;"></iframe>
+    <div class="bottom-fine">Free to read. No card needed. Unsubscribe any time.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Clinically Intelligent</div>
+  <div class="footer-tagline">AI in healthcare — written by a clinician who still has a caseload. / clinicallyintelligent.com</div>
+</footer>
+
+<script>
+function handleSignup(e, successId) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  document.getElementById(successId).style.display = 'block';
+}
+</script>
+
+</body>
+</html>
