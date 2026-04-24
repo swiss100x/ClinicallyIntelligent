@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinically Intelligent — practical AI for NHS clinicians</title>
+<meta name="description" content="A weekly breakdown of how NHS clinicians can use simple, free AI tools to protect time without lowering the standard of care. Free. Every Wednesday.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900;9..144,300,100,0;9..144,400,100,1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c0b0a;
+    --ink-2: #141210;
+    --paper: #f4ede0;
+    --paper-2: #ebe2d1;
+    --paper-dim: #a49a88;
+    --paper-mute: #6f6757;
+    --rule: #2a2621;
+    --amber: #d98a1e;
+    --amber-soft: #e9b367;
+    --ember: #b4601a;
+    --crit: #e04b27;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(217, 138, 30, 0.09), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 30%, rgba(217, 138, 30, 0.04), transparent 70%);
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ================= MASTHEAD ================= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0 18px;
+    position: sticky;
+    top: 0;
+    background: rgba(12, 11, 10, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+
+  .masthead-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+  }
+
+  .wordmark em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--amber-soft);
+  }
+
+  .mast-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    display: flex;
+    gap: 22px;
+  }
+
+  .mast-meta .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    margin-right: 7px;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px var(--amber);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 640px) {
+    .mast-meta .hide-sm { display: none; }
+  }
+
+  /* ================= HERO ================= */
+  .hero {
+    padding: 90px 0 70px;
+    position: relative;
+  }
+
+  .issue-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .issue-tag::before,
+  .issue-tag::after {
+    content: '';
+    height: 1px;
+    background: var(--rule);
+    flex: 0 1 60px;
+  }
+
+  .issue-tag::before { display: none; }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(44px, 7.2vw, 98px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 48px;
+    max-width: 18ch;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--amber-soft);
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+
+  .hero-lead {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(19px, 1.7vw, 22px);
+    line-height: 1.5;
+    color: var(--paper-2);
+    max-width: 52ch;
+    font-weight: 400;
+  }
+
+  .hero-cta-row {
+    margin-top: 56px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    background: var(--amber);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+  }
+
+  .btn:hover {
+    background: var(--amber-soft);
+    transform: translateY(-1px);
+  }
+
+  .btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .cta-fineprint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+
+  /* ================= CORE ARGUMENT ================= */
+  .core {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 100px 0;
+    background: var(--ink-2);
+    position: relative;
+  }
+
+  .core-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .core-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .core-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    padding-top: 8px;
+  }
+
+  .core-label .marker {
+    color: var(--amber);
+    margin-right: 10px;
+  }
+
+  .core-prose p {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.45;
+    letter-spacing: -0.012em;
+    color: var(--paper);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .core-prose p:last-child { margin-bottom: 0; }
+
+  .core-prose .pull {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--amber-soft);
+    font-variation-settings: "SOFT" 80, "WONK" 1;
+    border-left: 2px solid var(--amber);
+    padding-left: 28px;
+    margin: 40px 0;
+  }
+
+  /* ================= ROSTER OF FRICTION ================= */
+  .friction {
+    padding: 100px 0 90px;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: baseline;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 50;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--amber-soft);
+    font-variation-settings: "WONK" 1;
+  }
+
+  .friction-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 720px) {
+    .friction-list { grid-template-columns: 1fr; }
+  }
+
+  .friction-item {
+    padding: 36px 0 36px;
+    border-bottom: 1px solid var(--rule);
+    padding-right: 40px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .friction-item:nth-child(odd) {
+    padding-right: 50px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .friction-item:nth-child(even) {
+    padding-left: 50px;
+  }
+
+  @media (max-width: 720px) {
+    .friction-item:nth-child(odd) { border-right: none; padding-right: 0; }
+    .friction-item:nth-child(even) { padding-left: 0; }
+  }
+
+  .friction-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--paper-mute);
+    padding-top: 6px;
+  }
+
+  .friction-copy {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--paper-2);
+    font-weight: 400;
+  }
+
+  /* ================= THESIS ================= */
+  .thesis {
+    padding: 120px 0;
+    background: var(--ink-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thesis::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(217, 138, 30, 0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .thesis-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .thesis-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 40px;
+  }
+
+  .thesis-statement {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+
+  .thesis-statement em {
+    font-style: italic;
+    color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  .thesis-statement .break {
+    display: block;
+    margin-top: 14px;
+  }
+
+  /* ================= WHAT IT IS ================= */
+  .product {
+    padding: 110px 0 100px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .product-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  .product-prose p {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--paper-2);
+    margin-bottom: 24px;
+  }
+
+  .three-ones {
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 0;
+    position: relative;
+  }
+
+  .three-ones::before {
+    content: 'THE FORMULA';
+    position: absolute;
+    top: -8px;
+    left: 24px;
+    background: var(--ink);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--amber);
+  }
+
+  .one-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: baseline;
+    padding: 32px 32px;
+    border-bottom: 1px solid var(--rule);
+    gap: 24px;
+  }
+
+  .one-row:last-child { border-bottom: none; }
+
+  .one-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    color: var(--amber);
+    line-height: 1;
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  .one-label {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  .one-label strong {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .one-label span {
+    color: var(--paper-dim);
+    font-size: 15px;
+    font-family: 'Inter Tight', sans-serif;
+  }
+
+  /* ================= AUTHOR ================= */
+  .author {
+    padding: 100px 0;
+    background: var(--paper);
+    color: var(--ink);
+    position: relative;
+  }
+
+  .author-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(12, 11, 10, 0.15);
+  }
+
+  .author-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .author-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  .author-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+
+  .author-name em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ember);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  .author-role {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  .author-prose p {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.58;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+
+  .author-prose p:last-child { margin-bottom: 0; }
+
+  .author-prose em {
+    font-style: italic;
+    color: var(--ember);
+  }
+
+  /* ================= TESTIMONIAL ================= */
+  .testi {
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .testi-quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    max-width: 22ch;
+    margin: 0 auto 40px;
+    font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  }
+
+  .testi-quote::before {
+    content: '“';
+    display: block;
+    font-size: 120px;
+    color: var(--amber);
+    line-height: 0.5;
+    margin-bottom: 40px;
+    font-style: normal;
+    font-variation-settings: "WONK" 1;
+  }
+
+  .testi-attrib {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-bottom: 8px;
+  }
+
+  .testi-reach {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--paper-mute);
+    margin-top: 40px;
+  }
+
+  /* ================= FINAL CTA ================= */
+  .final {
+    padding: 140px 0 100px;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 40%, rgba(217, 138, 30, 0.08), transparent 70%);
+  }
+
+  .final-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .final-kicker {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    margin-bottom: 32px;
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+  }
+
+  .final-kicker em {
+    font-style: italic;
+    color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  .final-body {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--paper-2);
+    margin-bottom: 48px;
+  }
+
+  .final-cta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .final .btn {
+    padding: 20px 36px;
+    font-size: 15px;
+  }
+
+  .drop-note {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--paper-dim);
+    margin-top: 36px;
+  }
+
+  /* ================= FOOTER ================= */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+
+  .foot-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* ================= ENTRANCE MOTION ================= */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .reveal.d1 { animation-delay: 0.1s; }
+    .reveal.d2 { animation-delay: 0.25s; }
+    .reveal.d3 { animation-delay: 0.4s; }
+    .reveal.d4 { animation-delay: 0.55s; }
+    .reveal.d5 { animation-delay: 0.7s; }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  /* scroll-observed reveal */
+  .obs {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .obs.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 60px 0 50px; }
+    .core, .friction, .thesis, .product, .author, .testi, .final { padding-left: 0; padding-right: 0; }
+    .core { padding: 70px 0; }
+    .thesis { padding: 80px 0; }
+    .product { padding: 70px 0; }
+    .author { padding: 70px 0; }
+    .testi { padding: 80px 0; }
+    .final { padding: 80px 0 60px; }
+    .one-row { grid-template-columns: 50px 1fr; padding: 24px 20px; gap: 18px; }
+    .one-num { font-size: 42px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="wordmark">Clinically <em>Intelligent</em></div>
+    <div class="mast-meta">
+      <span class="hide-sm"><span class="dot"></span>DROPS WEDNESDAYS</span>
+      <span>EST. 2026</span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="issue-tag reveal d1">VOL. 01 — A PLAIN ARGUMENT</div>
+    <h1 class="reveal d2">You do not need more information. You need more <em>time</em> to use what you already know.</h1>
+    <p class="hero-lead reveal d3">For clinicians who already know what to do, but do not have the time to do it properly.</p>
+    <div class="hero-cta-row reveal d4">
+      <a href="https://www.clinicallyintelligent.com/?modal=signup" class="btn">Read the next issue <span class="arrow">→</span></a>
+      <span class="cta-fineprint">Free · No card · Every Wednesday</span>
+    </div>
+  </div>
+</section>
+
+<section class="core">
+  <div class="wrap">
+    <div class="core-grid">
+      <div class="core-label obs"><span class="marker">§</span>THE ARGUMENT</div>
+      <div class="core-prose">
+        <p class="obs">Clinicians are not struggling because they do not know enough. They are struggling because there is not enough time to do what they already know properly.</p>
+        <p class="obs">You already know what good care looks like. You trained for years to deliver it. The problem is not your knowledge or your commitment. The problem is everything else that fills your day before you get to use either of those things properly.</p>
+        <p class="pull obs">AI does not fix the NHS. It does not solve workforce pressures or give you back the hours that were never there to begin with.</p>
+        <p class="obs">But it can speed up the parts of your job that should not be taking as long as they do. And for a lot of clinicians that time adds up to something meaningful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="friction">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num obs">01 / EVIDENCE</div>
+      <h2 class="section-title obs">The shift doesn't run short of knowledge. It runs short of <em>minutes</em>.</h2>
+    </div>
+    <div class="friction-list">
+      <div class="friction-item obs">
+        <div class="friction-num">i.</div>
+        <p class="friction-copy">The documentation that follows every assessment.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">ii.</div>
+        <p class="friction-copy">The guidelines you mean to check but cannot find the time for.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">iii.</div>
+        <p class="friction-copy">The research sitting in your saved articles folder from three months ago.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">iv.</div>
+        <p class="friction-copy">The referral form you are still writing at the end of a shift that should have taken twenty minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="thesis">
+  <div class="wrap">
+    <div class="thesis-inner">
+      <div class="thesis-eyebrow obs">WHAT THIS IS, PLAINLY</div>
+      <p class="thesis-statement obs">
+        Clinically Intelligent is <em>not</em> an AI newsletter.
+        <span class="break">It is a weekly breakdown of how to use simple, free tools to get through your workload <em>without lowering the standard of care</em>.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="product">
+  <div class="wrap">
+    <div class="product-grid">
+      <div class="product-prose">
+        <div class="section-num obs" style="margin-bottom: 32px;">02 / THE FORMAT</div>
+        <p class="obs">Every issue is practical. Every tool has been tested before it is written about. Every prompt is ready to use.</p>
+        <p class="obs">The information governance guidance is built into every issue from the start — not as a disclaimer but as a non-negotiable.</p>
+        <p class="obs" style="color: var(--paper-dim); font-style: italic;">It drops every Wednesday. It is free. There is no paywall and no catch.</p>
+      </div>
+      <div class="three-ones obs">
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One tool.</strong>
+            <span>Tested. Free. Worth your time.</span>
+          </div>
+        </div>
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One real clinical use.</strong>
+            <span>From actual caseload, not theory.</span>
+          </div>
+        </div>
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One way to apply it this week.</strong>
+            <span>Ready before your next shift.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="author">
+  <div class="wrap">
+    <div class="author-label obs">WHO WRITES IT</div>
+    <div class="author-grid">
+      <div class="obs">
+        <h3 class="author-name">I am <em>Juwon</em>.</h3>
+        <p class="author-role">NHS Occupational Therapist<br>East London</p>
+      </div>
+      <div class="author-prose">
+        <p class="obs">Before healthcare I came through professional football academies at Stevenage FC and Leyton Orient FC. That background is part of who I am and how I think.</p>
+        <p class="obs">Six years in the NHS since then. I have built services, led teams, and been part of work recognised at the highest levels within Barts Health — including contributing to a service that won the <em>WeImprove Barts Award for Best Team Working in 2024</em>.</p>
+        <p class="obs">I started Clinically Intelligent during time away from the ward. I had been thinking about it for a while but it took stepping back from the day to day to actually build it. I was using AI tools in my own work and they were making a genuine difference. Not in a theoretical way. In a <em>I finished my notes before the end of shift</em> way. In a <em>I found a guideline update my Trust had not circulated</em> way. In a <em>I had more mental space left at the end of a Tuesday</em> way.</p>
+        <p class="obs">Most of the people around me had not been shown how to use these tools. That gap was not going to close by itself.</p>
+        <p class="obs">So I started writing about it. For people like me. Clinicians who are curious, who want to stay ahead, and who do not have time to go through generic AI content that was not written for someone with a caseload.</p>
+        <p class="obs">Every tool I cover I have tried myself first. Every scenario comes from real clinical work. If it did not earn its place it does not make the newsletter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap">
+    <p class="testi-quote obs">Really well written, clear and concise and really easy to follow the practical advice.</p>
+    <p class="testi-attrib obs">— Head of AHPs, London NHS Trust</p>
+    <p class="testi-reach obs">Read by AHP leads and clinicians across leading NHS Trusts.</p>
+  </div>
+</section>
+
+<section class="final" id="subscribe">
+  <div class="wrap">
+    <div class="final-inner">
+      <h2 class="final-kicker obs">You do not need more information. You need more <em>time</em> to use what you already know properly.</h2>
+      <p class="final-body obs">If that resonates with you then Clinically Intelligent is worth a read. It is free. It takes less than ten minutes a week. And it is written by someone who is figuring this out alongside you — not from the outside looking in.</p>
+      <div class="final-cta-row">
+        <a href="https://www.clinicallyintelligent.com/?modal=signup" class="btn obs">Subscribe free <span class="arrow">→</span></a>
+        <span class="cta-fineprint obs">Free · No card needed · Unsubscribe any time</span>
+      </div>
+      <p class="drop-note obs">Every Wednesday, something practical lands in your inbox.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© Clinically Intelligent 2026</span>
+    <span>Written in East London · Published on Beehiiv</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll-observed reveals
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.obs').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
