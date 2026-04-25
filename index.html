@@ -252,7 +252,7 @@
   }
   @media (max-width: 600px) {
     .beehiiv-wrap iframe {
-      height: 340px !important;
+      height: 400px !important;
     }
   }
 
@@ -484,6 +484,91 @@
   }
   .one-label strong { font-weight: 500; display: block; margin-bottom: 4px; }
   .one-label span { color: var(--paper-dim); font-size: 15px; font-family: 'Inter Tight', sans-serif; }
+
+  /* IN EVERY ISSUE */
+  .departments {
+    padding: 100px 0 110px;
+    border-top: 1px solid var(--rule);
+    background: var(--ink);
+  }
+
+  .departments-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: baseline;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .departments-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 50;
+  }
+
+  .departments-title em {
+    font-style: italic;
+    color: var(--amber-soft);
+    font-variation-settings: "WONK" 1;
+  }
+
+  .dept-list {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .dept-row {
+    display: grid;
+    grid-template-columns: 90px 200px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .dept-row:last-child { border-bottom: none; }
+
+  .dept-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--paper-mute);
+  }
+
+  .dept-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--amber-soft);
+    letter-spacing: -0.015em;
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  .dept-desc {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--paper-2);
+    font-weight: 400;
+  }
+
+  @media (max-width: 720px) {
+    .dept-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 28px 0;
+    }
+    .dept-num { font-size: 10.5px; }
+    .dept-name { font-size: 20px; }
+    .dept-desc { font-size: 17px; margin-top: 6px; }
+  }
 
   /* AUTHOR */
   .author { padding: 100px 0; background: var(--paper); color: var(--ink); }
@@ -1091,7 +1176,7 @@
       <div class="product-prose">
         <div class="section-num obs" style="margin-bottom: 32px;">02 / THE FORMAT</div>
         <p class="obs">Every issue is practical. Every tool has been tested before it is written about. Every prompt is ready to use.</p>
-        <p class="obs">The information governance guidance is built into every issue from the start — not as a disclaimer but as a non-negotiable.</p>
+        <p class="obs">The information governance guidance is built into every issue from the start. Not as a disclaimer but as a non-negotiable.</p>
         <p class="obs" style="color: var(--paper-dim); font-style: italic;">It drops every Wednesday. It is free. There is no paywall and no catch.</p>
       </div>
       <div class="three-ones obs">
@@ -1121,6 +1206,32 @@
   </div>
 </section>
 
+<section class="departments">
+  <div class="wrap">
+    <div class="departments-head">
+      <div class="section-num obs">03 / IN EVERY ISSUE</div>
+      <h2 class="departments-title obs">Three regular sections, <em>nothing filler</em>.</h2>
+    </div>
+    <div class="dept-list">
+      <div class="dept-row obs">
+        <div class="dept-num">i.</div>
+        <div class="dept-name">IG Guidance</div>
+        <p class="dept-desc">The IG questions clinicians actually ask, answered in plain English by someone who reads the standards so you do not have to.</p>
+      </div>
+      <div class="dept-row obs">
+        <div class="dept-num">ii.</div>
+        <div class="dept-name">Opinion</div>
+        <p class="dept-desc">A direct take on something that matters this week. No fence-sitting, no comms-team copy.</p>
+      </div>
+      <div class="dept-row obs">
+        <div class="dept-num">iii.</div>
+        <div class="dept-name">Digital Health News</div>
+        <p class="dept-desc">NHS England, MHRA, the things that actually changed this week, stripped of the press-release language.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="author">
   <div class="wrap">
     <div class="author-label obs">WHO WRITES IT</div>
@@ -1130,9 +1241,9 @@
         <p class="author-role">NHS Occupational Therapist<br>East London</p>
       </div>
       <div class="author-prose">
-        <p class="obs">Before healthcare I came through professional football academies at Stevenage FC and Leyton Orient FC. That background is part of who I am and how I think.</p>
-        <p class="obs">Six years in the NHS since then. I have built services, led teams, and been part of work recognised at the highest levels within Barts Health — including the <em>Newham Frailty Virtual Ward</em>, which won a 2024 WeImprove award for Working Across Systems.</p>
-        <p class="obs">I started Clinically Intelligent during time away from the ward. I had been thinking about it for a while but it took stepping back from the day to day to actually build it. I was using AI tools in my own work and they were making a genuine difference. Not in a theoretical way. In a <em>I finished my notes before the end of shift</em> way. In a <em>I found a guideline update my Trust had not circulated</em> way. In a <em>I had more mental space left at the end of a Tuesday</em> way.</p>
+        <p class="obs">Before healthcare I came through professional football academies at Stevenage and Leyton Orient. That background is part of who I am and how I think.</p>
+        <p class="obs">Six years in the NHS since then. I have built services, led teams, and been part of work recognised at the highest levels within Barts Health, including the <em>Newham Frailty Virtual Ward</em>, which won a 2024 WeImprove award for Working Across Systems.</p>
+        <p class="obs">I started Clinically Intelligent during time away from the ward. I had been thinking about it for a while but it took stepping back from the day to day to actually build it. I was using AI tools in my own work and they were making a difference. Not in a theoretical way. In a <em>I finished my notes before the end of shift</em> way. In a <em>I found a guideline update my Trust had not circulated</em> way. In a <em>I had more mental space left at the end of a Tuesday</em> way.</p>
         <p class="obs">Most of the people around me had not been shown how to use these tools. That gap was not going to close by itself.</p>
         <p class="obs">So I started writing about it. For people like me. Clinicians who are curious, who want to stay ahead, and who do not have time to go through generic AI content that was not written for someone with a caseload.</p>
         <p class="obs">Every tool I cover I have tried myself first. Every scenario comes from real clinical work. If it did not earn its place it does not make the newsletter.</p>
@@ -1144,7 +1255,7 @@
 <section class="testi">
   <div class="wrap">
     <p class="testi-quote obs">Really well written, clear and concise and really easy to follow the practical advice.</p>
-    <p class="testi-attrib obs">— Head of AHPs, London NHS Trust</p>
+    <p class="testi-attrib obs">— Senior Executive, London NHS Trust</p>
     <p class="testi-reach obs">Read by AHP leads and clinicians across leading NHS Trusts.</p>
   </div>
 </section>
@@ -1152,7 +1263,7 @@
 <section class="featured">
   <div class="wrap">
     <div class="featured-head">
-      <div class="section-num obs">03 / READ FIRST</div>
+      <div class="section-num obs">04 / READ FIRST</div>
       <h2 class="featured-title obs">The one issue to read before you <em>subscribe</em>.</h2>
     </div>
 
@@ -1162,7 +1273,7 @@
           <div class="issue-meta-row">
             <span class="issue-num">ISSUE 01</span>
             <span class="sep"></span>
-            <span>APRIL 2025</span>
+            <span>APRIL 2026</span>
             <span class="sep"></span>
             <span>~10 MIN READ</span>
           </div>
@@ -1181,7 +1292,7 @@
     <div class="final-inner">
       <div class="final-urgency obs">JOIN BEFORE WEDNESDAY'S ISSUE DROPS</div>
       <h2 class="final-kicker obs">You do not need more information. You need more <em>time</em> to use what you already know properly.</h2>
-      <p class="final-body obs">If that resonates with you then Clinically Intelligent is worth a read. It is free. It takes less than ten minutes a week. And it is written by someone who is figuring this out alongside you — not from the outside looking in.</p>
+      <p class="final-body obs">If that resonates with you then Clinically Intelligent is worth a read. It is free. It takes less than ten minutes a week. And it is written by someone who is figuring this out alongside you, not from the outside looking in.</p>
 
       <div class="beehiiv-wrap obs">
         <iframe src="https://subscribe-forms.beehiiv.com/ef224c1d-5dee-483e-914c-41b21e5c6745" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 305px; margin: 0; border-radius: 0 !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
