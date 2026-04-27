@@ -884,6 +884,50 @@
     .issue-card-aside { font-size: 72px; text-align: right; }
   }
 
+  /* ARCHIVE LINK — quiet footnote below the featured card */
+  .archive-link-row {
+    max-width: 860px;
+    margin: 36px auto 0;
+    padding: 0 4px;
+    text-align: right;
+  }
+
+  .archive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.25s ease, gap 0.25s ease;
+  }
+
+  .archive-link:hover {
+    color: var(--amber-soft);
+    gap: 14px;
+  }
+
+  .archive-link .arch-arrow {
+    color: var(--paper-mute);
+    transition: color 0.25s ease;
+  }
+
+  .archive-link:hover .arch-arrow {
+    color: var(--amber-soft);
+  }
+
+  @media (max-width: 720px) {
+    .archive-link-row {
+      text-align: left;
+      margin-top: 28px;
+      padding: 0 4px;
+    }
+  }
+
   /* STICKY CTA */
   .sticky-cta {
     position: fixed;
@@ -1267,7 +1311,7 @@
       <h2 class="featured-title obs">The one issue to read before you <em>subscribe</em>.</h2>
     </div>
 
-    <a href="https://read.clinicallyintelligent.com/p/clinically-intelligent" class="issue-card obs" target="_blank" rel="noopener">
+    <a href="https://www.clinicallyintelligent.com/p/clinically-intelligent" class="issue-card obs" target="_blank" rel="noopener">
       <div class="issue-card-inner">
         <div>
           <div class="issue-meta-row">
@@ -1284,6 +1328,12 @@
         <div class="issue-card-aside">01</div>
       </div>
     </a>
+
+    <div class="archive-link-row obs">
+      <a href="https://read.clinicallyintelligent.com/" class="archive-link" target="_blank" rel="noopener">
+        Read previous issues at read.clinicallyintelligent.com <span class="arch-arrow">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1341,7 +1391,7 @@
 <script>
   // Beehiiv signup URL — email is passed as a query param and the Beehiiv
   // modal completes the subscription server-side.
-  const BEEHIIV_URL = 'https://read.clinicallyintelligent.com/?modal=signup';
+  const BEEHIIV_URL = 'https://www.clinicallyintelligent.com/?modal=signup';
 
   function isValidEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
