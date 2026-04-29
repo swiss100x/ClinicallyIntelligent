@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates — Clinically Intelligent</title>
+<meta name="description" content="The three prompts and the carer guidance template from Issue 04 of Clinically Intelligent. Free downloads for NHS clinicians.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,300,100,1;9..144,400,100,1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c0b0a;
+    --ink-2: #141210;
+    --paper: #f4ede0;
+    --paper-2: #ebe2d1;
+    --paper-dim: #a49a88;
+    --paper-mute: #6f6757;
+    --rule: #2a2621;
+    /* Green = education / templates (page lead) */
+    --moss: #1f5f3f;
+    --moss-soft: #4a8a68;
+    --moss-deep: #143c28;
+    /* Amber = newsletter (conversion accent only) */
+    --amber: #d98a1e;
+    --amber-soft: #e9b367;
+    --ember: #b4601a;
+    --crit: #e04b27;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(31, 95, 63, 0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 30%, rgba(74, 138, 104, 0.05), transparent 70%);
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+    position: sticky; top: 0;
+    background: rgba(12, 11, 10, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+  .masthead-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand-link { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark { width: 38px; height: 38px; flex-shrink: 0; }
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
+  .brand-wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+  }
+  .brand-wordmark em { font-style: italic; font-weight: 400; color: var(--moss-soft); }
+  .mast-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--paper-mute);
+    display: flex; gap: 22px;
+  }
+  .mast-meta a { color: var(--paper-mute); text-decoration: none; transition: color 0.2s ease; }
+  .mast-meta a:hover { color: var(--moss-soft); }
+
+  .hero { padding: 80px 0 48px; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--moss-soft);
+    margin-bottom: 36px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .hero-eyebrow .badge {
+    border: 1px solid var(--moss);
+    color: var(--moss-soft);
+    padding: 5px 11px;
+    font-size: 10px;
+    background: rgba(31, 95, 63, 0.08);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(40px, 6vw, 80px); line-height: 1;
+    letter-spacing: -0.035em; margin-bottom: 32px;
+    max-width: 18ch;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  .hero h1 em {
+    font-style: italic; font-weight: 300; color: var(--moss-soft);
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .hero-lead {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5;
+    color: var(--paper-2); max-width: 56ch; margin-bottom: 12px;
+  }
+
+  .gate {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--rule);
+    background: var(--ink-2);
+    background-image: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(217, 138, 30, 0.06), transparent 60%);
+  }
+  .gate-inner { max-width: 720px; }
+  .gate-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--amber);
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .gate-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--amber);
+  }
+  .gate h2 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(26px, 3vw, 36px); line-height: 1.2;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 20px;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+  .gate h2 em {
+    font-style: italic; color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+  .gate-body {
+    font-family: 'Fraunces', serif; font-size: 18px;
+    line-height: 1.55; color: var(--paper-2); margin-bottom: 30px;
+  }
+
+  .subform {
+    display: flex;
+    max-width: 520px;
+    border: 1px solid var(--rule);
+    background: rgba(20, 18, 16, 0.6);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .subform:focus-within {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(217, 138, 30, 0.12);
+  }
+  .subform input[type="email"] {
+    flex: 1; padding: 18px 22px;
+    background: transparent; border: none; outline: none;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px; color: var(--paper);
+    min-width: 0;
+  }
+  .subform input[type="email"]::placeholder { color: var(--paper-mute); }
+  .subform button {
+    padding: 18px 26px;
+    background: var(--amber); color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.03em; border: none; cursor: pointer;
+    transition: background 0.25s ease;
+    white-space: nowrap;
+  }
+  .subform button:hover { background: var(--amber-soft); }
+  .gate-already {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .gate-already a { color: var(--moss-soft); text-decoration: none; border-bottom: 1px dotted var(--moss-soft); }
+  .gate-already a:hover { color: var(--paper); border-color: var(--paper); }
+  @media (max-width: 520px) {
+    .subform { flex-direction: column; max-width: 100%; }
+  }
+
+  .prompts { padding: 90px 0 60px; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--paper-mute);
+    margin-bottom: 14px;
+  }
+  .section-eyebrow .num { color: var(--moss-soft); }
+  .prompts h2 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.1;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 50px;
+    font-variation-settings: "SOFT" 50;
+  }
+  .prompts h2 em { font-style: italic; color: var(--moss-soft); font-variation-settings: "WONK" 1; }
+
+  .prompt-card {
+    border: 1px solid var(--rule);
+    background: var(--ink-2);
+    padding: 44px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    transition: border-color 0.25s ease;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .prompt-card.unlocked { opacity: 1; pointer-events: auto; }
+  .prompt-card:hover { border-color: var(--moss); }
+
+  .prompt-meta {
+    display: flex; align-items: center; gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--paper-mute);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .prompt-meta .num { color: var(--moss-soft); }
+  .prompt-meta .sep { width: 16px; height: 1px; background: var(--rule); }
+  .prompt-meta .tool {
+    color: var(--moss-soft);
+    border: 1px solid var(--moss);
+    padding: 4px 10px;
+    font-size: 10px;
+    background: rgba(31, 95, 63, 0.08);
+  }
+
+  .prompt-headline {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 12px; max-width: 22ch;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+  .prompt-headline em {
+    font-style: italic; color: var(--moss-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+  .prompt-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; line-height: 1.5;
+    color: var(--paper-2); margin-bottom: 30px;
+    font-style: italic; max-width: 60ch;
+  }
+
+  .prompt-block {
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--moss);
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--paper-2);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600; font-size: 12px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--paper);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.22s ease;
+  }
+  .btn-primary { background: var(--moss); color: var(--paper); border-color: var(--moss); }
+  .btn-primary:hover { background: var(--moss-soft); border-color: var(--moss-soft); color: var(--ink); }
+  .btn:hover { border-color: var(--moss); color: var(--moss-soft); }
+  .btn-primary.copied { background: transparent; color: var(--moss-soft); }
+  .btn .icn { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+  .lock-overlay {
+    position: absolute; inset: 0;
+    display: none;
+    align-items: center; justify-content: center;
+    background: rgba(12, 11, 10, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+  }
+  .prompt-card:not(.unlocked) .lock-overlay { display: flex; }
+  .lock-msg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--amber);
+    border: 1px solid var(--amber);
+    padding: 10px 18px;
+    background: var(--ink);
+  }
+
+  .companion {
+    padding: 80px 0 100px;
+    border-top: 1px solid var(--rule);
+    background: var(--ink-2);
+  }
+  .companion h2 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.1;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 50px;
+    font-variation-settings: "SOFT" 50;
+  }
+  .companion h2 em { font-style: italic; color: var(--moss-soft); font-variation-settings: "WONK" 1; }
+  .companion-card {
+    border: 1px solid var(--rule);
+    background: var(--ink);
+    padding: 50px 44px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    opacity: 0.55;
+    pointer-events: none;
+    transition: opacity 0.4s ease, border-color 0.25s ease;
+  }
+  .companion-card.unlocked { opacity: 1; pointer-events: auto; }
+  .companion-card:hover { border-color: var(--moss); }
+  .companion-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--moss-soft);
+    margin-bottom: 14px;
+  }
+  .companion h3 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 12px;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+  .companion h3 em { font-style: italic; color: var(--moss-soft); font-variation-settings: "WONK" 1; }
+  .companion p {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; line-height: 1.55;
+    color: var(--paper-2); font-style: italic;
+    max-width: 52ch;
+  }
+  @media (max-width: 720px) {
+    .companion-card { grid-template-columns: 1fr; }
+  }
+
+  .ig-notice {
+    padding: 50px 0 80px;
+    background: var(--ink-2);
+    border-top: 1px solid var(--rule);
+  }
+  .ig-box {
+    border: 1px solid var(--ember);
+    border-top: 4px solid var(--ember);
+    background: rgba(180, 96, 26, 0.05);
+    padding: 36px 38px;
+    max-width: 860px;
+  }
+  .ig-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--ember);
+    margin-bottom: 18px;
+  }
+  .ig-box p {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; line-height: 1.55;
+    color: var(--paper-2); margin-bottom: 14px;
+  }
+  .ig-box p:last-child { margin-bottom: 0; }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .foot-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .foot-mark { width: 26px; height: 26px; opacity: 0.7; }
+  .foot-mark svg { width: 100%; height: 100%; display: block; }
+  .foot-left { display: flex; align-items: center; gap: 14px; }
+
+  .toast {
+    position: fixed; bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--moss); color: var(--paper);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 14px 26px;
+    z-index: 200;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 60px 0 40px; }
+    .prompt-card { padding: 32px 24px; }
+    .prompt-block { padding: 20px 22px; font-size: 12px; }
+    .companion-card { padding: 36px 28px; }
+    .ig-box { padding: 28px 26px; }
+    .brand-wordmark { display: none; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(18px); animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+    .reveal.d1 { animation-delay: 0.10s; }
+    .reveal.d2 { animation-delay: 0.22s; }
+    .reveal.d3 { animation-delay: 0.34s; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="/" class="brand-link">
+      <span class="brand-mark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
+          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
+        </svg>
+      </span>
+      <span class="brand-wordmark">Clinically <em>Intelligent</em></span>
+    </a>
+    <div class="mast-meta">
+      <a href="/">← Home</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow reveal d1">
+      <span class="badge">EDUCATION</span>
+      <span>ISSUE 04  /  TEMPLATES</span>
+    </div>
+    <h1 class="reveal d2">Three prompts. One <em>workflow.</em></h1>
+    <p class="hero-lead reveal d3">The three prompts and the carer guidance template from Issue 04. Find. Decide. Explain. Use them in your own clinical work, free, no catch.</p>
+  </div>
+</section>
+
+<section class="gate" id="gate">
+  <div class="wrap">
+    <div class="gate-inner">
+      <div class="gate-label">UNLOCK ALL FOUR DOWNLOADS</div>
+      <h2>Free for NHS clinicians. <em>One email.</em> No spam, ever.</h2>
+      <p class="gate-body">Drop your email below to unlock the three prompts and the carer guidance template. You'll also get Issue 05 on Wednesday and one practical AI workflow every week after that.</p>
+      <form class="subform" id="gateForm" novalidate>
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+        <button type="submit">Unlock free →</button>
+      </form>
+      <div class="gate-already">
+        Already subscribed? <a href="#" id="alreadyLink">Skip the gate →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prompts">
+  <div class="wrap">
+    <div class="section-eyebrow"><span class="num">01</span> &nbsp;/&nbsp; PROMPT ONE</div>
+    <h2>The <em>roleplay</em> prompt.</h2>
+
+    <div class="prompt-card" data-prompt="01">
+      <div class="prompt-meta">
+        <span class="num">PROMPT 01</span>
+        <span class="sep"></span>
+        <span class="tool">CHATGPT</span>
+        <span class="sep"></span>
+        <span>FIND THE QUESTION</span>
+      </div>
+      <h3 class="prompt-headline">Pressure-test the conversation before you have it for <em>real.</em></h3>
+      <p class="prompt-tagline">Surfaces the questions a real family member would actually ask. Catches the words you use without thinking.</p>
+      <div class="prompt-block" id="p01">You are a [family member or patient] of someone facing [condition or situation]. You have no medical background. You are tired and worried. I am the [health professional] involved in their care.
+
+Ask me the questions you would actually have. Tell me when I use words you do not understand. Tell me when an instruction is not clear enough to follow at home. Push back if my answers are too clinical.
+
+Keep going until you feel you understand what is happening and what you need to do.</div>
+      <div class="prompt-actions">
+        <button class="btn btn-primary" data-copy="p01"><span class="icn">⎘</span> Copy prompt</button>
+        <a class="btn" href="downloads/Prompt-01-Roleplay-Clinically-Intelligent.docx" download><span class="icn">↓</span> Download .docx</a>
+      </div>
+      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top: 80px;"><span class="num">02</span> &nbsp;/&nbsp; PROMPT TWO</div>
+    <h2>The <em>operational research</em> prompt.</h2>
+
+    <div class="prompt-card" data-prompt="02">
+      <div class="prompt-meta">
+        <span class="num">PROMPT 02</span>
+        <span class="sep"></span>
+        <span class="tool">PERPLEXITY</span>
+        <span class="sep"></span>
+        <span>FIND THE EVIDENCE</span>
+      </div>
+      <h3 class="prompt-headline">Current evidence, framed for the way services <em>actually run.</em></h3>
+      <p class="prompt-tagline">Pushes Perplexity past summary and into operational translation. NHS-relevant, citation-backed, implementable.</p>
+      <div class="prompt-block" id="p02">Find the most relevant studies on [topic].
+
+Then translate the findings into NHS operational impact. For each insight include:
+
+  - what the study found
+  - what it means in practice for NHS services
+  - impact on cost, staffing, or patient flow
+  - whether it is realistically implementable
+
+Include citations.</div>
+      <div class="prompt-actions">
+        <button class="btn btn-primary" data-copy="p02"><span class="icn">⎘</span> Copy prompt</button>
+        <a class="btn" href="downloads/Prompt-02-Operational-Research-Clinically-Intelligent.docx" download><span class="icn">↓</span> Download .docx</a>
+      </div>
+      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top: 80px;"><span class="num">03</span> &nbsp;/&nbsp; PROMPT THREE</div>
+    <h2>The <em>documentation</em> prompt.</h2>
+
+    <div class="prompt-card" data-prompt="03">
+      <div class="prompt-meta">
+        <span class="num">PROMPT 03</span>
+        <span class="sep"></span>
+        <span class="tool">CLAUDE</span>
+        <span class="sep"></span>
+        <span>EXPLAIN IT CLEARLY</span>
+      </div>
+      <h3 class="prompt-headline">Bring the questions and the evidence together. <em>Build the library.</em></h3>
+      <p class="prompt-tagline">Produces structured carer or patient guidance at reading age eleven. Reusable. Composite scenarios only — never real patients.</p>
+      <div class="prompt-block" id="p03">Act as a clinical documentation assistant helping a [health professional] build a reusable [type of intervention] guidance template.
+
+I will give you a composite patient scenario and the [strategies / exercises / techniques] I have prescribed. Produce the output as a document laid out simply and clearly so a patient or carer can read it without effort.
+
+Use clear headings, short paragraphs, plain English at reading age eleven, and a warm tone written directly to the patient and the family member supporting them.
+
+Explain each [strategy / exercise / technique] using established clinical knowledge. Do not invent patient specific details. If something has not been provided write 'to be personalised by clinician' in that field.
+
+Scenario and [strategies / exercises / techniques]: [PASTE HERE]
+
+Template:
+
+About this guidance.
+  - What these [strategies / exercises / techniques] are for.
+  - Why your clinician has chosen them for you.
+  - What they should help with day to day.
+
+[Strategy / Exercise / Technique] one through four.
+  - What this is.
+  - When to use it.
+  - How to use it.
+  - How your family or carer can help.
+  - What good looks like.
+  - If it is not working.
+
+Building these into your day.
+  - How to fit these into normal life without it feeling like extra work.
+  - How to start small.
+  - What to do on a hard day.
+
+When to get in touch.
+  - Contact your team if.
+  - Contact your GP if.
+  - Call 111 if.
+  - Call 999 if.
+
+Questions for your next visit.
+Notes from home.</div>
+      <div class="prompt-actions">
+        <button class="btn btn-primary" data-copy="p03"><span class="icn">⎘</span> Copy prompt</button>
+        <a class="btn" href="downloads/Prompt-03-Documentation-Clinically-Intelligent.docx" download><span class="icn">↓</span> Download .docx</a>
+      </div>
+      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="companion">
+  <div class="wrap">
+    <div class="section-eyebrow"><span class="num">04</span> &nbsp;/&nbsp; COMPANION ASSET</div>
+    <h2>The <em>scaffold</em> the workflow produces.</h2>
+    <div class="companion-card" data-prompt="04">
+      <div>
+        <div class="companion-meta">CARER GUIDANCE TEMPLATE</div>
+        <h3>Save it once. Use it every <em>home visit.</em></h3>
+        <p>The fillable Word doc that Prompt 03 produces. Drop in the strategies, personalise inside your Trust's documentation systems, hand it to the family.</p>
+      </div>
+      <a class="btn btn-primary" href="downloads/Carer-Guidance-Template-Clinically-Intelligent.docx" download><span class="icn">↓</span> Download .docx</a>
+    </div>
+  </div>
+</section>
+
+<section class="ig-notice">
+  <div class="wrap">
+    <div class="ig-box">
+      <div class="ig-label">IMPORTANT</div>
+      <p>These prompts build library entries from <strong>composite scenarios</strong> — patient types, not real patients.</p>
+      <p>When you apply a library entry to a real patient, do so within your Trust's documentation systems. Any version with real patient information becomes a clinical record and your Trust's IG and records policies apply.</p>
+      <p>If you are not sure what those are, your IG lead is the person to ask.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-left">
+      <span class="foot-mark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
+          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
+        </svg>
+      </span>
+      <span>© Clinically Intelligent 2026</span>
+    </div>
+    <span>Written in East London · Published on Beehiiv</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+  const STORAGE_KEY = 'ci_templates_unlocked';
+  function isUnlocked() {
+    try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+  }
+  function unlock() {
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+    document.querySelectorAll('.prompt-card, .companion-card').forEach(el => el.classList.add('unlocked'));
+    const gate = document.getElementById('gate');
+    if (gate) gate.style.display = 'none';
+  }
+  if (isUnlocked()) unlock();
+
+  const BEEHIIV_URL = 'https://read.clinicallyintelligent.com/?modal=signup';
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+  document.getElementById('gateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const input = this.querySelector('input[type="email"]');
+    const email = input.value.trim();
+    if (!isValidEmail(email)) { input.focus(); return; }
+    const url = BEEHIIV_URL + '&email=' + encodeURIComponent(email);
+    window.open(url, '_blank', 'noopener');
+    setTimeout(unlock, 400);
+    showToast('Unlocked. Welcome aboard.');
+  });
+
+  document.getElementById('alreadyLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    unlock();
+    showToast('Unlocked.');
+    document.querySelector('.prompts').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', async function() {
+      if (!isUnlocked()) return;
+      const targetId = this.getAttribute('data-copy');
+      const text = document.getElementById(targetId).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const original = this.innerHTML;
+        this.classList.add('copied');
+        this.innerHTML = '<span class="icn">✓</span> Copied';
+        showToast('Prompt copied to clipboard');
+        setTimeout(() => {
+          this.classList.remove('copied');
+          this.innerHTML = original;
+        }, 2200);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Prompt copied');
+      }
+    });
+  });
+
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+</script>
+</body>
+</html>
