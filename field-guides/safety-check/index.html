@@ -664,10 +664,12 @@
 </footer>
 
 <script>
-  // Beehiiv signup. Email is passed as a query parameter; the Beehiiv modal
-  // completes the subscription. Same pattern as the templates page.
-  const BEEHIIV_URL = 'https://read.clinicallyintelligent.com/?modal=signup&utm_source=field_guide_01&utm_medium=safety_check_page&utm_campaign=field_guides';
-  const UNLOCK_KEY = 'ci_field_guide_01_unlocked';
+  // ─── CONFIGURATION ────────────────────────────────────────────────────────
+  // If you regenerate your API key, replace the value below and redeploy.
+  const BEEHIIV_PUB_ID  = 'vp1p1kc31zo0WAJ75qfOSSQlQYKYW10vARcURfx3hY6CD3NXbZ47xlo1pkRm0sej';
+  const BEEHIIV_API_KEY = 'ZckaVULob6OEXilrqlab7WZZbGywV3bv4lkVAwlpAfkHyfd9CSQapZubY9YhZxmQ';
+  const UNLOCK_KEY      = 'ci_field_guide_01_unlocked';
+  // ──────────────────────────────────────────────────────────────────────────
 
   function isValidEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -677,42 +679,77 @@
     document.getElementById('gateInner').style.display = 'none';
     document.querySelector('.gate').style.display = 'none';
     document.getElementById('unlocked').classList.add('show');
-    // Scroll the download section into view
     setTimeout(function() {
       document.getElementById('unlocked').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   }
 
-  // Check localStorage on load. If already unlocked, skip the gate
+  // If already unlocked (returning visitor), skip the gate immediately
   try {
-    if (localStorage.getItem(UNLOCK_KEY) === '1') {
-      unlock();
-    }
+    if (localStorage.getItem(UNLOCK_KEY) === '1') { unlock(); }
   } catch (e) {}
 
   // Wire the gate form
-  const form = document.getElementById('gateForm');
-  const err = document.getElementById('gateError');
+  const form  = document.getElementById('gateForm');
+  const err   = document.getElementById('gateError');
   const input = form.querySelector('input[type="email"]');
+  const btn   = form.querySelector('button');
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = input.value.trim();
 
     if (!isValidEmail(email)) {
+      err.textContent = 'Please enter a valid email address.';
       err.classList.add('show');
       input.focus();
       return;
     }
     err.classList.remove('show');
 
-    // Open Beehiiv subscription flow in a new tab with email pre-filled
-    const url = BEEHIIV_URL + '&email=' + encodeURIComponent(email);
-    window.open(url, '_blank', 'noopener');
+    // Disable button while request is in flight
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
 
-    // Persist unlock state and reveal the download
-    try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (e) {}
-    unlock();
+    try {
+      const res = await fetch(
+        `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${BEEHIIV_API_KEY}`
+          },
+          body: JSON.stringify({
+            email: email,
+            reactivate_existing: false,
+            send_welcome_email: true,
+            utm_source: 'field_guide_01',
+            utm_medium: 'safety_check_page',
+            utm_campaign: 'field_guides'
+          })
+        }
+      );
+
+      if (res.ok || res.status === 409) {
+        // 200/201 = new subscriber. 409 = already subscribed. Both unlock.
+        try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
+        unlock();
+      } else {
+        // Beehiiv returned an unexpected error
+        const data = await res.json().catch(() => ({}));
+        err.textContent = data.message || 'Something went wrong. Please try again.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Get the Field Guide →';
+      }
+    } catch (_) {
+      // Network failure — unlock anyway so the reader isn't blocked,
+      // and log the attempt so nothing is silently lost.
+      console.warn('Beehiiv API unreachable — unlocking without confirmed subscription.');
+      try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
+      unlock();
+    }
   });
 
   input.addEventListener('input', function() {
