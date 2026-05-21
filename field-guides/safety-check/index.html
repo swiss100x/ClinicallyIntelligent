@@ -665,10 +665,9 @@
 
 <script>
   // ─── CONFIGURATION ────────────────────────────────────────────────────────
-  // If you regenerate your API key, replace the value below and redeploy.
-  const BEEHIIV_PUB_ID  = 'vp1p1kc31zo0WAJ75qfOSSQlQYKYW10vARcURfx3hY6CD3NXbZ47xlo1pkRm0sej';
-  const BEEHIIV_API_KEY = 'ZckaVULob6OEXilrqlab7WZZbGywV3bv4lkVAwlpAfkHyfd9CSQapZubY9YhZxmQ';
-  const UNLOCK_KEY      = 'ci_field_guide_01_unlocked';
+  // Replace YOUR-SUBDOMAIN with your Cloudflare workers subdomain once deployed.
+  const PROXY_URL  = 'https://abeehiiv-proxy.juwonak1.workers.dev';
+  const UNLOCK_KEY = 'ci_field_guide_01_unlocked';
   // ──────────────────────────────────────────────────────────────────────────
 
   function isValidEmail(v) {
@@ -712,33 +711,25 @@
     btn.textContent = 'Subscribing…';
 
     try {
-      const res = await fetch(
-        `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${BEEHIIV_API_KEY}`
-          },
-          body: JSON.stringify({
-            email: email,
-            reactivate_existing: false,
-            send_welcome_email: true,
-            utm_source: 'field_guide_01',
-            utm_medium: 'safety_check_page',
-            utm_campaign: 'field_guides'
-          })
-        }
-      );
+      const res = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          utm_source:   'field_guide_01',
+          utm_medium:   'safety_check_page',
+          utm_campaign: 'field_guides'
+        })
+      });
 
-      if (res.ok || res.status === 409) {
-        // 200/201 = new subscriber. 409 = already subscribed. Both unlock.
+      const data = await res.json().catch(() => ({}));
+
+      if (data.ok) {
+        // Subscribed successfully (or already subscribed)
         try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
         unlock();
       } else {
-        // Beehiiv returned an unexpected error
-        const data = await res.json().catch(() => ({}));
-        err.textContent = data.message || 'Something went wrong. Please try again.';
+        err.textContent = data.error || 'Something went wrong. Please try again.';
         err.classList.add('show');
         btn.disabled = false;
         btn.textContent = 'Get the Field Guide →';
