@@ -354,6 +354,19 @@
   .download-card a:hover { background: var(--amber-soft); transform: translateY(-1px); }
   .download-card a .arrow { transition: transform 0.25s ease; }
   .download-card a:hover .arrow { transform: translateY(2px); }
+  .issue-nudge {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--paper-mute);
+    line-height: 1.8;
+  }
+  .issue-nudge a {
+    color: var(--amber-soft);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .issue-nudge a:hover { color: var(--paper); }
 
   /* SECTION */
   section.block { padding: 100px 0; border-top: 1px solid var(--rule); }
@@ -635,6 +648,7 @@
           Download Field Guide 01 <span class="arrow">↓</span>
         </a>
       </div>
+      <p class="issue-nudge">Want to read the full issue?<br><a href="https://read.clinicallyintelligent.com/p/issue-07-the-clinician-s-ai-safety-check-ef92" target="_blank" rel="noopener">Issue 07 · The Clinician's AI Safety Check →</a></p>
     </div>
   </div>
 </section>
