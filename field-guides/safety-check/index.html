@@ -267,6 +267,8 @@
     transition: background 0.25s ease;
   }
   .subform button:hover { background: var(--amber-soft); }
+  .subform button:disabled { background: var(--paper-mute); color: var(--paper-2); cursor: not-allowed; }
+
   .gate-fineprint {
     margin-top: 20px;
     font-family: 'JetBrains Mono', monospace;
@@ -644,7 +646,7 @@
       <p class="unlocked-body">Issue 07 of Clinically Intelligent lands in your inbox on Wednesday. In the meantime, the Field Guide is yours.</p>
       <div class="download-card">
         <div class="file-meta">PDF · 8 PAGES · VIEW IN GOOGLE DRIVE</div>
-        <a href="https://drive.google.com/file/d/15L52vvx4q9RXEhZKf7JInIBtsCDfYarR/view" target="_blank" rel="noopener">
+        <a href="https://drive.google.com/file/d/15L52vvx4q9RXEhZKf7InIBtsCDfYarR/view" target="_blank" rel="noopener">
           Download Field Guide 01 <span class="arrow">↓</span>
         </a>
       </div>
@@ -679,7 +681,6 @@
 
 <script>
   // ─── CONFIGURATION ────────────────────────────────────────────────────────
-  // Replace YOUR-SUBDOMAIN with your Cloudflare workers subdomain once deployed.
   const PROXY_URL  = 'https://abeehiiv-proxy.juwonak1.workers.dev';
   const UNLOCK_KEY = 'ci_field_guide_01_unlocked';
   // ──────────────────────────────────────────────────────────────────────────
@@ -720,8 +721,9 @@
     }
     err.classList.remove('show');
 
-    // Disable button while request is in flight
+    // DEBOUNCE TRIGGER: Lock down the button interface instantly
     btn.disabled = true;
+    const originalText = btn.textContent;
     btn.textContent = 'Subscribing…';
 
     try {
@@ -738,19 +740,18 @@
 
       const data = await res.json().catch(() => ({}));
 
-      if (data.ok) {
-        // Subscribed successfully (or already subscribed)
+      if (data.ok || res.ok) {
         try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
         unlock();
       } else {
         err.textContent = data.error || 'Something went wrong. Please try again.';
         err.classList.add('show');
+        // Release UI lock only on valid server rejection so they can fix input
         btn.disabled = false;
-        btn.textContent = 'Get the Field Guide →';
+        btn.textContent = originalText;
       }
     } catch (_) {
-      // Network failure — unlock anyway so the reader isn't blocked,
-      // and log the attempt so nothing is silently lost.
+      // Network/Proxy exception safety fallback
       console.warn('Beehiiv API unreachable — unlocking without confirmed subscription.');
       try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
       unlock();
