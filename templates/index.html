@@ -182,6 +182,8 @@
     white-space: nowrap;
   }
   .subform button:hover { background: var(--amber-soft); }
+  .subform button:disabled { background: var(--paper-mute); color: var(--paper-2); cursor: not-allowed; }
+  
   .gate-already {
     margin-top: 18px;
     font-family: 'JetBrains Mono', monospace;
@@ -643,30 +645,76 @@ Notes from home.</div>
 <div class="toast" id="toast">Copied to clipboard</div>
 
 <script>
+  // ─── CONFIGURATION & ENTITLEMENTS ─────────────────────────────────────────
   const STORAGE_KEY = 'ci_templates_unlocked';
+  const PROXY_URL   = 'https://abeehiiv-proxy.juwonak1.workers.dev';
+
   function isUnlocked() {
     try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
   }
+
   function unlock() {
     try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
     document.querySelectorAll('.prompt-card, .companion-card').forEach(el => el.classList.add('unlocked'));
     const gate = document.getElementById('gate');
     if (gate) gate.style.display = 'none';
   }
+
+  // Self-executing initialization for returning subscribers
   if (isUnlocked()) unlock();
 
-  const BEEHIIV_URL = 'https://read.clinicallyintelligent.com/?modal=signup';
-  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+  function isValidEmail(v) { 
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); 
+  }
 
-  document.getElementById('gateForm').addEventListener('submit', function(e) {
+  // ─── FORM HANDLING & DEBOUNCING ───────────────────────────────────────────
+  const form  = document.getElementById('gateForm');
+  const input = form.querySelector('input[type="email"]');
+  const btn   = form.querySelector('button');
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const input = this.querySelector('input[type="email"]');
     const email = input.value.trim();
-    if (!isValidEmail(email)) { input.focus(); return; }
-    const url = BEEHIIV_URL + '&email=' + encodeURIComponent(email);
-    window.open(url, '_blank', 'noopener');
-    setTimeout(unlock, 400);
-    showToast('Unlocked. Welcome aboard.');
+
+    if (!isValidEmail(email)) { 
+      input.focus(); 
+      showToast('Please enter a valid email address.');
+      return; 
+    }
+
+    // Lock UI state immediately to prevent duplicate requests from multi-clicks
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Unlocking...';
+
+    try {
+      const res = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email,
+          utm_source:   'templates_page',
+          utm_medium:   'resource_unlock',
+          utm_campaign: 'issue_04'
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (data.ok || res.ok) {
+        unlock();
+        showToast('Unlocked. Welcome aboard.');
+      } else {
+        showToast(data.error || 'Submission error. Please try again.');
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    } catch (err) {
+      // Graceful degradation fallback: let user read content even if network fails
+      console.warn('Beehiiv proxy unreachable — authorizing local bypass entitlement.', err);
+      unlock();
+      showToast('Unlocked.');
+    }
   });
 
   document.getElementById('alreadyLink').addEventListener('click', function(e) {
@@ -676,6 +724,7 @@ Notes from home.</div>
     document.querySelector('.prompts').scrollIntoView({ behavior: 'smooth' });
   });
 
+  // ─── CLIPBOARD ENGINE ──────────────────────────────────────────────────────
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', async function() {
       if (!isUnlocked()) return;
@@ -692,6 +741,7 @@ Notes from home.</div>
           this.innerHTML = original;
         }, 2200);
       } catch (err) {
+        // Legacy textual fallback layout
         const ta = document.createElement('textarea');
         ta.value = text; document.body.appendChild(ta);
         ta.select(); document.execCommand('copy');
@@ -701,9 +751,11 @@ Notes from home.</div>
     });
   });
 
+  // ─── NOTIFICATION SUBSYSTEM ───────────────────────────────────────────────
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
+    if (!t) return;
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(toastTimer);
