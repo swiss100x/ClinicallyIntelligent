@@ -736,7 +736,31 @@
     .reveal.d1 { animation-delay: 0.10s; }
     .reveal.d2 { animation-delay: 0.22s; }
     .reveal.d3 { animation-delay: 0.34s; }
+    .reveal.d4 { animation-delay: 0.46s; }
+    .reveal.d5 { animation-delay: 0.58s; }
     @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  }
+  .obs {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .obs.in { opacity: 1; transform: translateY(0); }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 40px 0 36px; }
+    .core { padding: 70px 0; }
+    .featured { padding: 70px 0 50px; }
+    .pathway-section { padding: 40px 0 70px; }
+    .friction { padding: 70px 0; }
+    .thesis { padding: 80px 0; }
+    .product { padding: 70px 0; }
+    .departments { padding: 70px 0; }
+    .author { padding: 70px 0; }
+    .testi { padding: 70px 0; }
+    .final { padding: 80px 0 60px; }
+    .one-row { grid-template-columns: 50px 1fr; padding: 24px 20px; gap: 18px; }
+    .one-num { font-size: 42px; }
+    .section-head, .featured-head, .departments-head { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>
 </head>
@@ -747,323 +771,431 @@
     <a href="/" class="brand-link">
       <span class="brand-mark" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
-          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
+          <text x="40" y="290" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
+          <text x="220" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
         </svg>
       </span>
-      <span class="brand-wordmark">Clinically <em>Intelligent</em></span>
+      <span class="wordmark">Clinically <em>Intelligent</em></span>
     </a>
     <div class="mast-meta">
-      <a href="/">← Home</a>
+      <span class="hide-sm drops">Drops Wednesdays</span>
+      <a href="mailto:hello@clinicallyintelligent.com">CONTACT</a>
     </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow reveal d1">
-      <span class="badge">EDUCATION</span>
-      <span>ISSUE 04  /  TEMPLATES</span>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="issue-tag reveal d1">A WEEKLY ISSUE FOR NHS CLINICIANS</div>
+        <p class="hero-byline reveal d1"><span class="label">Written by</span>NHS Occupational Therapist exploring AI in clinical practice</p>
+        <h1 class="reveal d2">You already know what to do. You just don't have <em>time</em> to do it properly.</h1>
+        <p class="hero-lead reveal d3">How healthcare is <em>actually</em> adopting AI. One practical lesson at a time.</p>
+
+        <form class="subform reveal d4" id="heroForm" novalidate>
+          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+          <button type="submit">Subscribe free <span class="arrow">→</span></button>
+          <div class="subform-success">You're in. Check your email to confirm your subscription.</div>
+        </form>
+        <div class="subform-error" id="heroError">Please enter a valid email address.</div>
+
+        <div class="hero-fineprint reveal d5">Free to read. No payment details required. Unsubscribe any time in one click.</div>
+      </div>
+
+      <div class="hero-image-frame reveal d3" aria-hidden="true">
+        <img src="images/hero-poster.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="hero-image-placeholder" style="display: none;">
+          <strong>Hero image goes here</strong>
+          Replace images/hero-poster.jpg<br>with your framed-poster photograph
+        </div>
+      </div>
     </div>
-    <h1 class="reveal d2">Three prompts. One <em>workflow.</em></h1>
-    <p class="hero-lead reveal d3">The three prompts and the carer guidance template from Issue 04. Find. Decide. Explain. Use them in your own clinical work, free, no catch.</p>
   </div>
 </section>
 
-<section class="gate" id="gate">
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <span><strong>How healthcare is actually adopting AI</strong></span>
+    <span class="sep" aria-hidden="true"></span>
+    <span>Practical AI for NHS clinicians</span>
+    <span class="sep" aria-hidden="true"></span>
+    <span>New issue every Wednesday</span>
+  </div>
+</div>
+
+<section class="core">
   <div class="wrap">
-    <div class="gate-inner">
-      <div class="gate-label">UNLOCK ALL FOUR DOWNLOADS</div>
-      <h2>Free for NHS clinicians. <em>One email.</em> No spam, ever.</h2>
-      <p class="gate-body">Drop your email below to unlock the three prompts and the carer guidance template. You'll also get Issue 05 on Wednesday and one practical AI workflow every week after that.</p>
-      <form class="subform" id="gateForm" novalidate>
+    <div class="core-grid">
+      <div class="core-label obs"><span class="marker">§</span>THE ARGUMENT</div>
+      <div class="core-prose">
+        <p class="obs">Clinicians are not struggling because they do not know enough. They are struggling because there is not enough time to do what they already know properly.</p>
+        <p class="obs">You already know what good care looks like. The problem is not knowledge. The problem is everything else competing for your attention before you get to use it.</p>
+        <p class="pull obs">AI does not fix the NHS. It does not solve workforce pressures or create hours that were never there.</p>
+        <p class="obs">But it can speed up the parts of the job that should not take as long as they do. And for many clinicians, that time adds up to something meaningful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="wrap">
+    <div class="featured-head">
+      <div class="section-num obs">01 / READ FIRST</div>
+      <h2 class="featured-title obs">The one issue to read before you <em>subscribe</em>.</h2>
+    </div>
+
+    <a href="https://read.clinicallyintelligent.com/p/clinically-intelligent" class="issue-card obs" target="_blank" rel="noopener">
+      <div class="issue-card-inner">
+        <div>
+          <div class="issue-meta-row">
+            <span class="issue-num">ISSUE 01</span>
+            <span class="sep"></span>
+            <span>APRIL 2026</span>
+            <span class="sep"></span>
+            <span>~10 MIN READ</span>
+          </div>
+          <h3 class="issue-headline">The tool that changed how I document <em>clinical assessments</em>.</h3>
+          <p class="issue-excerpt">There are things you can do right now, today, this week, that are safe, practical, and will give you time back.</p>
+          <span class="issue-card-cta">READ THE ISSUE <span>→</span></span>
+        </div>
+        <div class="issue-card-aside">01</div>
+      </div>
+    </a>
+
+    <div class="archive-link-row obs">
+      <a href="https://read.clinicallyintelligent.com/" class="archive-link" target="_blank" rel="noopener">
+        Read previous issues at read.clinicallyintelligent.com <span class="arch-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="pathway-section">
+  <div class="wrap">
+    <div class="featured-head">
+      <div class="section-num obs">02 / START FREE</div>
+      <h2 class="featured-title obs">Free resources for <em>clinicians</em>.</h2>
+    </div>
+    <div class="pathway-grid">
+
+      <a href="https://clinicallyintelligent.com/field-guides/safety-check/" class="pathway-card obs">
+        <div>
+          <div class="pathway-meta">FIELD GUIDE 01</div>
+          <h3 class="pathway-title">AI Safety Checklist</h3>
+          <p class="pathway-desc">A 30 second framework for safer AI use in clinical practice.</p>
+        </div>
+        <div class="pathway-cta">
+          <span class="pathway-arrow">→</span>
+          <span>READ FREE</span>
+        </div>
+        <div class="pathway-card-numeral">01</div>
+      </a>
+
+      <a href="https://clinicallyintelligent.com/templates/" class="pathway-card obs">
+        <div>
+          <div class="pathway-meta">RESOURCE LIBRARY</div>
+          <h3 class="pathway-title">Prompt Library</h3>
+          <p class="pathway-desc">Every prompt, framework and workflow from previous issues.</p>
+        </div>
+        <div class="pathway-cta">
+          <span class="pathway-arrow">→</span>
+          <span>OPEN LIBRARY</span>
+        </div>
+        <div class="pathway-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 130 150" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+            <rect x="6" y="40" width="22" height="100" />
+            <rect x="32" y="20" width="22" height="120" />
+            <rect x="58" y="30" width="22" height="110" />
+            <path d="M86 50 L100 138 L122 134 L108 46 Z" />
+          </svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="friction">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num obs">03 / EVIDENCE</div>
+      <h2 class="section-title obs">The shift doesn't run short of knowledge. It runs short of <em>minutes</em>.</h2>
+    </div>
+    <div class="friction-list">
+      <div class="friction-item obs">
+        <div class="friction-num">i.</div>
+        <p class="friction-copy">The note you still haven't finished at 4:42pm.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">ii.</div>
+        <p class="friction-copy">The referral that followed you home.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">iii.</div>
+        <p class="friction-copy">The guideline update you meant to read three weeks ago.</p>
+      </div>
+      <div class="friction-item obs">
+        <div class="friction-num">iv.</div>
+        <p class="friction-copy">The research sitting in your saved folder since the conference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="thesis">
+  <div class="wrap">
+    <div class="thesis-inner">
+      <div class="thesis-eyebrow obs">WHAT THIS IS, PLAINLY</div>
+      <p class="thesis-statement obs">
+        Clinically Intelligent is <em>not</em> an AI newsletter.
+        <span class="break">It is a weekly breakdown of how to use simple, free tools to get through your workload <span class="standard">without lowering the standard of care</span>.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="product">
+  <div class="wrap">
+    <div class="product-grid">
+      <div class="product-prose">
+        <div class="section-num obs" style="margin-bottom: 32px;">04 / THE FORMAT</div>
+        <p class="obs">Every issue is practical. Every tool has been tested before it is written about. Every prompt is ready to use.</p>
+        <p class="obs">The information governance guidance is built into every issue from the start. Not as a disclaimer but as a non-negotiable.</p>
+        <p class="obs" style="color: var(--paper-dim); font-style: italic;">It drops every Wednesday. It is free. There is no paywall and no catch.</p>
+      </div>
+      <div class="three-ones obs">
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One tool.</strong>
+            <span>Tested. Free. Worth your time.</span>
+          </div>
+        </div>
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One real clinical use.</strong>
+            <span>Grounded in NHS practice, not theory.</span>
+          </div>
+        </div>
+        <div class="one-row">
+          <div class="one-num">1.</div>
+          <div class="one-label">
+            <strong>One way to apply it this week.</strong>
+            <span>Ready before your next shift.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="departments">
+  <div class="wrap">
+    <div class="departments-head">
+      <div class="section-num obs">05 / IN EVERY ISSUE</div>
+      <h2 class="departments-title obs">Three regular sections, <em>nothing filler</em>.</h2>
+    </div>
+    <div class="dept-list">
+      <div class="dept-row obs">
+        <div class="dept-num">i.</div>
+        <div class="dept-name">The Tool</div>
+        <p class="dept-desc">A practical AI tool tested in real clinical practice. One per issue. The promise, the limits, and the prompt that actually works.</p>
+      </div>
+      <div class="dept-row obs">
+        <div class="dept-num">ii.</div>
+        <div class="dept-name">The Workflow</div>
+        <p class="dept-desc">Where the tool earns its place in a real clinical workflow. The specific moment of the week it saves time.</p>
+      </div>
+      <div class="dept-row obs">
+        <div class="dept-num">iii.</div>
+        <div class="dept-name">The Field Note</div>
+        <p class="dept-desc">A lesson, observation, or implementation insight from the front line. Short, specific, and earned the hard way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="author">
+  <div class="wrap">
+    <div class="author-label obs">WHO WRITES IT</div>
+    <div class="author-grid">
+      <div class="obs">
+        <h3 class="author-name">I am <em>Juwon</em>.</h3>
+        <p class="author-role">NHS Occupational Therapist<br>exploring AI in clinical practice<br>East London</p>
+      </div>
+      <div class="author-prose">
+        <p class="obs">I started Clinically Intelligent during time away from the ward. I had been thinking about it for a while, but it took stepping back from the day to day to actually build it.</p>
+        <p class="obs">I was using AI tools in my own work and they were making a difference. Not in a theoretical way. In a <em>I finished my notes before the end of shift</em> way. In a <em>I found a guideline update my Trust had not circulated</em> way. In a <em>I had more mental space left at the end of a Tuesday</em> way.</p>
+        <p class="obs">Most of the people around me had not been shown how to use these tools. That gap was not going to close by itself. So I started writing about it. For people like me. Clinicians who are curious, who want to stay ahead, and who do not have time to go through generic AI content that was not written for someone with a caseload.</p>
+        <p class="obs">Every tool I cover I have tried myself first. Every scenario comes from real clinical work. If it did not earn its place, it does not make the newsletter.</p>
+        <p class="obs">Over the last six years in the NHS, I have built services, led teams, and been part of work recognised within Barts Health, including the <em>Newham Frailty Virtual Ward</em>, which won a 2024 WeImprove Award for Working Across Systems.</p>
+        <p class="obs">Before healthcare I played at academies in Stevenage and Leyton Orient. I never made a career out of football, but I carried one lesson with me: performance is often the result of small improvements applied consistently over time. That idea sits underneath Clinically Intelligent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="notice">
+  <div class="notice-frame obs">
+    <div class="notice-label">Notice</div>
+    <p class="notice-body">Clinically Intelligent is written by Juwon Akinyande in a personal capacity and is <strong>not affiliated with, endorsed by, or representative of Barts Health NHS Trust</strong> or any other NHS organisation.</p>
+    <p class="notice-body">Content is intended for general educational purposes only and should not be treated as clinical, legal, or information governance advice. Local policies, governance requirements, and approved systems differ between organisations.</p>
+    <p class="notice-body">The AI tools referenced are consumer products. They have not been independently assessed against DCB0129 or DCB0160 clinical risk management standards, and may not be approved for clinical use by your employer. <strong>Patient identifiable information should not be entered into any consumer AI tool</strong> unless explicitly permitted within an approved organisational workflow.</p>
+    <p class="notice-body">Clinicians should follow local guidance and use their professional judgement when applying any ideas discussed in this publication.</p>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap">
+    <p class="testi-reach-lead obs">Being read at AHP Board level within a London NHS Trust, and with clinicians at another.</p>
+    <div class="testi-divider"></div>
+    <div class="testi-quote-mark obs">“</div>
+    <p class="testi-quote obs">Really well written, clear and concise and really easy to follow the practical advice.</p>
+    <p class="testi-attrib obs">— Senior Executive, London NHS Trust</p>
+  </div>
+</section>
+
+<section class="final" id="subscribe">
+  <div class="wrap">
+    <div class="final-inner">
+      <h2 class="final-kicker obs">You already know what to do. You just don't have <em>time</em> to do it properly.</h2>
+      <p class="final-body obs">If that resonates with you then Clinically Intelligent is worth a read. It is free. It takes less than ten minutes a week. And it is written by someone who is figuring this out alongside you, not from the outside looking in.</p>
+
+      <form class="subform obs" id="finalForm" novalidate>
         <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
-        <button type="submit">Unlock free →</button>
+        <button type="submit">Subscribe free <span class="arrow">→</span></button>
+        <div class="subform-success">You're in. Check your email to confirm your subscription.</div>
       </form>
-      <div class="gate-already">
-        Already subscribed? <a href="#" id="alreadyLink">Skip the gate →</a>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="subform-error" id="finalError">Please enter a valid email address.</div>
 
-<section class="prompts">
-  <div class="wrap">
-    <div class="section-eyebrow"><span class="num">01</span> &nbsp;/&nbsp; PROMPT ONE</div>
-    <h2>The <em>roleplay</em> prompt.</h2>
-
-    <div class="prompt-card" data-prompt="01">
-      <div class="prompt-meta">
-        <span class="num">PROMPT 01</span>
-        <span class="sep"></span>
-        <span class="tool">CHATGPT</span>
-        <span class="sep"></span>
-        <span>FIND THE QUESTION</span>
-      </div>
-      <h3 class="prompt-headline">Pressure-test the conversation before you have it for <em>real.</em></h3>
-      <p class="prompt-tagline">Surfaces the questions a real family member would actually ask. Catches the words you use without thinking.</p>
-      <div class="prompt-block" id="p01">You are a [family member or patient] of someone facing [condition or situation]. You have no medical background. You are tired and worried. I am the [health professional] involved in their care.
-
-Ask me the questions you would actually have. Tell me when I use words you do not understand. Tell me when an instruction is not clear enough to follow at home. Push back if my answers are too clinical.
-
-Keep going until you feel you understand what is happening and what you need to do.</div>
-      <div class="prompt-actions">
-        <button class="btn btn-primary" data-copy="p01"><span class="icn">⎘</span> Copy prompt</button>
-        <a class="btn" href="../downloads/Prompt-01-Roleplay-Clinically-Intelligent.pdf" download><span class="icn">↓</span> Download .pdf</a>
-      </div>
-      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
-    </div>
-
-    <div class="section-eyebrow" style="margin-top: 80px;"><span class="num">02</span> &nbsp;/&nbsp; PROMPT TWO</div>
-    <h2>The <em>operational research</em> prompt.</h2>
-
-    <div class="prompt-card" data-prompt="02">
-      <div class="prompt-meta">
-        <span class="num">PROMPT 02</span>
-        <span class="sep"></span>
-        <span class="tool">PERPLEXITY</span>
-        <span class="sep"></span>
-        <span>FIND THE EVIDENCE</span>
-      </div>
-      <h3 class="prompt-headline">Current evidence, framed for the way services <em>actually run.</em></h3>
-      <p class="prompt-tagline">Pushes Perplexity past summary and into operational translation. NHS-relevant, citation-backed, implementable.</p>
-      <div class="prompt-block" id="p02">Find the most relevant studies on [topic].
-
-Then translate the findings into NHS operational impact. For each insight include:
-
-  - what the study found
-  - what it means in practice for NHS services
-  - impact on cost, staffing, or patient flow
-  - whether it is realistically implementable
-
-Include citations.</div>
-      <div class="prompt-actions">
-        <button class="btn btn-primary" data-copy="p02"><span class="icn">⎘</span> Copy prompt</button>
-        <a class="btn" href="../downloads/Prompt-02-Operational-Research-Clinically-Intelligent.pdf" download><span class="icn">↓</span> Download .pdf</a>
-      </div>
-      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
-    </div>
-
-    <div class="section-eyebrow" style="margin-top: 80px;"><span class="num">03</span> &nbsp;/&nbsp; PROMPT THREE</div>
-    <h2>The <em>documentation</em> prompt.</h2>
-
-    <div class="prompt-card" data-prompt="03">
-      <div class="prompt-meta">
-        <span class="num">PROMPT 03</span>
-        <span class="sep"></span>
-        <span class="tool">CLAUDE</span>
-        <span class="sep"></span>
-        <span>EXPLAIN IT CLEARLY</span>
-      </div>
-      <h3 class="prompt-headline">Bring the questions and the evidence together. <em>Build the library.</em></h3>
-      <p class="prompt-tagline">Produces structured carer or patient guidance at reading age eleven. Reusable. Composite scenarios only — never real patients.</p>
-      <div class="prompt-block" id="p03">Act as a clinical documentation assistant helping a [health professional] build a reusable [type of intervention] guidance template.
-
-I will give you a composite patient scenario and the [strategies / exercises / techniques] I have prescribed. Produce the output as a document laid out simply and clearly so a patient or carer can read it without effort.
-
-Use clear headings, short paragraphs, plain English at reading age eleven, and a warm tone written directly to the patient and the family member supporting them.
-
-Explain each [strategy / exercise / technique] using established clinical knowledge. Do not invent patient specific details. If something has not been provided write 'to be personalised by clinician' in that field.
-
-Scenario and [strategies / exercises / techniques]: [PASTE HERE]
-
-Template:
-
-About this guidance.
-  - What these [strategies / exercises / techniques] are for.
-  - Why your clinician has chosen them for you.
-  - What they should help with day to day.
-
-[Strategy / Exercise / Technique] one through four.
-  - What this is.
-  - When to use it.
-  - How to use it.
-  - How your family or carer can help.
-  - What good looks like.
-  - If it is not working.
-
-Building these into your day.
-  - How to fit these into normal life without it feeling like extra work.
-  - How to start small.
-  - What to do on a hard day.
-
-When to get in touch.
-  - Contact your team if.
-  - Contact your GP if.
-  - Call 111 if.
-  - Call 999 if.
-
-Questions for your next visit.
-Notes from home.</div>
-      <div class="prompt-actions">
-        <button class="btn btn-primary" data-copy="p03"><span class="icn">⎘</span> Copy prompt</button>
-        <a class="btn" href="../downloads/Prompt-03-Documentation-Clinically-Intelligent.pdf" download><span class="icn">↓</span> Download .pdf</a>
-      </div>
-      <div class="lock-overlay"><div class="lock-msg">⌐ Unlock above</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="companion">
-  <div class="wrap">
-    <div class="section-eyebrow"><span class="num">04</span> &nbsp;/&nbsp; COMPANION ASSET</div>
-    <h2>The <em>scaffold</em> the workflow produces.</h2>
-    <div class="companion-card" data-prompt="04">
-      <div>
-        <div class="companion-meta">CARER GUIDANCE TEMPLATE</div>
-        <h3>Save it once. Use it every <em>home visit.</em></h3>
-        <p>The fillable complete bundle PDF that Prompt 03 produces. Drop in the strategies, personalise inside your Trust's documentation systems, hand it to the family.</p>
-      </div>
-      <a class="btn btn-primary" href="../downloads/Issue-04-Complete-Pack-Clinically-Intelligent.pdf" download><span class="icn">↓</span> Download .pdf</a>
-    </div>
-  </div>
-</section>
-
-<section class="ig-notice">
-  <div class="wrap">
-    <div class="ig-box">
-      <div class="ig-label">IMPORTANT</div>
-      <p>These prompts build library entries from <strong>composite scenarios</strong> — patient types, not real patients.</p>
-      <p>When you apply a library entry to a real patient, do so within your Trust's documentation systems. Any version with real patient information becomes a clinical record and your Trust's IG and records policies apply.</p>
-      <p>If you are not sure what those are, your IG lead is the person to ask.</p>
+      <div class="final-fineprint obs">Free to read. No payment details required. Unsubscribe any time in one click.</div>
+      <p class="drop-note obs">Every Wednesday, something practical lands in your inbox.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot-inner">
-    <div class="foot-left">
-      <span class="foot-mark" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
-          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
-        </svg>
-      </span>
+  <div class="foot-signature">
+    <div class="foot-mark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+        <text x="40" y="290" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
+        <text x="220" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
+      </svg>
       <span>© Clinically Intelligent 2026</span>
     </div>
     <span>Written in East London · Published on Beehiiv</span>
   </div>
 </footer>
 
-<div class="toast" id="toast">Copied to clipboard</div>
-
 <script>
-  // ─── CONFIGURATION & ENTITLEMENTS ─────────────────────────────────────────
-  const STORAGE_KEY = 'ci_templates_unlocked';
-  const PROXY_URL   = 'https://abeehiiv-proxy.juwonak1.workers.dev';
+  const PROXY_URL = 'https://abeehiiv-proxy.juwonak1.workers.dev';
 
-  function isUnlocked() {
-    try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
-  }
-
-  function unlock() {
-    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
-    document.querySelectorAll('.prompt-card, .companion-card').forEach(el => el.classList.add('unlocked'));
-    const gate = document.getElementById('gate');
-    if (gate) gate.style.display = 'none';
-  }
-
-  // Self-executing initialization for returning subscribers
-  if (isUnlocked()) unlock();
-
-  function isValidEmail(v) { 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); 
-  }
-
-  // ─── FORM HANDLING & DEBOUNCING ───────────────────────────────────────────
-  const form  = document.getElementById('gateForm');
-  const input = form.querySelector('input[type="email"]');
-  const btn   = form.querySelector('button');
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = input.value.trim();
-
-    if (!isValidEmail(email)) { 
-      input.focus(); 
-      showToast('Please enter a valid email address.');
-      return; 
-    }
-
-    // Lock UI state immediately to prevent duplicate requests from multi-clicks
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Unlocking...';
-
-    try {
-      const res = await fetch(PROXY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email,
-          utm_source:   'templates_page',
-          utm_medium:   'resource_unlock',
-          utm_campaign: 'issue_04'
-        })
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (data.ok || res.ok) {
-        unlock();
-        showToast('Unlocked. Welcome aboard.');
-      } else {
-        showToast(data.error || 'Something went wrong. Please try again.');
-        btn.disabled = false;
-        btn.textContent = originalText;
-      }
-    } catch (networkErr) {
-      // Graceful degradation fallback: let user read content even if network fails
-      console.warn('Beehiiv proxy unreachable — authorizing local bypass entitlement.', networkErr);
-      unlock();
-      showToast('Unlocked.');
-    }
-  });
-
-  document.getElementById('alreadyLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    unlock();
-    showToast('Unlocked.');
-    document.querySelector('.prompts').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  // ─── CLIPBOARD ENGINE ──────────────────────────────────────────────────────
-  document.querySelectorAll('[data-copy]').forEach(btn => {
-    btn.addEventListener('click', async function() {
-      if (!isUnlocked()) return;
-      const targetId = this.getAttribute('data-copy');
-      const text = document.getElementById(targetId).innerText;
-      try {
-        await navigator.clipboard.writeText(text);
-        const original = this.innerHTML;
-        this.classList.add('copied');
-        this.innerHTML = '<span class="icn">✓</span> Copied';
-        showToast('Prompt copied to clipboard');
-        setTimeout(() => {
-          this.classList.remove('copied');
-          this.innerHTML = original;
-        }, 2200);
-      } catch (err) {
-        // Legacy textual fallback layout
-        const ta = document.createElement('textarea');
-        ta.value = text; document.body.appendChild(ta);
-        ta.select(); document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('Prompt copied');
+  (function cacheTrackingParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function(param) {
+      if (urlParams.has(param)) {
+        try { sessionStorage.setItem('ci_' + param, urlParams.get(param)); } catch(_) {}
       }
     });
-  });
+  })();
 
-  // ─── NOTIFICATION SUBSYSTEM ───────────────────────────────────────────────
-  let toastTimer;
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    if (!t) return;
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  function getTrackingTag(param, fallback) {
+    try { return sessionStorage.getItem('ci_' + param) || fallback; } catch(_) { return fallback; }
   }
+
+  function checkEmailTypo(emailStr) {
+    var domainMatch = emailStr.trim().toLowerCase().match(/@([^@\s]+)$/);
+    if (!domainMatch) return null;
+    var domain = domainMatch[1];
+    var corrections = {
+      'gamil.com': 'gmail.com', 'gmal.com': 'gmail.com', 'gmaill.com': 'gmail.com',
+      'nhs.nett': 'nhs.net', 'nhs.ne': 'nhs.net', 'nhss.net': 'nhs.net', 'nsh.net': 'nhs.net',
+      'hotmial.com': 'hotmail.com', 'outlok.com': 'outlook.com', 'yahooo.com': 'yahoo.com'
+    };
+    return corrections[domain] || null;
+  }
+
+  function isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  }
+
+  function wireForm(formId, errorId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var err = errorId ? document.getElementById(errorId) : null;
+    const input = form.querySelector('input[type="email"]');
+    const btn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var email = input.value.trim();
+
+      if (!isValidEmail(email)) {
+        if (err) { err.textContent = 'Please enter a valid email address.'; err.classList.add('show'); }
+        input.focus();
+        return;
+      }
+
+      var typoCorrection = checkEmailTypo(email);
+      if (typoCorrection) {
+        if (err) { err.textContent = 'Did you mean ' + typoCorrection + '?'; err.classList.add('show'); }
+        input.focus();
+        return;
+      }
+
+      if (err) err.classList.remove('show');
+
+      btn.disabled = true;
+      var originalText = btn.innerHTML;
+      btn.textContent = 'Subscribing...';
+
+      try {
+        var res = await fetch(PROXY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            utm_source: getTrackingTag('utm_source', 'homepage'),
+            utm_medium: getTrackingTag('utm_medium', formId === 'heroForm' ? 'hero_section' : 'final_section'),
+            utm_campaign: getTrackingTag('utm_campaign', 'newsletter_signup')
+          })
+        });
+
+        var data = await res.json().catch(function() { return {}; });
+
+        if (data.ok || res.ok) {
+          form.classList.add('is-success');
+        } else {
+          if (err) { err.textContent = data.error || 'Something went wrong. Please try again.'; err.classList.add('show'); }
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      } catch (networkErr) {
+        console.error('Subscription failed:', networkErr);
+        if (err) { err.textContent = 'Could not connect. Please try again in a moment.'; err.classList.add('show'); }
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+
+    input.addEventListener('input', function() {
+      if (err) err.classList.remove('show');
+    });
+  }
+
+  wireForm('heroForm', 'heroError');
+  wireForm('finalForm', 'finalError');
+
+  var scrollObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); scrollObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.obs').forEach(function(el) { scrollObs.observe(el); });
 </script>
+
 </body>
 </html>
