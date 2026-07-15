@@ -4,71 +4,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Prompting Guide — Clinically Intelligent</title>
-<!-- [Insert Metadata as per spec] -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  /* Standard safety-check CSS pattern */
-  :root { --ink: #0c0b0a; --ink-2: #141210; --paper: #f4ede0; --amber: #d98a1e; --rule: #2a2621; --moss: #1f5f3f; }
-  /* [Full CSS implementation matching safety-check architecture] */
+  :root { --ink: #0c0b0a; --ink-2: #141210; --paper: #f4ede0; --paper-2: #ebe2d1; --paper-mute: #8a8273; --rule: #2a2621; --amber: #d98a1e; --amber-soft: #e9b367; --moss: #1f5f3f; --moss-soft: #4a8a68; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--ink); color: var(--paper); font-family: 'Fraunces', serif; font-size: 18px; line-height: 1.6; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+  
+  /* Masthead */
+  .masthead { border-bottom: 1px solid var(--rule); padding: 20px 0; position: sticky; top: 0; background: rgba(12, 11, 10, 0.94); backdrop-filter: blur(8px); z-index: 50; }
+  .masthead-inner { display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  
+  /* Hero */
+  .hero { padding: 80px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--moss-soft); margin-bottom: 36px; }
+  .hero h1 { font-weight: 300; font-size: 64px; line-height: 1.1; margin-bottom: 24px; }
+  .hero em { color: var(--amber-soft); font-style: italic; }
+  .btn-primary { display: inline-block; padding: 18px 30px; background: var(--amber); color: var(--ink); font-weight: 600; text-decoration: none; margin-top: 20px; }
+
+  /* Section Styles */
+  .section { padding: 100px 0; border-top: 1px solid var(--rule); }
+  .sec-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--moss-soft); margin-bottom: 20px; }
+  .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+  .preview-card { border: 1px solid var(--rule); background: #111; transition: .35s; }
+  .preview-card:hover { transform: translateY(-6px); border-color: var(--amber); }
+  
+  /* Form */
+  .gate { padding: 100px 0; background: var(--ink-2); border-top: 1px solid var(--rule); text-align: center; }
+  .subform { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; }
+  .subform input { padding: 18px; background: transparent; border: 1px solid var(--rule); color: var(--paper); outline: none; }
+  
+  footer { padding: 80px 0; border-top: 1px solid var(--rule); font-size: 11px; color: var(--paper-mute); }
 </style>
 </head>
 <body>
 
-<header class="masthead">
-  <div class="wrap masthead-inner">
-    <a href="/" class="brand-link">Clinically Intelligent</a>
-    <a href="/">← Home</a>
-  </div>
-</header>
+<header class="masthead"><div class="wrap masthead-inner"><div>Clinically Intelligent</div><a href="/">← Home</a></div></header>
 
 <main class="wrap">
   <section class="hero">
-    <div class="hero-copy">
+    <div>
       <div class="hero-eyebrow">FIELD GUIDE 02 · FREE DOWNLOAD</div>
-      <h1>The AI Prompting Guide.</h1>
-      <p class="hero-sub">Instructions that turn AI into a colleague, not a tool. A structured approach to writing prompts that produce reliable AI outputs.</p>
-      <div class="meta-row">Free · 10 pages · Six-part structure · Ready to use</div>
-      <a href="#gate" class="btn-primary">Get the Field Guide →</a>
+      <h1>The AI Prompting Guide. <em>Instructions that turn AI into a colleague, not a tool.</em></h1>
+      <p style="font-size: 22px; color: var(--paper-2); margin-bottom: 40px;">A structured approach to writing prompts that produce reliable AI outputs.</p>
+      <a href="#gate" class="btn-primary">Grab a copy of The AI Prompting Guide →</a>
     </div>
   </section>
 
-  <!-- Section 01: What's Inside -->
   <section class="section">
     <div class="sec-head">01 / WHAT'S INSIDE</div>
     <h2>A structured approach to writing prompts that produce reliable AI outputs.</h2>
-    <div class="list-rows">
-      <div class="row"><div>R</div><div><strong>Role</strong><br>Set the tone, expertise, and lens the AI takes before it says a word.</div></div>
-      <div class="row"><div>T</div><div><strong>Task</strong><br>Name what you want done. Precise, single-purpose, unambiguous.</div></div>
-      <div class="row"><div>C</div><div><strong>Context</strong><br>Give the AI the information it needs to make good decisions.</div></div>
-      <div class="row"><div>O</div><div><strong>Output</strong><br>Define the shape, length, and format of what comes back.</div></div>
-      <div class="row"><div>R</div><div><strong>Reflection</strong><br>Ask the AI to think before it answers to produce structured logic.</div></div>
-      <div class="row"><div>C</div><div><strong>Constraints</strong><br>Set the boundaries. What must be included, avoided, or true.</div></div>
+    <div class="preview-grid">
+       <div class="preview-card"><img src="previews/preview-1-cover.png" alt="Cover"></div>
+       <div class="preview-card"><img src="previews/preview-2-framework.png" alt="Framework"></div>
+       <div class="preview-card"><img src="previews/preview-3-example.png" alt="Example"></div>
     </div>
   </section>
 
-  <!-- Section 02: Who This Is For -->
-  <section class="section">
-    <div class="sec-head">02 / WHO THIS IS FOR</div>
-    <div class="two-col">
-      <div><h3>Clinicians</h3><ul><li>Spending too long rewriting the same prompt.</li><li>Using AI at work without training or guidance.</li><li>Wanting outputs that fit clinical practice.</li><li>Wanting to write faster without lowering the standard of care.</li></ul></div>
-      <div><h3>Everyone else</h3><ul><li>Getting poor answers and wondering why.</li><li>Copying the same instructions into every session.</li><li>Wanting consistent, repeatable results.</li><li>Wanting a structure that works across every AI assistant.</li></ul></div>
-    </div>
-  </section>
-
-  <!-- Section 03: Why This Exists -->
-  <section class="section">
-    <div class="sec-head">03 / WHY THIS EXISTS</div>
-    <h2>The problem is rarely the tool. It is almost always the instructions.</h2>
-    <div class="prose">
-      <p>Most clinicians have tried AI and found it unreliable. They ask vague questions. They rewrite the same prompt repeatedly. They blame the model. Usually, the model is capable. The instructions are just incomplete.</p>
-      <p>When these prompts fail, clinicians conclude that AI is not ready for clinical work. It becomes the tool they tried once and never returned to. The gap between what AI can do and what it does for you sits almost entirely in the prompt.</p>
-      <p class="accent">This guide teaches the structure. Six parts. Same structure every time.</p>
-    </div>
+  <section class="gate" id="gate">
+    <h2>Drop your email. The Field Guide unlocks below.</h2>
+    <form class="subform" id="gateForm">
+      <input type="email" id="emailInput" placeholder="your@email.com" required>
+      <button type="submit" id="submitBtn" class="btn-primary">Grab a copy of The AI Prompting Guide →</button>
+    </form>
   </section>
 </main>
 
+<footer><div class="wrap">© Clinically Intelligent 2026</div></footer>
+
 <script>
-  // [Insert exact wireForm logic here]
+  // Insert your wireForm logic here
 </script>
 </body>
 </html>
