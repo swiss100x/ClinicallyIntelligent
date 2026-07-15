@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clinically Intelligent — practical AI for NHS clinicians</title>
+<link rel="canonical" href="https://clinicallyintelligent.com/">
+<meta name="theme-color" content="#0c0b0a">
 <meta property="og:title" content="Clinically Intelligent">
 <meta property="og:description" content="How healthcare is actually adopting AI. One practical lesson at a time. A weekly newsletter for NHS clinicians.">
 <meta property="og:type" content="website">
@@ -19,7 +22,7 @@
 <meta name="description" content="A weekly publication on how NHS clinicians can use simple, free AI tools to protect time without lowering the standard of care. Free. Every Wednesday.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,300,100,1;9..144,400,100,1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,400,100,1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="prefetch" href="https://clinicallyintelligent.com/templates/">
 <link rel="prefetch" href="https://clinicallyintelligent.com/field-guides/safety-check/">
 <style>
@@ -137,39 +140,8 @@
     margin-top: 16px; font-family: 'JetBrains Mono', monospace;
     font-size: 10.5px; letter-spacing: 0.12em;
     color: var(--paper-mute); text-transform: uppercase;
-  }
-  .hero-image-frame {
-    position: relative; aspect-ratio: 4 / 5;
-    overflow: hidden; border: 1px solid var(--rule);
-    background: var(--ink-2);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(217, 138, 30, 0.04);
-  }
-  .hero-image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-image-frame::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, transparent 60%, rgba(12, 11, 10, 0.18) 100%);
-  }
-  .hero-image-placeholder {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--paper-mute);
-    line-height: 1.8;
-  }
-  .hero-image-placeholder strong {
-    display: block; color: var(--paper-2);
-    font-family: 'Fraunces', serif; font-style: italic;
-    font-size: 18px; letter-spacing: -0.01em;
-    text-transform: none; margin-bottom: 14px;
-    font-variation-settings: "WONK" 1, "SOFT" 80;
-  }
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero-image-frame { aspect-ratio: 4 / 5; max-width: 480px; margin: 0 auto; }
-  }
+  }  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }  }
   .subform {
     display: flex; gap: 0; max-width: 520px;
     border: 1px solid var(--rule);
@@ -732,7 +704,7 @@
     .foot-signature { padding: 30px 24px; font-size: 9.5px; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(18px); animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+    html.js .reveal { opacity: 0; transform: translateY(18px); animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
     .reveal.d1 { animation-delay: 0.10s; }
     .reveal.d2 { animation-delay: 0.22s; }
     .reveal.d3 { animation-delay: 0.34s; }
@@ -740,11 +712,13 @@
     .reveal.d5 { animation-delay: 0.58s; }
     @keyframes rise { to { opacity: 1; transform: translateY(0); } }
   }
-  .obs {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  @media (prefers-reduced-motion: no-preference) {
+    html.js .obs {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    html.js .obs.in { opacity: 1; transform: translateY(0); }
   }
-  .obs.in { opacity: 1; transform: translateY(0); }
   @media (max-width: 640px) {
     .wrap { padding: 0 24px; }
     .hero { padding: 40px 0 36px; }
@@ -762,9 +736,72 @@
     .one-num { font-size: 42px; }
     .section-head, .featured-head, .departments-head { grid-template-columns: 1fr; gap: 16px; }
   }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 100;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--amber); color: var(--ink); padding: 12px 18px;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Masthead subscribe */
+  .mast-subscribe {
+    display: inline-block;
+    font-family: 'Inter Tight', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink) !important; background: var(--amber);
+    padding: 9px 16px 8px; text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .mast-subscribe:hover { background: var(--amber-soft); }
+
+  /* Hero specimen — rendered issue front matter */
+  .hero-specimen {
+    border: 1px solid var(--rule); background: var(--ink-2);
+    padding: 40px 36px 32px;
+    box-shadow: 12px 12px 0 rgba(217, 138, 30, 0.10);
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .specimen-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .specimen-mark { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 22px; }
+  .specimen-mark .c { color: var(--moss-soft); }
+  .specimen-mark .i { color: var(--amber); }
+  .specimen-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.18em; color: var(--paper-mute);
+  }
+  .specimen-title {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 400;
+    font-size: clamp(24px, 2.4vw, 32px); line-height: 1.22; color: var(--paper);
+  }
+  .specimen-title em { font-style: italic; color: var(--amber-soft); }
+  .specimen-rows { border-top: 1px solid var(--rule); }
+  .specimen-row {
+    display: flex; align-items: baseline; gap: 18px;
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+  }
+  .specimen-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--amber); min-width: 24px;
+  }
+  .specimen-name {
+    font-family: 'Fraunces', Georgia, serif; font-size: 17px;
+    font-weight: 400; color: var(--paper-dim);
+  }
+  .specimen-foot {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute);
+  }
+  @media (max-width: 900px) {
+    .hero-specimen { display: none; }
+  }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <header class="masthead">
   <div class="wrap masthead-inner">
@@ -779,10 +816,13 @@
     </a>
     <div class="mast-meta">
       <span class="hide-sm drops">Drops Wednesdays</span>
-      <a href="mailto:hello@clinicallyintelligent.com">CONTACT</a>
+      <a href="mailto:hello@clinicallyintelligent.com" class="hide-sm">CONTACT</a>
+      <a href="#subscribe" class="mast-subscribe">Subscribe</a>
     </div>
   </div>
 </header>
+
+<main id="main">
 
 <section class="hero">
   <div class="wrap">
@@ -796,19 +836,25 @@
         <form class="subform reveal d4" id="heroForm" novalidate>
           <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
           <button type="submit">Subscribe free <span class="arrow">→</span></button>
-          <div class="subform-success">You're in. Check your email to confirm your subscription.</div>
+          <div class="subform-success" role="status">You're in. Check your email to confirm your subscription.</div>
         </form>
-        <div class="subform-error" id="heroError">Please enter a valid email address.</div>
+        <div class="subform-error" id="heroError" role="alert">Please enter a valid email address.</div>
 
         <div class="hero-fineprint reveal d5">Free to read. No payment details required. Unsubscribe any time in one click.</div>
       </div>
 
-      <div class="hero-image-frame reveal d3" aria-hidden="true">
-        <img src="images/hero-poster.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="hero-image-placeholder" style="display: none;">
-          <strong>Hero image goes here</strong>
-          Replace images/hero-poster.jpg<br>with your framed-poster photograph
+      <div class="hero-specimen reveal d3" aria-hidden="true">
+        <div class="specimen-head">
+          <span class="specimen-mark"><span class="c">C</span><span class="i">I</span></span>
+          <span class="specimen-meta">ISSUE 01 · APRIL 2026 · ~10 MIN</span>
         </div>
+        <div class="specimen-title">The tool that changed how I document <em>clinical assessments</em>.</div>
+        <div class="specimen-rows">
+          <div class="specimen-row"><span class="specimen-num">i.</span><span class="specimen-name">The Tool</span></div>
+          <div class="specimen-row"><span class="specimen-num">ii.</span><span class="specimen-name">The Workflow</span></div>
+          <div class="specimen-row"><span class="specimen-num">iii.</span><span class="specimen-name">The Field Note</span></div>
+        </div>
+        <div class="specimen-foot">Drops Wednesdays · Free · No paywall</div>
       </div>
     </div>
   </div>
@@ -1022,7 +1068,7 @@
     <div class="author-label obs">WHO WRITES IT</div>
     <div class="author-grid">
       <div class="obs">
-        <h3 class="author-name">I am <em>Juwon</em>.</h3>
+        <h2 class="author-name">I am <em>Juwon</em>.</h2>
         <p class="author-role">NHS Occupational Therapist<br>exploring AI in clinical practice<br>East London</p>
       </div>
       <div class="author-prose">
@@ -1037,15 +1083,6 @@
   </div>
 </section>
 
-<section class="notice">
-  <div class="notice-frame obs">
-    <div class="notice-label">Notice</div>
-    <p class="notice-body">Clinically Intelligent is written by Juwon Akinyande in a personal capacity and is <strong>not affiliated with, endorsed by, or representative of Barts Health NHS Trust</strong> or any other NHS organisation.</p>
-    <p class="notice-body">Content is intended for general educational purposes only and should not be treated as clinical, legal, or information governance advice. Local policies, governance requirements, and approved systems differ between organisations.</p>
-    <p class="notice-body">The AI tools referenced are consumer products. They have not been independently assessed against DCB0129 or DCB0160 clinical risk management standards, and may not be approved for clinical use by your employer. <strong>Patient identifiable information should not be entered into any consumer AI tool</strong> unless explicitly permitted within an approved organisational workflow.</p>
-    <p class="notice-body">Clinicians should follow local guidance and use their professional judgement when applying any ideas discussed in this publication.</p>
-  </div>
-</section>
 
 <section class="testi">
   <div class="wrap">
@@ -1066,15 +1103,27 @@
       <form class="subform obs" id="finalForm" novalidate>
         <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
         <button type="submit">Subscribe free <span class="arrow">→</span></button>
-        <div class="subform-success">You're in. Check your email to confirm your subscription.</div>
+        <div class="subform-success" role="status">You're in. Check your email to confirm your subscription.</div>
       </form>
-      <div class="subform-error" id="finalError">Please enter a valid email address.</div>
+      <div class="subform-error" id="finalError" role="alert">Please enter a valid email address.</div>
 
       <div class="final-fineprint obs">Free to read. No payment details required. Unsubscribe any time in one click.</div>
       <p class="drop-note obs">Every Wednesday, something practical lands in your inbox.</p>
     </div>
   </div>
 </section>
+
+<section class="notice">
+  <div class="notice-frame obs">
+    <div class="notice-label">Notice</div>
+    <p class="notice-body">Clinically Intelligent is an independent publication by Juwon Akinyande. It is <strong>not an official publication of Barts Health NHS Trust</strong> or any other NHS organisation, is not endorsed by them, and the views expressed are my own.</p>
+    <p class="notice-body">Content is intended for general educational purposes only and should not be treated as clinical, legal, or information governance advice. Local policies, governance requirements, and approved systems differ between organisations.</p>
+    <p class="notice-body">The AI tools referenced are consumer products. They have not been independently assessed against DCB0129 or DCB0160 clinical risk management standards, and may not be approved for clinical use by your employer. <strong>Patient identifiable information should not be entered into any consumer AI tool</strong> unless explicitly permitted within an approved organisational workflow.</p>
+    <p class="notice-body">Clinicians should follow local guidance and use their professional judgement when applying any ideas discussed in this publication.</p>
+  </div>
+</section>
+
+</main>
 
 <footer>
   <div class="foot-signature">
