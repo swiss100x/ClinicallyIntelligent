@@ -4,37 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Prompting Guide — Clinically Intelligent</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="A structured approach to writing prompts that produce reliable, clinically useful AI outputs. Free Field Guide from Clinically Intelligent.">
+
+<meta property="og:title" content="The AI Prompting Guide">
+<meta property="og:description" content="A structured approach to writing prompts that produce reliable, clinically useful AI outputs. Free Field Guide.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">
+<meta property="og:image" content="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-  :root { --ink: #0c0b0a; --ink-2: #141210; --paper: #f4ede0; --paper-2: #ebe2d1; --paper-mute: #8a8273; --rule: #2a2621; --amber: #d98a1e; --amber-soft: #e9b367; --moss: #1f5f3f; --moss-soft: #4a8a68; }
+  :root { --ink: #0c0b0a; --ink-2: #141210; --paper: #f4ede0; --paper-2: #ebe2d1; --paper-dim: #a49a88; --paper-mute: #8a8273; --rule: #2a2621; --amber: #d98a1e; --amber-soft: #e9b367; --moss: #1f5f3f; --moss-soft: #4a8a68; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--ink); color: var(--paper); font-family: 'Fraunces', serif; font-size: 18px; line-height: 1.6; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--paper); font-family: 'Fraunces', Georgia, serif; font-size: 18px; line-height: 1.6; }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
   
   /* Masthead */
   .masthead { border-bottom: 1px solid var(--rule); padding: 20px 0; position: sticky; top: 0; background: rgba(12, 11, 10, 0.94); backdrop-filter: blur(8px); z-index: 50; }
-  .masthead-inner { display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .masthead-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
   
   /* Hero */
-  .hero { padding: 80px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--moss-soft); margin-bottom: 36px; }
-  .hero h1 { font-weight: 300; font-size: 64px; line-height: 1.1; margin-bottom: 24px; }
-  .hero em { color: var(--amber-soft); font-style: italic; }
-  .btn-primary { display: inline-block; padding: 18px 30px; background: var(--amber); color: var(--ink); font-weight: 600; text-decoration: none; margin-top: 20px; }
+  .hero { padding: 80px 0 50px; }
+  .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--moss-soft); margin-bottom: 36px; }
+  .hero h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(44px, 7vw, 92px); line-height: 0.98; letter-spacing: -0.035em; margin-bottom: 32px; max-width: 14ch; }
+  .hero h1 em { font-style: italic; color: var(--amber-soft); }
+  .hero-sub { font-family: 'Fraunces', serif; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.5; color: var(--paper-2); max-width: 48ch; margin-bottom: 20px; }
+  .hero-sub-2 { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); margin-bottom: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+  
+  .btn-primary { display: inline-flex; align-items: center; gap: 12px; padding: 18px 30px; background: var(--amber); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-decoration: none; border: none; cursor: pointer; }
+  .btn-secondary { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-mute); text-decoration: none; padding: 8px 0; }
+  
+  /* Preview */
+  .preview { padding: 30px 0 90px; }
+  .preview-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; align-items: flex-start; }
+  .preview-cell { background: var(--ink-2); border: 1px solid var(--rule); aspect-ratio: 3 / 4; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); }
+  .preview-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .preview-cell:nth-child(2) { transform: translateY(36px); }
+  .preview-cell:nth-child(3) { transform: translateY(72px); }
+  .preview-caption { margin-top: 50px; font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--paper-dim); max-width: 60ch; }
 
   /* Section Styles */
-  .section { padding: 100px 0; border-top: 1px solid var(--rule); }
-  .sec-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--moss-soft); margin-bottom: 20px; }
-  .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
-  .preview-card { border: 1px solid var(--rule); background: #111; transition: .35s; }
-  .preview-card:hover { transform: translateY(-6px); border-color: var(--amber); }
+  .block { padding: 100px 0; border-top: 1px solid var(--rule); }
+  .sec-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--moss-soft); margin-bottom: 20px; }
+  .sec-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -0.025em; color: var(--paper); max-width: 22ch; }
   
-  /* Form */
-  .gate { padding: 100px 0; background: var(--ink-2); border-top: 1px solid var(--rule); text-align: center; }
-  .subform { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; }
-  .subform input { padding: 18px; background: transparent; border: 1px solid var(--rule); color: var(--paper); outline: none; }
+  .inside-row { display: grid; grid-template-columns: 60px 1fr; gap: 32px; padding: 30px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .inside-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--paper-mute); }
+  .inside-body { font-family: 'Fraunces', serif; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.5; color: var(--paper-2); }
   
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+  .two-col ul { list-style: none; margin-top: 20px; }
+  .two-col li { margin-bottom: 15px; font-family: 'Fraunces', serif; color: var(--paper-2); }
+
+  .why-prose p { font-family: 'Fraunces', serif; font-size: clamp(20px, 2vw, 26px); line-height: 1.45; color: var(--paper); margin-bottom: 28px; max-width: 56ch; }
+  .accent { color: var(--amber-soft); font-style: italic; border-left: 2px solid var(--amber); padding-left: 28px; }
+
+  /* Gate/Unlocked */
+  .gate { padding: 110px 0; border-top: 1px solid var(--rule); background: var(--ink-2); text-align: center; }
+  .subform { display: flex; max-width: 480px; margin: 20px auto; border: 1px solid var(--rule); background: rgba(20, 18, 16, 0.6); }
+  .subform input { flex: 1; padding: 18px 22px; background: transparent; border: none; outline: none; color: var(--paper); }
+  .subform button { padding: 18px 26px; background: var(--amber); color: var(--ink); border: none; cursor: pointer; font-weight: 600; }
+  
+  .unlocked { display: none; padding: 100px 0; border-top: 1px solid var(--rule); text-align: center; }
+  .unlocked.show { display: block; }
+  .download-card { display: inline-flex; flex-direction: column; align-items: center; gap: 20px; padding: 36px 48px; background: rgba(12, 11, 10, 0.6); border: 1px solid var(--rule); }
+
   footer { padding: 80px 0; border-top: 1px solid var(--rule); font-size: 11px; color: var(--paper-mute); }
 </style>
 </head>
@@ -47,26 +84,56 @@
     <div>
       <div class="hero-eyebrow">FIELD GUIDE 02 · FREE DOWNLOAD</div>
       <h1>The AI Prompting Guide. <em>Instructions that turn AI into a colleague, not a tool.</em></h1>
-      <p style="font-size: 22px; color: var(--paper-2); margin-bottom: 40px;">A structured approach to writing prompts that produce reliable AI outputs.</p>
+      <p class="hero-sub">A structured approach to writing prompts that produce reliable AI outputs. Works across every major AI assistant.</p>
+      <div class="hero-sub-2">Free · 10 pages · Six-part structure · Ready to use</div>
       <a href="#gate" class="btn-primary">Grab a copy of The AI Prompting Guide →</a>
     </div>
   </section>
 
-  <section class="section">
-    <div class="sec-head">01 / WHAT'S INSIDE</div>
-    <h2>A structured approach to writing prompts that produce reliable AI outputs.</h2>
+  <section class="preview">
     <div class="preview-grid">
-       <div class="preview-card"><img src="previews/preview-1-cover.png" alt="Cover"></div>
-       <div class="preview-card"><img src="previews/preview-2-framework.png" alt="Framework"></div>
-       <div class="preview-card"><img src="previews/preview-3-example.png" alt="Example"></div>
+      <div class="preview-cell"><img src="previews/preview-1-cover.png" alt="Cover"></div>
+      <div class="preview-cell"><img src="previews/preview-2-framework.png" alt="Framework"></div>
+      <div class="preview-cell"><img src="previews/preview-3-example.png" alt="Example"></div>
+    </div>
+    <p class="preview-caption">Ten pages. Six parts. One structure that turns AI from unpredictable to useful.</p>
+  </section>
+
+  <section class="block">
+    <div class="sec-head">01 / WHAT'S INSIDE</div>
+    <h2 class="sec-title">A structured approach to writing prompts that produce reliable AI outputs.</h2>
+    <div class="inside-row"><div>R</div><div><strong>Role</strong><br>Set the tone, expertise, and lens the AI takes before it says a word.</div></div>
+    <div class="inside-row"><div>T</div><div><strong>Task</strong><br>Name what you want done. Precise, single-purpose, unambiguous.</div></div>
+    <div class="inside-row"><div>C</div><div><strong>Context</strong><br>Give the AI the information it needs to make good decisions.</div></div>
+    <div class="inside-row"><div>O</div><div><strong>Output</strong><br>Define the shape, length, and format of what comes back.</div></div>
+    <div class="inside-row"><div>R</div><div><strong>Reasoning</strong><br>Ask the AI to think before it answers. Structured thinking produces structured outputs.</div></div>
+    <div class="inside-row"><div>C</div><div><strong>Constraint</strong><br>Set the boundaries. What must be included, avoided, or true.</div></div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head">02 / WHO THIS IS FOR</div>
+    <h2 class="sec-title">Written with clinicians in mind. Useful for anyone who wants better AI outputs.</h2>
+    <div class="two-col">
+      <div><h3>Clinicians</h3><ul><li>Spending too long rewriting the same prompt.</li><li>Using AI at work without training or guidance.</li><li>Wanting outputs that fit clinical practice.</li><li>Wanting to write faster without lowering the standard of care.</li></ul></div>
+      <div><h3>Everyone else</h3><ul><li>Getting poor answers and wondering why.</li><li>Copying the same instructions into every session.</li><li>Wanting consistent, repeatable results.</li><li>Wanting a structure that works across every AI assistant.</li></ul></div>
     </div>
   </section>
 
-  <section class="gate" id="gate">
+  <section class="block" id="gate">
+    <div class="sec-head">03 / WHY THIS EXISTS</div>
+    <h2 class="sec-title">The problem is rarely the tool. It is almost always the instructions.</h2>
+    <div class="why-prose">
+      <p>Most clinicians have tried AI and found it unreliable. They ask vague questions. They rewrite the same prompt repeatedly. They blame the model. Usually, the model is capable. The instructions are just incomplete.</p>
+      <p>When these prompts fail, clinicians conclude that AI is not ready for clinical work. It becomes the tool they tried once and never returned to. The gap between what AI can do and what it does for you sits almost entirely in the prompt.</p>
+      <p class="accent">This guide teaches the structure. Six parts. Same structure every time.</p>
+    </div>
+  </section>
+
+  <section class="gate">
     <h2>Drop your email. The Field Guide unlocks below.</h2>
     <form class="subform" id="gateForm">
       <input type="email" id="emailInput" placeholder="your@email.com" required>
-      <button type="submit" id="submitBtn" class="btn-primary">Grab a copy of The AI Prompting Guide →</button>
+      <button type="submit" id="submitBtn">Grab a copy of The AI Prompting Guide →</button>
     </form>
   </section>
 </main>
@@ -74,7 +141,7 @@
 <footer><div class="wrap">© Clinically Intelligent 2026</div></footer>
 
 <script>
-  // Insert your wireForm logic here
+  // Add wireForm logic here as specified in previous steps
 </script>
 </body>
 </html>
