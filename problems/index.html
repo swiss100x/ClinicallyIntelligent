@@ -154,18 +154,6 @@
     outline-offset:2px;
   }
 
-  .qr-tag{
-    display:inline-block;
-    font-family:var(--mono);
-    font-size:11px;
-    color:var(--moss-deep);
-    background:#e7efe9;
-    padding:3px 8px;
-    border-radius:99px;
-    margin-bottom:14px;
-    width:fit-content;
-  }
-
   label.field-label{
     display:block;
     font-family:var(--mono);
@@ -373,7 +361,6 @@
 
     <!-- SCREEN 1: LANDING -->
     <section class="screen active" data-screen="landing" aria-labelledby="landing-h">
-      <span class="qr-tag" id="campaign-tag" hidden></span>
 
       <div class="box-scene" aria-hidden="true">
         <div class="slip" style="left:36px;transform:rotate(-7deg);"></div>
@@ -552,12 +539,6 @@
       campaign = JSON.parse(existing);
     }
   }catch(e){}
-
-  var tagEl = document.getElementById("campaign-tag");
-  if(campaign.source !== "direct"){
-    tagEl.hidden = false;
-    tagEl.textContent = "via " + campaign.source;
-  }
 
   /* ---------- analytics funnel (preview: local log, no free text ever) ---------- */
   var ANALYTICS_KEY = "pb_analytics_events";
