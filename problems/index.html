@@ -239,6 +239,26 @@
   .privacy-block p{margin:0;font-size:13.5px;color:var(--moss-deep);line-height:1.5;}
   .privacy-block p.privacy-head{font-weight:600;margin-bottom:3px;}
 
+  .quiet-note{
+    border-left:2px solid var(--moss-deep);
+    background:#f6efe1;
+    padding:14px 16px;
+    margin:18px 0 4px;
+  }
+  .quiet-note p.quiet-head{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .quiet-note p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+
   .spacer{flex:1;}
   .btn-row{display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:12px;}
   .back-link{
@@ -419,6 +439,13 @@
         <input type="text" id="field-service" maxlength="120" placeholder="e.g. Frailty Virtual Ward">
       </div>
 
+      <p class="section-q">A little context</p>
+
+      <div class="field-group">
+        <label class="field-label" for="field-organisation">Organisation <span style="font-weight:400;">(optional)</span></label>
+        <input type="text" id="field-organisation" maxlength="120" placeholder="e.g. NHS trust, hospital, GP practice or other organisation">
+      </div>
+
       <div class="field-group">
         <label class="field-label" id="who-label">Who does it affect?</label>
         <p class="field-sub">Choose any that apply.</p>
@@ -464,6 +491,11 @@
       <div class="spacer"></div>
       <div class="btn-row">
         <button class="btn btn-primary" id="submit-btn" type="button" disabled>Drop it in the box</button>
+      </div>
+
+      <div class="quiet-note">
+        <p class="quiet-head">A quick note</p>
+        <p>This is a suggestion box, not an NHS reporting system. Clinically Intelligent is independent. If you need to report a patient safety incident or concern, please use your organisation's usual reporting process.</p>
       </div>
     </section>
 
@@ -605,7 +637,7 @@
   });
 
   /* ---------- state ---------- */
-  var state = { problem:"", service:"", who:[], what:[], improve:"", whoOther:"", whatOther:"" };
+  var state = { problem:"", service:"", organisation:"", who:[], what:[], improve:"", whoOther:"", whatOther:"" };
   var MIN_PROBLEM_LEN = 25;
 
   document.getElementById("start-btn").addEventListener("click", function(){
@@ -646,6 +678,7 @@
 
   /* ---------- screen: context ---------- */
   var fieldService = document.getElementById("field-service");
+  var fieldOrganisation = document.getElementById("field-organisation");
   var fieldImprove = document.getElementById("field-improve");
   var submitBtn = document.getElementById("submit-btn");
   var whoOtherDetail = document.getElementById("who-other-detail");
@@ -696,6 +729,7 @@
 
   function attemptSubmit(){
     state.service = fieldService.value.trim();
+    state.organisation = fieldOrganisation.value.trim();
     state.improve = fieldImprove.value.trim();
     state.whoOther = whoOtherText.value.trim();
     state.whatOther = whatOtherText.value.trim();
@@ -704,6 +738,7 @@
       id: uid(),
       problem: state.problem,
       service: state.service,
+      organisation: state.organisation,
       who: state.who.slice(),
       who_other: state.whoOther,
       what: state.what.slice(),
@@ -728,6 +763,7 @@
     var formData = new FormData();
     formData.append("problem", lastPayload.problem);
     formData.append("service", lastPayload.service);
+    formData.append("organisation", lastPayload.organisation);
     formData.append("who", lastPayload.who.join(", "));
     formData.append("who_other", lastPayload.who_other);
     formData.append("what", lastPayload.what.join(", "));
@@ -784,11 +820,12 @@
   /* ---------- share another ---------- */
   document.getElementById("share-again-btn").addEventListener("click", function(){
     track("share_another");
-    state = { problem:"", service:"", who:[], what:[], improve:"", whoOther:"", whatOther:"" };
+    state = { problem:"", service:"", organisation:"", who:[], what:[], improve:"", whoOther:"", whatOther:"" };
     problemText.value = "";
     problemNote.classList.remove("is-short", "is-valid");
     problemStatus.textContent = MIN_PROBLEM_LEN + " characters minimum";
     fieldService.value = "";
+    fieldOrganisation.value = "";
     fieldImprove.value = "";
     whoOtherText.value = "";
     whatOtherText.value = "";
