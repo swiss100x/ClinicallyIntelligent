@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Would you send it? A 20 second test from Clinically Intelligent</title>
+<meta name="description" content="A clinician's note and an AI summary of it. The numbers are right. Can you spot what changed?">
+<meta property="og:title" content="Would you send it?">
+<meta property="og:description" content="A 20 second test. The numbers were right. Was the meaning?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicallyintelligent.com/work/would-you-send-it/">
+<meta property="og:image" content="https://clinicallyintelligent.com/work/would-you-send-it/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://clinicallyintelligent.com/work/would-you-send-it/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4efe4; --paper:#fbf8f1; --ink:#0c0b0a; --ink-soft:#4a4841; --moss:#1f5f3f; --moss-text:#1f5f3f;
+  --amber:#d98a1e; --line:#d9d1bf; --panel:#1f5f3f; --panel-ink:#f4efe4; --dark:#0c0b0a; --dark-ink:#efe9dc; --graphite:#2c4a3a;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Inter Tight", Arial, Helvetica, sans-serif;
+  --mono:"JetBrains Mono", "Courier New", monospace;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12110f; --paper:#1a1916; --ink:#efe9dc; --ink-soft:#b9b2a3; --moss-text:#7cc39c; --line:#34322c; --panel:#173f2c; --graphite:#9cc9ae;
+}}
+:root[data-theme="dark"]{ --bg:#12110f; --paper:#1a1916; --ink:#efe9dc; --ink-soft:#b9b2a3; --moss-text:#7cc39c; --line:#34322c; --panel:#173f2c; --graphite:#9cc9ae; }
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.6}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+.wrap{max-width:860px;margin-left:auto;margin-right:auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+header.top{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:10px}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark b{font-family:var(--serif);font-weight:700;font-size:1.6rem;letter-spacing:-.02em;line-height:1}
+.mark b .c{color:var(--moss-text)} .mark b .i{color:var(--amber)}
+.mark span{font-size:.95rem;font-weight:500}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,8vw,4.4rem);line-height:1;letter-spacing:-.025em;margin:0 0 12px;font-variation-settings:"opsz" 120,"SOFT" 100}
+.kicker{font-size:1rem;font-weight:500;color:var(--moss-text);margin:0 0 10px}
+.muted{color:var(--ink-soft)}
+.after{font-family:var(--serif);font-size:1.25rem;margin:26px 0 0;max-width:30em;color:var(--moss-text)}
+/* test */
+.test{background:var(--paper);margin-top:clamp(72px,12vw,140px);padding:clamp(56px,9vw,110px) 0}
+.test h2{margin-bottom:8px}
+.test .how{margin:0 0 36px;max-width:36em}
+.note{border-left:2px solid var(--line);padding-left:clamp(16px,3vw,28px);margin-left:2px;max-width:44em}
+.note + .note{margin-top:30px}
+.note small{display:block;font-size:.9rem;color:var(--ink-soft);margin-bottom:6px}
+.src{font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.7rem);line-height:1.4;margin:0;font-variation-settings:"opsz" 30}
+.ai{font-family:var(--mono);font-size:clamp(1.02rem,2.4vw,1.25rem);line-height:2;margin:0}
+.ai button{font:inherit;color:inherit;background:none;border:0;padding:0 1px;margin:0;cursor:pointer;border-bottom:1px dashed var(--line);border-radius:0}
+.ai button:hover{border-bottom-color:var(--ink-soft)}
+.ai button.found{text-decoration:underline wavy var(--amber);text-decoration-thickness:2px;text-underline-offset:7px;border-bottom-color:transparent;color:var(--ink)}
+.ai button.nope{animation:nudge .35s}
+@keyframes nudge{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.feedback{min-height:1.7em;margin:22px 0 0;font-size:1rem;color:var(--ink-soft)}
+.textbtn{background:none;border:0;font:500 1rem var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:.2em;cursor:pointer;padding:0}
+.reveal{display:none;margin-top:44px}
+.reveal.on{display:block;animation:rise .6s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.reveal .q{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.15;margin:0 0 6px;font-variation-settings:"opsz" 96,"SOFT" 100}
+.reveal .a{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.15;margin:0 0 22px;color:var(--moss-text);font-variation-settings:"opsz" 96,"SOFT" 100}
+.reveal p{max-width:38em}
+.fine{font-size:.85rem;color:var(--ink-soft);margin-top:30px}
+
+.test{margin-top:0}
+.next{margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+.next p{margin:0 0 16px;max-width:34em}
+.btn{display:inline-block;font:600 1rem/1 var(--sans);padding:16px 22px;border-radius:3px;text-decoration:none;background:var(--moss);color:#f4efe4}
+.row{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center}
+footer{padding:26px 0 48px;font-size:.85rem;color:var(--ink-soft)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="mark" href="https://clinicallyintelligent.com/studio/" aria-label="Clinically Intelligent"><b><span class="c">C</span><span class="i">I</span></b><span>Clinically Intelligent</span></a>
+</header>
+<main class="test" id="test" style="padding-top:clamp(36px,7vw,72px)">
+  <div class="wrap">
+    <p class="kicker">Learning through experience</p>
+    <h2>Would you send it?</h2>
+    <p class="how muted">A clinician’s note, and an AI summary of it. Tap the words the AI added that aren’t in the source.</p>
+    <div class="note"><small>The source note</small><p class="src">Lantus 20 units normally. Reduce to 18 units on football days.</p></div>
+    <div class="note"><small>The AI summary</small><p class="ai" id="ai"></p></div>
+    <p class="feedback" id="fb" aria-live="polite"></p>
+    <button class="textbtn" id="show" type="button">Show me</button>
+    <div class="reveal" id="reveal">
+      <p class="q">Where did “before football” come from? Nowhere.</p>
+      <p class="a">The numbers were right. The meaning wasn’t.</p>
+      <p>Every figure survived. The instruction didn’t. “On football days” and “before football” are different advice, and a patient would act on the second. This is the habit CI teaches: check every AI draft for what was <strong>added</strong>, what was <strong>removed</strong>, whether the <strong>meaning</strong> shifted, and whether it now sounds more <strong>certain</strong> than the source.</p>
+      <p class="after">This is how we think learning should feel: practical, active and built around judgement.</p>
+      <p style="margin-top:18px"><button class="textbtn" id="again" type="button">Try it again</button><button class="textbtn" style="margin-left:22px" id="share-test" type="button">Send it to a colleague</button></p>
+      <div class="next">
+        <p>Clinically Intelligent is a clinician-led initiative exploring better ways to learn and work in healthcare. This exercise comes from our live teaching with NHS clinical teams.</p>
+        <div class="row"><a class="btn" href="https://clinicallyintelligent.com/studio/">See more of CI</a><a href="https://clinicallyintelligent.com/studio/#work-with">Bring this to your team</a></div>
+      </div>
+    </div>
+    <p class="fine">Composite example from a CI workshop. Not clinical advice. Never put patient identifiable information into an AI tool. If you are ever unsure ask your IG lead before you upload anything.</p>
+  </div>
+</main>
+<footer class="wrap"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust.</p></footer>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var words='On days when you play football, reduce your Lantus from 20 units to 18 units before football.'.split(' ');
+  var added={15:1,16:1};
+  var inSource={'football,':1,'reduce':1,'Lantus':1,'20':1,'units':1,'18':1,'On':1,'days':1};
+  var ai=document.getElementById('ai'), fb=document.getElementById('fb'), rv=document.getElementById('reveal'), show=document.getElementById('show');
+  var found={};
+  function build(){
+    ai.innerHTML=''; found={}; fb.textContent=''; rv.classList.remove('on'); show.style.display='';
+    words.forEach(function(w,i){
+      var b=document.createElement('button'); b.type='button'; b.textContent=w; b.dataset.i=i;
+      b.addEventListener('click',function(){tap(b,i,w);});
+      ai.appendChild(b); ai.appendChild(document.createTextNode(' '));
+    });
+  }
+  function tap(b,i,w){
+    if(added[i]){
+      b.classList.add('found'); b.setAttribute('aria-pressed','true'); found[i]=1;
+      var n=Object.keys(found).length;
+      fb.textContent = n<2 ? 'Good. That one isn\u2019t in the source. There\u2019s one more word next to it.' : 'Found them both.';
+      if(n===2) done();
+    } else {
+      b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope');
+      fb.textContent = inSource[w] ? 'That one\u2019s in the source. Keep looking.' : 'Reworded, but the meaning holds. Keep looking.';
+    }
+  }
+  function done(){
+    Array.prototype.forEach.call(ai.children,function(b){ if(added[b.dataset.i]) b.classList.add('found'); });
+    show.style.display='none'; rv.classList.add('on');
+  }
+  show.addEventListener('click',function(){ fb.textContent='Here they are.'; done(); });
+  document.getElementById('again').addEventListener('click',function(){ build(); window.scrollTo({top:0,behavior: reduce?'auto':'smooth'}); });
+  var st=document.getElementById('share-test');
+  st.addEventListener('click',function(){
+    var url=location.href.split('#')[0];
+    var data={title:'Would you send it?',text:'A 20 second test. The numbers were right. Was the meaning?',url:url};
+    if(navigator.share){ navigator.share(data).catch(function(){}); return; }
+    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){st.textContent='Link copied';},function(){st.textContent=url;}); }
+    else { st.textContent=url; }
+  });
+  build();
+})();
+</script>
+</body>
+</html>

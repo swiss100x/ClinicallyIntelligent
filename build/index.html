@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build with CI | Clinically Intelligent</title>
+<meta name="description" content="A 45 second film from Clinically Intelligent. Clinicians, designers, engineers, or anyone with an idea that could make healthcare better.">
+<meta property="og:title" content="Build with CI">
+<meta property="og:description" content="A 45 second film. Want to be part of what we’re building?">
+<meta property="og:type" content="video.other">
+<meta property="og:url" content="https://clinicallyintelligent.com/build/">
+<meta property="og:image" content="https://clinicallyintelligent.com/build/og.jpg">
+<meta property="og:video" content="https://clinicallyintelligent.com/build/build-with-ci.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://clinicallyintelligent.com/build/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4efe4; --paper:#fbf8f1; --ink:#0c0b0a; --ink-soft:#4a4841; --moss:#1f5f3f; --moss-text:#1f5f3f;
+  --amber:#d98a1e; --line:#d9d1bf; --panel:#1f5f3f; --panel-ink:#f4efe4; --dark:#0c0b0a; --dark-ink:#efe9dc; --graphite:#2c4a3a;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Inter Tight", Arial, Helvetica, sans-serif;
+  --mono:"JetBrains Mono", "Courier New", monospace;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12110f; --paper:#1a1916; --ink:#efe9dc; --ink-soft:#b9b2a3; --moss-text:#7cc39c; --line:#34322c; --panel:#173f2c; --graphite:#9cc9ae;
+}}
+:root[data-theme="dark"]{ --bg:#12110f; --paper:#1a1916; --ink:#efe9dc; --ink-soft:#b9b2a3; --moss-text:#7cc39c; --line:#34322c; --panel:#173f2c; --graphite:#9cc9ae; }
+html{-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--panel);color:#f4efe4;font-family:var(--sans);font-size:1.0625rem;line-height:1.6}
+a{color:inherit;text-underline-offset:.2em}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+header{display:flex;align-items:center;gap:12px;padding-top:22px}
+header b{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1}
+header b .i{color:var(--amber)}
+header span{font-size:.95rem;font-weight:500}
+main{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:1fr;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,8vw,96px);align-items:center}
+@media(min-width:860px){main{grid-template-columns:minmax(0,420px) 1fr}}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,9vw,5.6rem);line-height:.95;letter-spacing:-.03em;margin:0 0 12px;font-variation-settings:"opsz" 144,"SOFT" 100}
+.kinds{margin:0 0 28px;opacity:.75}
+.say{font-size:1.25rem;line-height:1.5;max-width:24em;margin:0}
+.say2{margin:16px 0 0;opacity:.8;max-width:30em}
+video{display:block;width:100%;height:auto;aspect-ratio:4/5;background:#0c0b0a;border-radius:2px}
+figure{margin:0}
+figcaption{font-size:.92rem;opacity:.8;margin-top:10px}
+.actions{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:32px}
+.go{display:inline-block;font:600 1rem/1 var(--sans);padding:16px 22px;border-radius:3px;background:#f4efe4;color:#0c0b0a;text-decoration:none;transition:transform .25s}
+.go:hover,.go:focus-visible{transform:translateX(6px)}
+.share{background:none;border:0;color:inherit;font:500 1rem var(--sans);text-decoration:underline;text-underline-offset:.2em;cursor:pointer;padding:6px 0}
+footer{padding-bottom:40px;font-size:.85rem;opacity:.7}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap"><b>C<span class="i">I</span></b><span>Clinically Intelligent</span></header>
+<main class="wrap">
+  <figure>
+    <video controls playsinline preload="metadata" poster="poster.jpg" width="1080" height="1350" aria-describedby="cap">
+      <source src="build-with-ci.mp4" type="video/mp4">
+    </video>
+    <figcaption id="cap">A seven page referral form, a nurse, a designer, an engineer and a pharmacist. 45 seconds, sound on.</figcaption>
+  </figure>
+  <div>
+    <h1>Build with CI</h1>
+    <p class="kinds">People, ideas, a collective.</p>
+    <p class="say">Want to be part of what we’re building? Clinicians, designers, engineers, or anyone with an idea that could make healthcare better.</p>
+    <p class="say2">For people with curiosity, initiative and high standards, whatever their discipline.</p>
+    <div class="actions">
+      <a class="go" href="mailto:hello@clinicallyintelligent.com?subject=Build%20with%20CI&amp;body=What%20are%20you%20working%20on%3F%0A%0A%0AWhat%27s%20your%20discipline%3F%0A%0A%0AA%20link%20to%20something%20you%27ve%20made%3A%0A%0A%0AName%3A%0A">Show us what you’re working on</a>
+      <button class="share" type="button" id="share">Share the film</button>
+    </div>
+  </div>
+</main>
+<footer class="wrap"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. No forms were harmed.</p></footer>
+<script>
+(function(){
+  var b=document.getElementById('share');
+  b.addEventListener('click',function(){
+    var url=location.href.split('#')[0];
+    var data={title:'Build with CI',text:'A 45 second film from Clinically Intelligent. Want to be part of what we\u2019re building?',url:url};
+    if(navigator.share){navigator.share(data).catch(function(){});return;}
+    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){b.textContent='Link copied';},function(){b.textContent=url;});}
+    else{b.textContent=url;}
+  });
+})();
+</script>
+</body>
+</html>
