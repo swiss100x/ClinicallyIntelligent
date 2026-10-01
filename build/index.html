@@ -38,8 +38,7 @@ a{color:inherit;text-underline-offset:.2em}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
 .wrap{max-width:1040px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
 header{display:flex;align-items:center;gap:12px;padding-top:22px}
-header b{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1}
-header b .i{color:var(--amber)}
+header .logo{display:block;width:auto;height:40px}
 header span{font-size:.95rem;font-weight:500}
 main{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:1fr;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,8vw,96px);align-items:center}
 @media(min-width:860px){main{grid-template-columns:minmax(0,420px) 1fr}}
@@ -59,7 +58,7 @@ footer{padding-bottom:40px;font-size:.85rem;opacity:.7}
 </style>
 </head>
 <body>
-<header class="wrap"><b>C<span class="i">I</span></b><span>Clinically Intelligent</span></header>
+<header class="wrap"><img class="logo" src="logo.png" width="27" height="40" alt=""><span>Clinically Intelligent</span></header>
 <main class="wrap">
   <figure>
     <video controls playsinline preload="metadata" poster="poster.jpg" width="1080" height="1350" aria-describedby="cap">
