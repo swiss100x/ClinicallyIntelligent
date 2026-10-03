@@ -447,10 +447,10 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   });
   /* ---------- voice: a "Say it" button on page 1. Speak, check the words, drop it in.
      The browser turns speech into text. This page never receives or stores audio.
-     TEST MODE ONLY until IG review. Enable with ?voice=test ---------- */
+     IG approved. Shown wherever the browser supports speech recognition. ---------- */
   (function(){
     var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-    if(new URLSearchParams(location.search).get('voice')!=='test' || !SR) return;
+    if(!SR) return;
     var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote'), said='', NS=' This page never receives or stores your voice.';
     function idle(){ on=false; mic.setAttribute('aria-pressed','false'); $('micLabel').textContent='Say it'; }
     stopVoice=function(){ if(on&&rec){ try{ rec.stop(); }catch(e){} } };
