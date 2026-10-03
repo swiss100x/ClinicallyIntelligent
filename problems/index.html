@@ -157,15 +157,13 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .btn.ghost:hover{background:rgba(239,231,216,.08)}
 .receipt{font-family:var(--hand);font-style:italic;font-size:1.12rem;color:#cfc4ae;margin:0 auto 14px;max-width:24em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .receipt::before{content:"“"}.receipt::after{content:"”"}
-.say{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.bigmic{width:88px;height:88px;border-radius:50%;border:0;cursor:pointer;background:var(--moss);color:#f4efe4;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1.5px rgba(239,231,216,.35),0 10px 24px -10px rgba(0,0,0,.7);transition:transform .2s,background .2s}
-.bigmic:hover{transform:translateY(-1px);background:var(--moss-l)}
-.bigmic svg{width:38px;height:38px}
-.bigmic[aria-pressed="true"]{background:var(--amber);color:#15120e;animation:pulse 1.4s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(207,123,56,.22),0 10px 24px -10px rgba(0,0,0,.7)}}
-.saylabel{margin:0;font-weight:600;font-size:1rem;color:var(--ivory)}
-.vnote{margin:0;font-size:.88rem;color:#d6ccb8;max-width:26em;min-height:1.3em}
-@media (prefers-reduced-motion: reduce){.bigmic[aria-pressed="true"]{animation:none}}
+.voice{display:flex;align-items:center;gap:10px 12px;margin-top:10px;flex-wrap:wrap;text-align:left}
+.mic{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid #cdbf9f;background:#fffdf7;color:var(--ink);font:600 .95rem var(--sans);cursor:pointer}
+.mic svg{width:18px;height:18px}
+.mic[aria-pressed="true"]{background:var(--moss);border-color:var(--moss);color:#f4efe4;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(31,95,63,.18)}}
+.vnote{font-size:.82rem;line-height:1.4;color:var(--soft);flex:1;min-width:160px;margin:0}
+@media (prefers-reduced-motion: reduce){.mic[aria-pressed="true"]{animation:none}}
 .other{margin:6px auto 0;max-width:320px}
 .other .line{font-size:1.1rem}
 .where{margin:0 0 22px;text-align:center}
@@ -192,6 +190,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             <label for="problem" class="sr">What happened</label>
             <div class="keep"><b>Keep it about the work.</b> Please don’t include patient names, NHS numbers or other patient-identifiable or confidential information.</div>
             <textarea id="problem" class="lines" maxlength="700" placeholder="For example: I was trying to get an update on a delivery of a commode, but it took 45 minutes and three phone calls." aria-describedby="pmin perr"></textarea>
+            <div class="voice" id="voice" hidden><button class="mic" id="mic" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="micLabel">Say it</span></button><p class="vnote" id="vnote" aria-live="polite"></p></div>
             <div class="count"><span id="pmin" aria-live="polite">25 characters is a good start</span><span id="plen">0/700</span></div>
             <p class="err" id="perr" role="alert"></p>
           </div>
@@ -257,11 +256,6 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     <button class="btn ghost" id="more" type="button" hidden>Turn the page</button>
     <button class="link" id="back" type="button" hidden>Turn back</button>
   </div>
-  <div class="say" id="say" hidden>
-    <button class="bigmic" id="mic" type="button" aria-pressed="false" aria-describedby="vnote"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="sr" id="micSr">Say it instead</span></button>
-    <p class="saylabel" id="micLabel">In a rush? Say it instead.</p>
-    <p class="vnote" id="vnote" aria-live="polite"></p>
-  </div>
   <div class="steps" id="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
   <p class="stepname" id="stepname">Please don’t include anything that could identify a patient.</p>
 
@@ -316,12 +310,11 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 
   /* ---------- pages ---------- */
-  var card=$('card'), go=$('go'), back=$('back'), page=0 /* 0 = invitation */, startedAt=null, payload=null, busy=false, voiceOK=false, spoke=false, stopVoice=function(){}, micText=function(){};
+  var card=$('card'), go=$('go'), back=$('back'), page=0 /* 0 = invitation */, startedAt=null, payload=null, busy=false, stopVoice=function(){};
   var labels={0:'Fill in a card',1:'Drop it in now',2:'Turn the page',3:'Drop it in the box'};
   function ui(){
     go.textContent=labels[page]; back.hidden = page<2; $('more').hidden = page!==1;
     document.body.classList.toggle('engaged', page>0);
-    $('say').hidden = !voiceOK || page>1 || busy; micText();
     var idx = page<=1?0:page-1;
     [].forEach.call($('steps').children,function(d,k){ d.classList.toggle('on',k===idx); });
     $('stepname').textContent = page===0 ? 'Please don’t include anything that could identify a patient.' : page===1 ? 'Drop it in now, or turn the page to add a little more.' : ['The problem','Where it happens','What it costs'][idx]+'. Optional. Step '+(idx+1)+' of 3.';
@@ -405,15 +398,15 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   function vals(name){ return [].map.call(document.querySelectorAll('input[name="'+name+'"]:checked'),function(i){return i.value;}).join(', '); }
   function build(route){
     var quick=route==='quick';
-    if(quick) return {problem:pr.value.trim(),route:spoke?'voice':'quick',source_type:spoke?'moment_of_work_observation':'problem_card',input_method:method(),service:'',organisation:'',who:'',who_other:'',what:'',what_other:'',how_often:'',improve:'',contact_email:'',created_at:new Date().toISOString(),utm_source:camp.source,utm_campaign:camp.campaign,seconds_to_submit:startedAt?Math.round((Date.now()-startedAt)/1000):''};
-    return {route:'full',source_type:'problem_card',input_method:method(),problem:pr.value.trim(),service:$('service').value.trim(),organisation:$('org').value.trim(),who:vals('who'),who_other:$('who-other').value.trim(),what:vals('what'),what_other:$('what-other').value.trim(),how_often:vals('often'),
+    if(quick) return {problem:pr.value.trim(),route:'quick',input_method:method(),service:'',organisation:'',who:'',who_other:'',what:'',what_other:'',how_often:'',improve:'',contact_email:'',created_at:new Date().toISOString(),utm_source:camp.source,utm_campaign:camp.campaign,seconds_to_submit:startedAt?Math.round((Date.now()-startedAt)/1000):''};
+    return {route:'full',input_method:method(),problem:pr.value.trim(),service:$('service').value.trim(),organisation:$('org').value.trim(),who:vals('who'),who_other:$('who-other').value.trim(),what:vals('what'),what_other:$('what-other').value.trim(),how_often:vals('often'),
       improve:$('improve').value.trim(),contact_email:$('email').value.trim(),created_at:new Date().toISOString(),
       utm_source:camp.source,utm_campaign:camp.campaign,seconds_to_submit:startedAt?Math.round((Date.now()-startedAt)/1000):''};
   }
 
   /* ---------- posting: pick the card up, carry it to the slot, slide it in ---------- */
   function post(){
-    stopVoice(); busy=true; $('say').hidden=true; $('acts').hidden=true; $('more').hidden=true; $('steps').hidden=true; $('stepname').hidden=true; $('intro').style.opacity='0'; $('fail').classList.remove('on'); document.activeElement && document.activeElement.blur();
+    stopVoice(); busy=true; $('acts').hidden=true; $('more').hidden=true; $('steps').hidden=true; $('stepname').hidden=true; $('intro').style.opacity='0'; $('fail').classList.remove('on'); document.activeElement && document.activeElement.blur();
     var sent=fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:(function(){var fd=new FormData(); for(var k in payload) fd.append(k,payload[k]); return fd;})()})
       .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return true; });
     var anim=new Promise(function(res){
@@ -440,7 +433,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       if(r[0] && r[0].failed){ card.getAnimations && card.getAnimations().forEach(function(x){x.cancel();}); card.style.visibility=''; card.style.transformOrigin='';
         $('fail').classList.add('on'); $('acts').hidden=false; $('stepname').hidden=false; busy=false; ui(); $('steps').hidden=false; $('intro').style.opacity=''; return; }
       var line=(payload&&payload.problem||'').replace(/\s+/g,' '); $('receipt').textContent=line; $('receipt').hidden=!line;
-      clearDraft(); spoke=false; dictated=typed=false; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
+      clearDraft(); dictated=typed=false; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
     });
   }
   $('retry').addEventListener('click',function(){ $('fail').classList.remove('on'); if(payload) post(); });
@@ -452,49 +445,47 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     $('acts').hidden=false; $('steps').hidden=false; $('stepname').hidden=false; $('intro').style.opacity=''; payload=null; startedAt=Date.now();
     showPage(1); page=1; $('invite').hidden=true; $('write').hidden=false; ui(); focusPage();
   });
-  /* ---------- voice: one big mic. Speak, check the words, drop it in.
-     The browser turns speech into text. No audio is recorded or kept by this page.
+  /* ---------- voice: a "Say it" button on page 1. Speak, check the words, drop it in.
+     The browser turns speech into text. This page never receives or stores audio.
      TEST MODE ONLY until IG review. Enable with ?voice=test ---------- */
   (function(){
     var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
     if(new URLSearchParams(location.search).get('voice')!=='test' || !SR) return;
-    var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote');
-    micText=function(){ if(!on) $('micLabel').textContent = page>0 && pr.value.trim() ? 'Tap to add more' : 'In a rush? Say it instead.'; };
-    function idle(){ on=false; mic.setAttribute('aria-pressed','false'); $('micSr').textContent='Say it instead'; micText(); }
-    function privLine(){ if(!$('privnote')) note.insertAdjacentHTML('afterend','<p class="vnote" id="privnote">'+(local?'Speech is turned into text on this device.':'Your browser may send speech online to turn it into text.')+' No audio is kept.</p>'); }
+    var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote'), said='', NS=' This page never receives or stores your voice.';
+    function idle(){ on=false; mic.setAttribute('aria-pressed','false'); $('micLabel').textContent='Say it'; }
     stopVoice=function(){ if(on&&rec){ try{ rec.stop(); }catch(e){} } };
     function start(){
       var base=pr.value.replace(/\s+$/,''), heard='';
       rec=new SR(); rec.lang='en-GB'; rec.interimResults=true; rec.continuous=false;
       if(local) try{ rec.processLocally=true; }catch(e){}
-      rec.onresult=function(e){ var fin='', tmp='';
-        for(var k=0;k<e.results.length;k++){ var t=e.results[k][0].transcript; if(e.results[k].isFinal) fin+=t+' '; else tmp+=t+' '; }
-        heard=(fin+tmp).trim(); pr.value=(base?base+' ':'')+heard; pr.dispatchEvent(new Event('input')); };
-      rec.onerror=function(e){ note.textContent = e.error==='not-allowed'||e.error==='service-not-allowed' ? 'Microphone not allowed. You can type on the card instead.' : e.error==='no-speech' ? 'We didn’t catch that. Tap the mic and try again, or type.' : 'That didn’t work. You can type on the card instead.'; };
+      rec.onresult=function(e){ var t='';
+        for(var k=0;k<e.results.length;k++) t+=e.results[k][0].transcript+' ';
+        heard=t.trim(); pr.value=(base?base+' ':'')+heard; pr.dispatchEvent(new Event('input')); };
+      rec.onerror=function(e){ note.textContent = e.error==='not-allowed'||e.error==='service-not-allowed' ? 'Microphone not allowed. You can type instead.' : e.error==='no-speech' ? 'We didn’t catch that. Try again, or type.' : 'That didn’t work. You can type instead.'; };
       rec.onend=function(){
         idle();
-        if(heard){ spoke=true; dictated=true; pr.value=(base?base+' ':'')+heard; pr.dispatchEvent(new Event('input')); saveDraft();
-          note.textContent='Check the words on the card. Edit anything that’s wrong, then drop it in.';
+        if(heard){ dictated=true; pr.value=(base?base+' ':'')+heard; pr.dispatchEvent(new Event('input')); saveDraft();
+          note.textContent='Check the words. Edit anything that’s wrong, then drop it in.'+NS;
           $('stepname').textContent='Check the words, then drop it in.';
           $('acts').scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'}); }
       };
-      try{ rec.start(); on=true; mic.setAttribute('aria-pressed','true'); $('micSr').textContent='Stop listening'; $('micLabel').textContent='Listening. Tap when you’ve finished.';
-        note.textContent='Keep it brief. Don’t say anything that could identify a patient or colleague.'; }
-      catch(e){ idle(); note.textContent='That didn’t work. You can type on the card instead.'; }
+      try{ rec.start(); on=true; mic.setAttribute('aria-pressed','true'); $('micLabel').textContent='Listening. Tap to stop';
+        note.textContent='Don’t say anything that could identify a patient or colleague. '+said; }
+      catch(e){ idle(); note.textContent='That didn’t work. You can type instead.'; }
     }
+    function privacy(){ said=(local?'Speech is turned into text on this device.':'Your browser may send speech online to turn it into text.')+NS; }
     mic.addEventListener('click',function(){
       if(busy) return;
       if(on&&rec){ rec.stop(); return; }
-      if(page===0){ startedAt=Date.now(); $('invite').hidden=true; $('write').hidden=false; page=1; card.style.setProperty('--ry','0deg'); ui(); }
-      else if(!startedAt) startedAt=Date.now();
-      if(checked || typeof SR.available!=='function'){ checked=true; privLine(); start(); return; }
+      if(checked || typeof SR.available!=='function'){ checked=true; privacy(); start(); return; }
       checked=true;
       // only ask the browser about on-device speech when the person chooses to speak
       SR.available({langs:['en-GB'],processLocally:true}).then(function(r){ local = r==='available'; })
         .catch(function(){ local=false; })
-        .then(function(){ privLine(); start(); });
+        .then(function(){ privacy(); start(); });
     });
-    voiceOK=true; ui();
+    $('voice').hidden=false;
+    note.textContent='Short on time? Say it instead.'+NS;
   })();
 
   ui();
@@ -513,7 +504,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     $('resume').hidden=false;
   }
   $('fresh').addEventListener('click',function(){
-    stopVoice(); spoke=false; dictated=typed=false; clearDraft(); pr.value=''; ['service','org','improve','email','who-other','what-other'].forEach(function(id){$(id).value='';}); ['who','what'].forEach(function(n){ $(n+'-other-wrap').hidden=true; });
+    stopVoice(); dictated=typed=false; clearDraft(); pr.value=''; ['service','org','improve','email','who-other','what-other'].forEach(function(id){$(id).value='';}); ['who','what'].forEach(function(n){ $(n+'-other-wrap').hidden=true; });
     document.querySelectorAll('.tick input').forEach(function(i){i.checked=false;}); pr.dispatchEvent(new Event('input'));
     $('resume').hidden=true; showPage(1); page=1; ui(); focusPage();
   });
