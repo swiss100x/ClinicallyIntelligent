@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How we look after your card | Clinically Intelligent</title>
+<meta name="description" content="What makes your work harder than it needs to be? Fill in a card. Two minutes. You don't need to know the solution.">
+<meta property="og:title" content="What makes your work harder than it needs to be?">
+<meta property="og:description" content="Fill in a card. Two minutes. You don’t need to know the solution.">
+<meta property="og:url" content="https://clinicallyintelligent.com/problems/privacy/">
+<meta property="og:image" content="https://clinicallyintelligent.com/problems/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15120e">
+<link rel="canonical" href="https://clinicallyintelligent.com/problems/privacy/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600&family=Tinos:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--surface:#15120e;--surface2:#1e1914;--card:#fbf6ea;--card-edge:#e6dac2;--ink:#1d1a16;--soft:#6e6555;--rule:rgba(31,95,63,.22);
+--amber:#cf7b38;--amber-l:#e3a165;--moss:#1f5f3f;--moss-l:#2b7350;--moss-d:#163f2b;--ivory:#efe7d8;--muted:#a69c8a;
+--serif:"Fraunces",Georgia,serif;--hand:"Times New Roman",Tinos,Times,serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif;--lh:34px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--ivory);font-family:var(--sans);font-size:1.0625rem;line-height:1.55;
+  background:radial-gradient(ellipse 70% 55% at 50% 38%,#2b2219 0%,#1b1611 55%,var(--surface) 100%) fixed,var(--surface)}
+a{color:inherit;text-underline-offset:.22em}
+:focus-visible{outline:2px solid var(--amber-l);outline-offset:3px;border-radius:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.top{display:flex;justify-content:center;padding:18px 16px 0}
+.top img{height:42px;width:auto;display:block}
+main{max-width:600px;margin:0 auto;padding:clamp(18px,4vw,36px) clamp(18px,5vw,32px) clamp(40px,7vw,64px);text-align:center}
+.note{font-size:.95rem;color:var(--muted);margin:0 0 clamp(18px,3vw,28px);letter-spacing:.01em;transition:opacity .4s}
+body.writing .note{opacity:.35}
+
+/* the scene */
+.desk{position:relative;padding-bottom:132px;perspective:1400px;perspective-origin:50% 20%}
+.card{position:relative;z-index:1;margin:0 auto;max-width:520px;transform-style:preserve-3d;
+  transform:rotateX(var(--rx,10deg)) rotateY(var(--ry,0deg)) rotateZ(-.4deg);transform-origin:50% 100%;
+  transition:transform .8s cubic-bezier(.22,.8,.2,1),opacity .3s,filter .4s}
+body.engaged .card{--rx:0deg;transform:rotateX(0) rotateY(var(--ry,0deg)) rotateZ(0) translateY(-6px)}
+
+.face{background:var(--card);color:var(--ink);border:1px solid var(--card-edge);border-radius:4px;padding:26px clamp(20px,5vw,34px) 28px;text-align:left;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 30px 60px -28px rgba(0,0,0,.75),0 10px 22px -12px rgba(0,0,0,.45);
+  background-image:linear-gradient(var(--amber),var(--amber));background-size:calc(100% - 2*clamp(20px,5vw,34px)) 1.5px;background-position:center 66px;background-repeat:no-repeat}
+
+
+
+.label{display:flex;justify-content:space-between;font-size:.8rem;letter-spacing:.04em;color:var(--soft);margin:0 0 34px;height:20px}
+.q{font-family:var(--serif);font-weight:400;text-align:center;font-size:clamp(1.75rem,6vw,2.35rem);line-height:1.12;letter-spacing:-.015em;margin:2px auto 14px;max-width:16em;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sub{font-size:1.02rem;color:var(--soft);margin:0 auto;text-align:center;max-width:26em}
+.lines{display:block;width:100%;border:0;background:transparent;resize:none;padding:0 2px;margin-top:8px;font-family:var(--hand);font-size:1.3rem;line-height:var(--lh);color:var(--ink);
+  min-height:calc(var(--lh)*6);caret-color:var(--amber);
+  background-image:linear-gradient(transparent calc(var(--lh) - 1px),var(--rule) calc(var(--lh) - 1px));background-size:100% var(--lh);background-attachment:local}
+.lines.short{min-height:calc(var(--lh)*3)}
+.lines:focus,.line:focus{outline:none}
+.line{display:block;width:100%;border:0;border-bottom:1px solid var(--rule);background:transparent;font-family:var(--hand);font-size:1.22rem;padding:6px 2px;color:var(--ink);border-radius:0;caret-color:var(--amber);text-align:center}
+.line:focus{border-bottom-color:var(--moss)}
+.lines::placeholder,.line::placeholder{color:#b8ad96;font-style:italic}
+.f{margin:0 0 20px;text-align:center}
+.f > span,.f legend{display:block;width:100%;font-size:.88rem;letter-spacing:.01em;color:var(--soft);margin:0 0 4px;padding:0;text-align:center}
+fieldset.f{border:0;padding:0;margin:0 0 20px}
+.ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:8px}
+.tick{display:inline-flex;align-items:center;gap:8px;font-size:1rem;cursor:pointer;padding:4px 0;color:var(--ink)}
+.tick input{position:absolute;opacity:0;width:1px;height:1px}
+.sq{width:20px;height:20px;border:1.5px solid #a39780;border-radius:2px;position:relative;flex:0 0 auto;background:#fffdf8}
+.tick input:checked + .sq::after{content:"";position:absolute;left:4px;top:-5px;width:9px;height:18px;border-right:3px solid var(--amber);border-bottom:3px solid var(--amber);transform:rotate(42deg) scale(.6);opacity:0;border-radius:1px;animation:inkTick .25s ease-out forwards}
+@keyframes inkTick{to{transform:rotate(42deg) scale(1);opacity:1}}
+.tick input:focus-visible + .sq{outline:2px solid var(--amber);outline-offset:2px}
+.count{font-size:.84rem;color:var(--soft);display:flex;justify-content:space-between;gap:12px;margin-top:10px;text-align:left}
+.err{color:#9b3420;font-size:.95rem;min-height:1.3em;margin:10px 0 0;text-align:center}
+
+/* the box, centred under the card, its front edge in front of the card */
+.box{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(380px,94%);height:126px;z-index:2;pointer-events:none}
+.box .slot{position:absolute;left:17%;right:17%;top:0;height:11px;background:#070605;border-radius:3px;box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.box .front{position:absolute;inset:7px 0 0 0;border-radius:3px;background:linear-gradient(180deg,var(--moss-l) 0%,var(--moss) 18%,var(--moss-d) 100%);border-top:1px solid rgba(255,255,255,.12)}
+.box .front span{position:absolute;left:0;right:0;top:48px;text-align:center;font-family:var(--serif);color:#efe7d8;font-size:1.05rem;letter-spacing:.02em;opacity:.85}
+
+
+/* actions */
+.acts{display:flex;flex-wrap:wrap;gap:12px 22px;justify-content:center;align-items:center;margin-top:26px}
+.btn{font:600 1.02rem/1 var(--sans);padding:17px 28px;border-radius:999px;border:0;cursor:pointer;background:var(--ivory);color:#15120e;text-decoration:none;display:inline-block;transition:transform .2s,background .2s}
+.btn:hover{background:#fff8ec;transform:translateY(-1px)}
+.link{background:none;border:0;padding:6px 0;font:500 1rem var(--sans);color:var(--ivory);text-decoration:underline;text-underline-offset:.22em;cursor:pointer;opacity:.8}
+.steps{display:flex;justify-content:center;gap:8px;margin-top:22px}
+.steps i{width:7px;height:7px;border-radius:50%;background:rgba(239,231,216,.25);transition:background .3s}
+.steps i.on{background:var(--amber-l)}
+
+/* after */
+.done{display:none;padding-top:8px}
+.done.on{display:block;animation:fade .7s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.done h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,7vw,3rem);margin:0 0 10px;color:var(--ivory);font-variation-settings:"opsz" 120,"SOFT" 100}
+.done p{color:var(--muted);margin:0 auto 6px;max-width:28em}
+.more{margin-top:30px;padding-top:20px;border-top:1px solid rgba(239,231,216,.14);display:flex;justify-content:center;gap:10px 30px;flex-wrap:wrap}
+.more a{font-weight:500;color:var(--ivory)}
+.foot{max-width:560px;margin:0 auto;padding:0 clamp(18px,5vw,32px) 36px;font-size:.8rem;color:#857b6a;text-align:center}
+.foot p{margin:0 0 6px}
+@media (hover:none),(prefers-reduced-motion: reduce){.card{--ry:0deg}}
+@media (prefers-reduced-motion: reduce){.card,.card.flipped,.card.posting,.done.on,.note{transition:none!important;animation:none!important}.tick input:checked + .sq::after{animation:none;opacity:1;transform:rotate(42deg)}}
+
+/* ===== v4: three pages, page turns, posting ===== */
+main{max-width:640px;padding-left:clamp(12px,4vw,32px);padding-right:clamp(12px,4vw,32px)}
+.top{position:relative}
+.snd{position:absolute;right:clamp(14px,3vw,28px);top:22px;background:none;border:0;color:var(--muted);font:500 .85rem var(--sans);cursor:pointer;padding:6px 2px;text-decoration:underline;text-underline-offset:.2em}
+.desk{padding-bottom:var(--boxh)}
+.card{max-width:560px}
+.face{position:relative;transform:none;min-height:0}
+.page{display:none}
+.page.on{display:block}
+.box{height:100px}
+.box .front span{top:34px}
+.card.turning{transition:none}
+.lines.two{min-height:calc(var(--lh)*2)}
+.ticks{gap:6px 16px}
+.tick{padding:3px 0}
+.f{margin-bottom:16px}
+.lede-sm{font-size:.86rem;color:var(--soft);margin:-2px 0 6px;text-align:center}
+.box.bump{animation:bump .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bump{0%{transform:translateX(-50%) translateY(0)}35%{transform:translateX(-50%) translateY(5px) scaleY(.985)}100%{transform:translateX(-50%) translateY(0)}}
+@media (max-width:420px){.face{padding:22px 18px 22px}.label{margin-bottom:28px}.q{font-size:1.7rem}}
+
+:root{--boxw:min(380px,94%);--boxh:clamp(118px,36vw,150px)}
+.bx{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:var(--boxw);height:var(--boxh);pointer-events:none;display:block}
+.bx-back{z-index:0}
+.bx-front{z-index:2}
+.desk .card{z-index:1}
+.bx.bump{animation:bump .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bump{0%{transform:translateX(-50%) translateY(0)}35%{transform:translateX(-50%) translateY(4px)}100%{transform:translateX(-50%) translateY(0)}}
+.keep{background:#f2ece0;border-left:2px solid var(--moss);padding:10px 12px;margin:4px 0 6px;font-size:.88rem;line-height:1.45;color:#3d372e;text-align:left}
+.keep b{color:var(--moss);font-weight:600}
+#pmin{transition:color .2s}
+#pmin.ok{color:var(--moss);font-weight:600}
+.lines{min-height:calc(var(--lh)*5)}
+.note{color:#d6ccb8;font-size:1rem}
+.foot{color:#b3a993;font-size:.86rem}
+.snd{color:#d6ccb8;min-height:44px}
+.link{min-height:44px;opacity:1}
+.btn{min-height:52px}
+.tick{min-height:44px}
+.stepname{margin:10px 0 0;font-size:.92rem;color:#d6ccb8}
+body:not(.engaged) .card{cursor:pointer}
+body:not(.engaged) .card:hover{--rx:6deg}
+body:not(.engaged) .card:hover .face{box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 36px 70px -28px rgba(0,0,0,.8),0 12px 24px -12px rgba(0,0,0,.5)}
+.top img{height:46px}
+@media print{html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#15120e!important}.snd{display:none}}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.echo{font-family:var(--hand);font-style:italic;color:#9a8f7b;font-size:1.02rem;text-align:center;margin:0 auto 12px;max-width:30em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.echo::before{content:"“"}.echo::after{content:"”"}
+.resume{color:#e3a165;font-size:.98rem;margin:-14px 0 18px}
+.resume .link{min-height:auto;padding:0 0 0 6px;color:#d6ccb8}
+.foot a{color:#d6ccb8}
+
+.doc{max-width:560px;margin:0 auto;padding:clamp(24px,5vw,44px) clamp(20px,5vw,32px) 56px;text-align:left}
+.doc h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,7vw,2.6rem);line-height:1.08;margin:0 0 14px;color:var(--ivory);font-variation-settings:"opsz" 120,"SOFT" 100}
+.doc .lead{color:#d6ccb8;font-size:1.08rem;margin:0 0 30px}
+.doc h2{font-family:var(--serif);font-weight:400;font-size:1.3rem;margin:26px 0 6px;color:var(--ivory);font-variation-settings:"opsz" 48,"SOFT" 100}
+.doc p{color:#d6ccb8;margin:0 0 10px}
+.doc a{color:var(--ivory)}
+.backto{display:inline-block;margin-top:34px;font-weight:600}
+</style>
+</head>
+<body>
+<header class="top"><a href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a></header>
+<main class="doc">
+  <h1>How we look after your card</h1>
+  <p class="lead">It’s a suggestion box. No name needed. Here’s the simple version of what happens to what you write.</p>
+  <h2>Who reads it</h2>
+  <p>Juwon, who runs Clinically Intelligent. Nobody else.</p>
+  <h2>How long we keep it</h2>
+  <p>Up to 24 months, then it’s deleted.</p>
+  <h2>What we do with it</h2>
+  <p>We look for patterns across cards, the things that come up again and again, and use them to decide what to write about, teach and build. We may turn those patterns into themes or research, always anonymised. Your card itself is never published.</p>
+  <h2>Your email</h2>
+  <p>Only if you choose to add it, and only so we can follow up about your card. We won’t add you to any mailing list.</p>
+  <h2>Please leave out</h2>
+  <p>Anything that could identify a patient or a colleague. Keep it about the work.</p>
+  <h2>Not for incidents</h2>
+  <p>This isn’t an NHS reporting system. For a patient safety incident or concern, use your organisation’s usual process.</p>
+  <h2>Questions, or want something removed?</h2>
+  <p>Email <a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a> and we’ll sort it.</p>
+  <p style="margin-top:22px;font-size:.92rem;color:#b3a993">Clinically Intelligent is independent and not affiliated with Barts Health NHS Trust.</p>
+  <a class="backto" href="/problems/">Back to your card</a>
+</main>
+</body>
+</html>
