@@ -157,12 +157,17 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .btn.ghost:hover{background:rgba(239,231,216,.08)}
 .receipt{font-family:var(--hand);font-style:italic;font-size:1.12rem;color:#cfc4ae;margin:0 auto 14px;max-width:24em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .receipt::before{content:"“"}.receipt::after{content:"”"}
-.voice{display:flex;align-items:center;gap:10px 12px;margin-top:10px;flex-wrap:wrap;text-align:left}
-.mic{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid #cdbf9f;background:#fffdf7;color:var(--ink);font:600 .95rem var(--sans);cursor:pointer}
+.voice{display:flex;flex-direction:column;align-items:center;margin:20px 0 2px;text-align:center}
+.mic{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:10px 26px 10px 22px;border-radius:999px;border:1px solid #d3c6a8;background:#fffdf7;color:var(--ink);font:600 1rem var(--sans);letter-spacing:.005em;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 6px 14px -8px rgba(60,45,25,.45);transition:border-color .2s,box-shadow .2s,transform .2s}
+.mic:hover{border-color:var(--moss);transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 9px 18px -9px rgba(60,45,25,.5)}
+.mic svg{color:var(--moss)}
+.mic[aria-pressed="true"] svg{color:inherit}
 .mic svg{width:18px;height:18px}
 .mic[aria-pressed="true"]{background:var(--moss);border-color:var(--moss);color:#f4efe4;animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(31,95,63,.18)}}
-.vnote{font-size:.82rem;line-height:1.4;color:var(--soft);flex:1;min-width:160px;margin:0}
+.vnote{font-size:.9rem;line-height:1.45;color:var(--ink);opacity:.78;max-width:24em;margin:12px auto 0}
+.vsafe{font-size:.78rem;line-height:1.4;color:var(--soft);max-width:24em;margin:3px auto 0}
+.voice + .count{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule)}
 @media (prefers-reduced-motion: reduce){.mic[aria-pressed="true"]{animation:none}}
 .other{margin:6px auto 0;max-width:320px}
 .other .line{font-size:1.1rem}
@@ -190,7 +195,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             <label for="problem" class="sr">What happened</label>
             <div class="keep"><b>Keep it about the work.</b> Please don’t include patient names, NHS numbers or other patient-identifiable or confidential information.</div>
             <textarea id="problem" class="lines" maxlength="700" placeholder="For example: I was trying to get an update on a delivery of a commode, but it took 45 minutes and three phone calls." aria-describedby="pmin perr"></textarea>
-            <div class="voice" id="voice" hidden><button class="mic" id="mic" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="micLabel">Say it</span></button><p class="vnote" id="vnote" aria-live="polite"></p></div>
+            <div class="voice" id="voice" hidden><button class="mic" id="mic" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="micLabel">Say it</span></button><p class="vnote" id="vnote" aria-live="polite"></p><p class="vsafe">This page never receives or stores your voice.</p></div>
             <div class="count"><span id="pmin" aria-live="polite">25 characters is a good start</span><span id="plen">0/700</span></div>
             <p class="err" id="perr" role="alert"></p>
           </div>
@@ -451,7 +456,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   (function(){
     var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
     if(!SR) return;
-    var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote'), said='', NS=' This page never receives or stores your voice.';
+    var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote'), said='';
     function idle(){ on=false; mic.setAttribute('aria-pressed','false'); $('micLabel').textContent='Say it'; }
     stopVoice=function(){ if(on&&rec){ try{ rec.stop(); }catch(e){} } };
     function start(){
@@ -465,7 +470,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       rec.onend=function(){
         idle();
         if(heard){ dictated=true; pr.value=(base?base+' ':'')+heard; pr.dispatchEvent(new Event('input')); saveDraft();
-          note.textContent='Check the words. Edit anything that’s wrong, then drop it in.'+NS;
+          note.textContent='Check the words, edit anything that’s wrong, then drop it in.';
           $('stepname').textContent='Check the words, then drop it in.';
           $('acts').scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'}); }
       };
@@ -473,7 +478,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
         note.textContent='Don’t say anything that could identify a patient or colleague. '+said; }
       catch(e){ idle(); note.textContent='That didn’t work. You can type instead.'; }
     }
-    function privacy(){ said=(local?'Speech is turned into text on this device.':'Your browser may send speech online to turn it into text.')+NS; }
+    function privacy(){ said=local?'Speech is turned into text on this device.':'Your browser may send speech online to turn it into text.'; }
     mic.addEventListener('click',function(){
       if(busy) return;
       if(on&&rec){ rec.stop(); return; }
@@ -485,7 +490,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
         .then(function(){ privacy(); start(); });
     });
     $('voice').hidden=false;
-    note.textContent='Short on time? Say it instead.'+NS;
+    note.textContent='Short on time? Say it instead of typing.';
   })();
 
   ui();
