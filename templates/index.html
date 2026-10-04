@@ -433,26 +433,57 @@
     .reveal.d3 { animation-delay: 0.34s; }
     @keyframes rise { to { opacity: 1; transform: translateY(0); } }
   }
+
+/* CI shell. Paste inside the page <style>, after the page's own rules. */
+.site-head,.sh-sheet,.site-foot{--bg:#f4efe4;--panel:#1f5f3f;--line:#d9d1bf;--amber:#d98a1e;--ink:#0c0b0a;--moss-text:#1f5f3f;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif}
+
+/* ===== CI shell: shared header and footer ===== */
+.site-head{color:var(--ink);position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:10px clamp(16px,3vw,32px);background:var(--bg);transition:box-shadow .2s}
+.site-head.scrolled{box-shadow:0 1px 0 var(--line)}
+.site-head.dark{background:var(--panel);color:#f4efe4}
+.site-head.dark.scrolled{box-shadow:0 1px 0 rgba(244,239,228,.18)}
+.sh-logo{display:block;margin-right:auto;line-height:0}
+.sh-logo img{height:44px;width:auto;display:block}
+.sh-nav{display:none;gap:26px;align-items:center}
+.sh-nav a,.sh-cta,.sh-menu{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0;border-bottom:1.5px solid transparent}
+.sh-nav a:hover{border-bottom-color:currentColor}
+.sh-nav a[aria-current="page"]{border-bottom-color:currentColor;font-weight:600}
+.sh-cta{font-weight:600;border-bottom-color:var(--amber)}
+.sh-menu{background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.sh-menu i{display:inline-block;width:18px;height:10px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transition:transform .2s}
+.sh-menu[aria-expanded="true"] i{transform:scaleY(.15)}
+.sh-quick{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0}
+@media(min-width:880px){.sh-nav{display:flex}.sh-menu,.sh-quick{display:none}}
+.sh-sheet{position:fixed;inset:0;z-index:19;background:var(--bg);color:var(--ink);padding:calc(env(safe-area-inset-top,0px) + 84px) clamp(20px,5vw,48px) calc(env(safe-area-inset-bottom,0px) + 32px);overflow-y:auto}
+.sh-sheet[hidden]{display:none}
+.sh-sheet ul{list-style:none;margin:0;padding:0}
+.sh-sheet li a{display:block;font-family:var(--serif);font-size:clamp(2rem,9vw,2.8rem);line-height:1.1;padding:10px 0;text-decoration:none;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sh-sheet li a[aria-current="page"]{color:var(--moss-text)}
+.sh-sheet .sh-more{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:12px}
+.sh-sheet .sh-more a{font:500 1.05rem var(--sans);color:var(--ink)}
+body.sh-open{overflow:hidden}
+footer.site-foot{opacity:1;margin:clamp(64px,10vw,120px) 0 0;padding:clamp(40px,6vw,64px) 0 calc(env(safe-area-inset-bottom,0px) + 40px);border-top:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.95rem;max-width:none}
+footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margin-top:0}
+.sf-in{max-width:1120px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+.sf-grid{display:grid;grid-template-columns:1fr;gap:32px 48px}
+@media(min-width:760px){.sf-grid{grid-template-columns:1.4fr 1fr 1fr}}
+.sf-grid img{height:44px;width:auto;display:block;margin-bottom:14px}
+.sf-tag{font-family:var(--serif);font-size:1.3rem;margin:0 0 10px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.site-foot a{color:inherit;text-underline-offset:.2em}
+.site-foot ul a{text-decoration:none}
+.site-foot ul a:hover{text-decoration:underline}
+.sf-legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;opacity:.75}
+.site-foot.dark .sf-legal{border-top-color:rgba(244,239,228,.18)}
+.sf-legal p{margin:0 0 8px;max-width:62em}
+@media (prefers-reduced-motion: reduce){.site-head,.sh-menu i{transition:none}}
 </style>
 </head>
 <body>
+<header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/">Build with CI</a></nav><a class="sh-quick" href="https://clinicallyintelligent.com/publication/">Publication</a><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
+<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://read.clinicallyintelligent.com/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
 
-<header class="masthead">
-  <div class="wrap masthead-inner">
-    <a href="/" class="brand-link">
-      <span class="brand-mark" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
-          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
-        </svg>
-      </span>
-      <span class="brand-wordmark">Clinically <em>Intelligent</em></span>
-    </a>
-    <div class="mast-meta">
-      <a href="/">← Home</a>
-    </div>
-  </div>
-</header>
 
 <section class="hero">
   <div class="wrap">
@@ -625,20 +656,7 @@ Notes from home.</div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap foot-inner">
-    <div class="foot-left">
-      <span class="foot-mark" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-          <text x="60" y="280" font-family="Fraunces, Georgia, serif" font-size="340" font-weight="500" fill="#1f5f3f">C</text>
-          <text x="195" y="345" font-family="Fraunces, Georgia, serif" font-size="320" font-weight="500" fill="#d98a1e">I</text>
-        </svg>
-      </span>
-      <span>© Clinically Intelligent 2026</span>
-    </div>
-    <span>Written in East London · Published on Beehiiv</span>
-  </div>
-</footer>
+<footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://read.clinicallyintelligent.com/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
 
 <div class="toast" id="toast">Copied to clipboard</div>
 
@@ -759,6 +777,26 @@ Notes from home.</div>
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
   }
+</script>
+<script>
+(function(){
+  var h=document.querySelector('.site-head'), b=h&&h.querySelector('.sh-menu'), s=document.getElementById('sh-sheet');
+  if(!h) return;
+  function onS(){ h.classList.toggle('scrolled', window.scrollY>4); } onS(); window.addEventListener('scroll',onS,{passive:true});
+  function set(open){ b.setAttribute('aria-expanded',open); s.hidden=!open; document.body.classList.toggle('sh-open',open); b.firstChild.nodeValue=open?'Close ':'Menu '; if(open){ var f=s.querySelector('a'); if(f) f.focus(); } }
+  b.addEventListener('click',function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  document.addEventListener('keydown',function(e){
+    if(s.hidden) return;
+    if(e.key==='Escape'){ set(false); b.focus(); return; }
+    if(e.key==='Tab'){
+      var f=[b].concat([].slice.call(s.querySelectorAll('a'))), i=f.indexOf(document.activeElement);
+      if(e.shiftKey && i<=0){ e.preventDefault(); f[f.length-1].focus(); }
+      else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); }
+    }
+  });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=880 && !s.hidden) set(false); });
+  s.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); });
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,160 @@
+[
+ {
+  "number": 1,
+  "title": "The tool that changed how I document clinical assessments.",
+  "date": "2026-04",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "How I use Claude to complete CGAs and social histories in minutes, and the one IG rule every NHS clinician needs to know before using AI at work.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Claude"
+ },
+ {
+  "number": 2,
+  "title": "The free tool that turns your team’s knowledge into instant answers.",
+  "date": "2026-04",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "How to build a NotebookLM knowledge base that reduces interruptions, empowers junior staff and gives you back your focus.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "NotebookLM"
+ },
+ {
+  "number": 3,
+  "title": "The free research tool that keeps your practice current.",
+  "date": "2026-04",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "How I used Perplexity to find a NICE guideline update from April 2025 that most clinicians missed, and why it matters for your practice.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Perplexity"
+ },
+ {
+  "number": 4,
+  "title": "Three Tools. Three Lanes. One Workflow.",
+  "date": "2026-04",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "How I used three AI tools to create carer guidance that actually works at home, and how you can use the same workflow this week.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Three Tools"
+ },
+ {
+  "number": 5,
+  "title": "The Tool That Captures What Was Actually …",
+  "date": "2026-05",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "I got the hour after meetings back. Here’s the tool that helped me listen properly and leave with the minutes already done.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Otter"
+ },
+ {
+  "number": 6,
+  "title": "The Tool That Turns the Page Nobody Reads Into …",
+  "date": "2026-05",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "The creativity did not leave. It just needed a faster way out.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Napkin"
+ },
+ {
+  "number": 7,
+  "title": "The Clinician’s AI Safety Check.",
+  "date": "2026-05",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "Safety Check"
+ },
+ {
+  "number": 8,
+  "title": "What Seven Issues Taught Me That I Did Not Expect.",
+  "date": "2026-05",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "I thought the challenge would be technical. I was wrong.",
+  "cover": "/publication/covers/issue-08.jpg",
+  "spine": "type",
+  "topic": "Seven Issues"
+ },
+ {
+  "number": 9,
+  "title": "The Tool That Showed Me What I Missed.",
+  "date": "2026-06",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "Gemini is not the chat. It is the front door.",
+  "cover": "/publication/covers/issue-09.jpg",
+  "topic": "Gemini"
+ },
+ {
+  "number": 10,
+  "title": "A Licence Is Not A Plan.",
+  "date": "2026-06",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "What the NHS’s largest AI rollout reveals about adoption, training and clinical practice.",
+  "cover": "/publication/covers/masthead.jpg",
+  "spine": "type",
+  "topic": "NHS Rollout"
+ },
+ {
+  "number": 11,
+  "title": "The Clinician’s AI Prompting Guide.",
+  "date": "2026-07",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "",
+  "cover": "/publication/covers/issue-11.jpg",
+  "spine": "type",
+  "topic": "Prompting"
+ },
+ {
+  "number": 12,
+  "title": "Digital literacy is not what we think it is.",
+  "date": "2026-07",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "The next digital skill isn’t technical. It’s judgement.",
+  "cover": "/publication/covers/issue-12.jpg",
+  "spine": "type",
+  "topic": "Digital Literacy"
+ },
+ {
+  "number": 13,
+  "title": "The tool the NHS is committing to.",
+  "date": "2026-08",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "You do not have to prefer Copilot. You do need to understand it.",
+  "cover": "/publication/covers/issue-13.jpg",
+  "spine": "type",
+  "topic": "Copilot"
+ },
+ {
+  "number": 14,
+  "title": "The first Copilot app worth a proper look.",
+  "date": "2026-08",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "I took a 20 page workflow into OneNote to see what its Copilot features could actually do.",
+  "cover": "",
+  "spine": "type",
+  "topic": "OneNote"
+ },
+ {
+  "number": 15,
+  "title": "The AI tool that lives on your phone.",
+  "date": "2026-08",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "No cloud. No account. Works offline. Nothing leaves your device.",
+  "cover": "/publication/covers/issue-15.jpg",
+  "spine": "type",
+  "topic": "PocketPal"
+ },
+ {
+  "number": 16,
+  "title": "Made with, alongside, or by AI?",
+  "date": "2026-09",
+  "url": "https://read.clinicallyintelligent.com/",
+  "subtitle": "Where does your work end and the machine’s begin?",
+  "cover": "/publication/covers/issue-16.jpg",
+  "topic": "Made With AI"
+ }
+]
