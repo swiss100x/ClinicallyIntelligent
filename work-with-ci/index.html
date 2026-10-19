@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-  PRICES SWITCH: prices are built in but hidden.
-  To show them, change the data-prices value from off to on in the <html> tag below.
--->
-<html lang="en-GB" data-prices="off">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -69,9 +65,7 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.3rem,6vw,4rem);lin
 .offer h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,3vw,1.9rem);line-height:1.15;margin:0 0 6px;color:var(--moss-text);font-variation-settings:"opsz" 48,"SOFT" 100}
 .offer .fmt{margin:0;font-size:.95rem;color:var(--ink-soft)}
 .offer .what{margin:0;max-width:26em}
-.price{font-family:var(--serif);font-size:1.25rem;margin:10px 0 0;color:var(--ink)}
-.price small{font-family:var(--sans);font-size:.9rem;color:var(--ink-soft)}
-[data-prices="off"] .price{display:none}
+.offer .what + .what{margin-top:10px}
 .offer .act{align-self:center}
 .offer .act a{font-weight:600;white-space:nowrap}
 .note{margin:22px 0 0;font-size:.95rem;color:var(--ink-soft);max-width:40em}
@@ -166,22 +160,27 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
 
 <section class="wrap" id="education">
   <h2>Develop capability.</h2>
-  <p class="intro">Practical AI education built around real clinical work, for individuals and teams.</p>
+  <p class="intro">Practical AI education and development built around real healthcare work, for individuals, teams and services.</p>
   <div class="offers">
     <div class="offer">
       <div><h3>AI Foundations for Healthcare</h3><p class="fmt">90 minutes. Live online. Per person.</p></div>
-      <div><p class="what">A practical introduction to using AI safely and well in everyday clinical and professional work.</p><p class="price">£95 <small>per person</small></p></div>
+      <div><p class="what">A practical introduction to using AI safely, critically and confidently in everyday clinical and professional work.</p></div>
       <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Register%20interest%3A%20AI%20Foundations%20for%20Healthcare&amp;body=Name%3A%0ARole%3A%0AOrganisation%3A%0ADates%20or%20times%20that%20suit%20you%3A%0A">Register interest</a></div>
     </div>
     <div class="offer">
-      <div><h3>Personal AI Intensive</h3><p class="fmt">One-to-one. 90 minutes. Single session or three-session series.</p></div>
-      <div><p class="what">Focused time on your own work, your tools and your questions.</p><p class="price">£295 <small>single session</small><br>£750 <small>three-session series</small></p></div>
-      <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Register%20interest%3A%20Personal%20AI%20Intensive&amp;body=Name%3A%0ARole%3A%0ASingle%20session%20or%20three-session%20series%3A%0AWhat%20would%20you%20like%20to%20work%20on%3F%0A%0A">Register interest</a></div>
+      <div><h3>Personal AI Intensive</h3><p class="fmt">One to one. 90 minutes. Single session or three session series.</p></div>
+      <div><p class="what">Focused support built around your work, the tools available to you and what you’d like to achieve.</p></div>
+      <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Register%20interest%3A%20Personal%20AI%20Intensive&amp;body=Name%3A%0ARole%3A%0ASingle%20session%20or%20three%20session%20series%3A%0AWhat%20would%20you%20like%20to%20work%20on%3F%0A%0A">Register interest</a></div>
     </div>
     <div class="offer">
-      <div><h3>Practical AI for Clinical Teams</h3><p class="fmt">Half-day. Up to 15 people.</p></div>
-      <div><p class="what">A session shaped around your team’s real tasks, systems and questions.</p><p class="price">From £1,250</p></div>
-      <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Team%20education%20enquiry&amp;body=Name%3A%0AOrganisation%20and%20team%3A%0ARoughly%20how%20many%20people%3A%0AWhat%20would%20you%20like%20the%20team%20to%20be%20able%20to%20do%20afterwards%3F%0A%0A">Enquire about team education</a></div>
+      <div><h3>Practical AI for Clinical Teams</h3><p class="fmt">Half day or full day. Tailored to your team.</p></div>
+      <div><p class="what">Interactive education shaped around your team’s tasks, challenges and questions. We explore practical applications, professional judgement and how to continue learning beyond the session.</p></div>
+      <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Team%20education%20enquiry&amp;body=Name%3A%0AOrganisation%20and%20team%3A%0ARoughly%20how%20many%20people%3A%0AHalf%20day%20or%20full%20day%3A%0AWhat%20would%20you%20like%20the%20team%20to%20be%20able%20to%20do%20afterwards%3F%0A%0A">Enquire about team education</a></div>
+    </div>
+    <div class="offer">
+      <div><h3>AI Capability Pilot</h3><p class="fmt">Two week exploratory pilot. For teams and services.</p></div>
+      <div><p class="what">Understanding AI is one thing. Knowing how to use it well in your work is another.</p><p class="what">We’re developing a practical approach to understanding team capability, identifying learning needs and exploring where AI could make a meaningful difference.</p><p class="what">We’re inviting conversations with organisations interested in helping shape and test the approach.</p></div>
+      <div class="act"><a href="mailto:hello@clinicallyintelligent.com?subject=Early%20pilot%3A%20AI%20Capability%20Pilot&amp;body=Name%3A%0AOrganisation%20and%20team%20or%20service%3A%0AWhat%20would%20you%20like%20to%20understand%20or%20improve%3F%0A%0A">Discuss an early pilot</a></div>
     </div>
   </div>
   <p class="note">Registering interest doesn’t confirm a place. We’ll come back to you to confirm dates, details and payment before anything is booked.</p>
@@ -192,7 +191,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
   <p class="intro">Selected projects, scoped individually rather than sold as fixed packages.</p>
 
   <div class="proj">
-    <figure><img src="assess.jpg" width="1100" height="605" alt="A clinical-style assessment of a workflow. History: what actually happens at 4pm on a Tuesday? Observed: everyone skips field 6. Impression: not a tech problem, a handover problem." loading="lazy"><figcaption>Still from Start with the work, a CI film.</figcaption></figure>
+    <figure><img src="assess.jpg" width="1100" height="605" alt="A clinical style assessment of a workflow. History: what actually happens at 4pm on a Tuesday? Observed: everyone skips field 6. Impression: not a tech problem, a handover problem." loading="lazy"><figcaption>Still from Start with the work, a CI film.</figcaption></figure>
     <div>
       <p class="q">Why does this process take so long?</p>
       <h3>Discovery</h3>
@@ -246,7 +245,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     </svg>
   </div>
   <div class="routes">
-    <a class="btn moss" href="https://calendly.com/hello-clinicallyintelligent" target="_blank" rel="noopener">Book a 20-minute conversation<small>Pick a time that suits you</small></a>
+    <a class="btn moss" href="https://calendly.com/hello-clinicallyintelligent" target="_blank" rel="noopener">Book a 20 minute conversation<small>Pick a time that suits you</small></a>
     <a class="btn line" href="mailto:hello@clinicallyintelligent.com?subject=Work%20with%20CI&amp;body=What%20would%20you%20like%20to%20explore%3F%0A%0A%0AName%3A%0AOrganisation%3A%0A">Write to us<small>Describe it in your own words</small></a>
   </div>
   <p class="direct muted">Or email <a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p>
