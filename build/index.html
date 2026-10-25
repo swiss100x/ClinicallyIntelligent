@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Build with CI | Clinically Intelligent</title>
-<meta name="description" content="A 45 second film from Clinically Intelligent. Clinicians, designers, engineers, or anyone with an idea that could make healthcare better.">
+<meta name="description" content="Build with CI. People. Ideas. A collective. Find your people. Make things happen. Be part of CI.">
 <meta property="og:title" content="Build with CI">
-<meta property="og:description" content="A 45 second film. Want to be part of what we’re building?">
+<meta property="og:description" content="People. Ideas. A collective. Find your people. Make things happen.">
 <meta property="og:type" content="video.other">
 <meta property="og:url" content="https://clinicallyintelligent.com/build/">
 <meta property="og:image" content="https://clinicallyintelligent.com/build/og.jpg">
@@ -41,10 +41,24 @@ a{color:inherit;text-underline-offset:.2em}
 header b{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1}
 header b .i{color:var(--amber)}
 header span{font-size:.95rem;font-weight:500}
-main{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:1fr;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,8vw,96px);align-items:center}
-@media(min-width:860px){main{grid-template-columns:minmax(0,420px) 1fr}}
+.hero{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:1fr;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,8vw,96px);align-items:center}
+@media(min-width:860px){.hero{grid-template-columns:minmax(0,420px) 1fr}}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,9vw,5.6rem);line-height:.95;letter-spacing:-.03em;margin:0 0 12px;font-variation-settings:"opsz" 144,"SOFT" 100}
 .kinds{margin:0 0 28px;opacity:.75}
+.beat{padding-top:clamp(56px,9vw,104px);padding-bottom:clamp(8px,2vw,16px)}
+.beat + .beat{border-top:1px solid rgba(244,239,228,.16)}
+.beat h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.025em;margin:0 0 26px;font-variation-settings:"opsz" 120,"SOFT" 100}
+.beat p{margin:0 0 16px;max-width:32em;color:#dfe8e1}
+.beat .big{font-family:var(--serif);font-size:clamp(1.4rem,3.4vw,1.9rem);line-height:1.3;letter-spacing:-.01em;color:#f4efe4;margin:0 0 14px;font-variation-settings:"opsz" 48,"SOFT" 100}
+.beat .big em{font-style:italic;color:var(--amber)}
+.beat .pair{margin:30px 0 0}
+.beat .pair p{margin:0}
+.beat .need{margin:26px 0 0}
+.beat .need p{font-family:var(--serif);font-size:clamp(1.2rem,2.8vw,1.5rem);color:#f4efe4;margin:0 0 6px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.beat .actions{margin-top:30px}
+.sign{padding-top:clamp(72px,11vw,128px);padding-bottom:clamp(56px,8vw,96px)}
+.sign p{font-family:var(--serif);font-size:clamp(1.6rem,4.4vw,2.4rem);line-height:1.15;letter-spacing:-.015em;margin:0;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sign p + p{color:var(--amber);font-style:italic}
 .say{font-size:1.25rem;line-height:1.5;max-width:24em;margin:0}
 .say2{margin:16px 0 0;opacity:.8;max-width:30em}
 video{display:block;width:100%;height:auto;aspect-ratio:4/5;background:#0c0b0a;border-radius:2px}
@@ -102,7 +116,8 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
 <body>
 <header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/" aria-current="page">Build with CI</a></nav><a class="sh-quick" href="https://clinicallyintelligent.com/publication/">Publication</a><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
 <div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/" aria-current="page">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://read.clinicallyintelligent.com/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
-<main class="wrap">
+<main>
+<div class="wrap hero">
   <figure>
     <video controls playsinline preload="metadata" poster="poster.jpg" width="1080" height="1350" aria-describedby="cap">
       <source src="build-with-ci.mp4" type="video/mp4">
@@ -110,15 +125,66 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     <figcaption id="cap">A seven page referral form, a nurse, a designer, an engineer and a pharmacist. 45 seconds, sound on.</figcaption>
   </figure>
   <div>
-    <h1>Build with CI</h1>
-    <p class="kinds">People, ideas, a collective.</p>
-    <p class="say">Want to be part of what we’re building? Clinicians, designers, engineers, or anyone with an idea that could make healthcare better.</p>
-    <p class="say2">For people with curiosity, initiative and high standards, whatever their discipline.</p>
+    <h1>Build with CI.</h1>
+    <p class="kinds">People. Ideas. A collective.</p>
+    <p class="say">Already redesigning it in your head? Good.</p>
     <div class="actions">
-      <a class="go" href="mailto:hello@clinicallyintelligent.com?subject=Build%20with%20CI&amp;body=What%20are%20you%20working%20on%3F%0A%0A%0AWhat%27s%20your%20discipline%3F%0A%0A%0AA%20link%20to%20something%20you%27ve%20made%3A%0A%0A%0AName%3A%0A">Show us what you’re working on</a>
+      <a class="go" href="#join">Be part of CI</a>
       <button class="share" type="button" id="share">Share the film</button>
     </div>
   </div>
+</div>
+
+<section class="wrap beat" aria-label="Who this is for">
+  <p class="big">Some people see something that could be better and move on.</p>
+  <p class="big">Others start thinking about what they could do differently.</p>
+  <p class="big"><em>We like those people.</em></p>
+  <div class="pair">
+    <p>Build with CI brings together clinicians, designers, engineers, filmmakers, researchers, educators, founders and people who don’t fit neatly into a category.</p>
+    <p style="margin-top:16px">Different backgrounds. Different skills. A shared instinct to make things happen.</p>
+  </div>
+</section>
+
+<section class="wrap beat">
+  <h2>Find your people.</h2>
+  <p>The people who challenge your thinking. Back your ideas. Bring skills you don’t have. See possibilities you might have missed.</p>
+  <p>People you can learn from, create with and call when you’ve got something you want to build.</p>
+  <p>Sometimes it’s a conversation. Sometimes it’s helping someone with a small project. Sometimes it’s the beginning of something much bigger.</p>
+  <div class="pair">
+    <p class="big">Not another network of names.</p>
+    <p class="big"><em>People who actually build together.</em></p>
+  </div>
+</section>
+
+<section class="wrap beat" id="join">
+  <h2>Be part of CI.</h2>
+  <p>We’re bringing together a small founding collective of curious, capable people who want to make things better.</p>
+  <p>People who care about their craft. Who share what they know. Who are willing to learn from others. Who want to contribute to something beyond their own work.</p>
+  <div class="need">
+    <p>You don’t need to have an idea ready.</p>
+    <p>You don’t need to work in healthcare.</p>
+    <p>You just need to bring something of yourself.</p>
+  </div>
+  <p class="big" style="margin-top:30px">Help shape what CI becomes.</p>
+  <div class="actions">
+    <a class="go" href="mailto:hello@clinicallyintelligent.com?subject=Be%20part%20of%20CI&amp;body=What%20do%20you%20do%2C%20or%20love%20doing%3F%0A%0A%0AWhat%20would%20you%20bring%3F%0A%0A%0AA%20link%20to%20something%20you%27ve%20made%20(optional)%3A%0A%0A%0AName%3A%0A%0A%0A(Being%20part%20of%20CI%20means%20joining%20our%20founding%20collective.%20It%20isn%27t%20employment%2C%20and%20it%20doesn%27t%20mean%20representing%20Clinically%20Intelligent%20officially.)%0A">Be part of CI</a>
+  </div>
+</section>
+
+<section class="wrap beat" id="project">
+  <h2>Got something you want to build?</h2>
+  <p>An idea you’ve been sitting on. A project that’s missing the right people. A problem you think deserves a better answer.</p>
+  <p class="big" style="margin-top:22px">Bring it to CI.</p>
+  <p>We’ll explore what you’re trying to create, where you need help and whether we could build something worthwhile together.</p>
+  <div class="actions">
+    <a class="go" href="mailto:hello@clinicallyintelligent.com?subject=Bring%20a%20project%20to%20CI&amp;body=What%20are%20you%20trying%20to%20build%3F%0A%0A%0AWhere%20do%20you%20need%20help%3F%0A%0A%0AName%3A%0A">Bring a project</a>
+  </div>
+</section>
+
+<div class="wrap sign">
+  <p>Clinically Intelligent.</p>
+  <p>The human part is the point.</p>
+</div>
 </main>
 <footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://read.clinicallyintelligent.com/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
 <script>
@@ -126,7 +192,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
   var b=document.getElementById('share');
   b.addEventListener('click',function(){
     var url=location.href.split('#')[0];
-    var data={title:'Build with CI',text:'A 45 second film from Clinically Intelligent. Want to be part of what we\u2019re building?',url:url};
+    var data={title:'Build with CI',text:'People. Ideas. A collective. Find your people. Make things happen.',url:url};
     if(navigator.share){navigator.share(data).catch(function(){});return;}
     if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){b.textContent='Link copied';},function(){b.textContent=url;});}
     else{b.textContent=url;}
