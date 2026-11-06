@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subscribe free | Clinically Intelligent</title>
+<meta name="description" content="Practical AI for healthcare professionals. One useful idea every Wednesday, in plain English. Written by a practising occupational therapist. Free.">
+<link rel="canonical" href="https://clinicallyintelligent.com/subscribe/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="There’s a lot of AI talk. Let’s make sense of it.">
+<meta property="og:description" content="Practical AI for healthcare professionals. One useful idea every Wednesday, in plain English. Free.">
+<meta property="og:url" content="https://clinicallyintelligent.com/subscribe/">
+<meta property="og:image" content="https://clinicallyintelligent.com/assets/og-home.jpg">
+<meta name="theme-color" content="#f4efe4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://abeehiiv-proxy.juwonak1.workers.dev">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+/* Subscribe page. The object is the flyer people just saw, turned into a reply slip they can fill in. */
+:root{--cream:#f4efe4;--paper:#fbf8f1;--ink:#0c0b0a;--deep:#10261c;--green:#1f5f3f;--amber:#d98a1e;--line:#d9d1bf;--muted:#5a5448;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--deep);font:17px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* hero: the flyer, continued */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:min(720px,calc(100vh - 70px))}.hero>*{min-width:0}
+.qpanel{background:var(--amber);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,56px)}
+.ai{font:600 clamp(150px,19vw,300px)/.85 var(--serif);letter-spacing:-.05em;color:var(--deep);margin:0;white-space:nowrap;font-variation-settings:"opsz" 144}
+.ai i{font-style:italic;font-weight:400;color:var(--cream);letter-spacing:0}
+.by{border-top:3px solid var(--deep);padding-top:16px;font:600 clamp(17px,1.5vw,21px)/1.3 var(--sans);margin:0;max-width:22ch}
+.copy{padding:clamp(32px,5vw,72px) clamp(20px,5vw,80px) clamp(32px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+h1{font:500 clamp(40px,5vw,68px)/1.02 var(--serif);letter-spacing:-.03em;margin:0;font-variation-settings:"opsz" 144}
+h1 em{display:block;font-style:italic;font-weight:400;color:var(--green);margin-top:.12em}
+.rule{width:88px;height:3px;background:var(--amber);margin:26px 0 18px}
+.promise{margin:0 0 26px;font-size:clamp(17px,1.4vw,19px);color:#2a2824}
+.promise b{display:block;font-weight:600;color:var(--deep);font-size:clamp(18px,1.5vw,21px);margin-top:3px}
+
+/* the reply slip */
+.slip{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px clamp(18px,2.4vw,26px) 18px;max-width:560px;box-shadow:0 1px 0 #0000000d,0 14px 30px -18px #10261c40}
+.slip::before{content:"";position:absolute;left:14px;right:14px;top:-1px;border-top:2px dashed #cbbf9f}
+.slip label{display:block;font:500 20px/1.3 var(--serif);margin:0 0 12px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row input{flex:1 1 240px;min-width:0;font:17px var(--sans);color:var(--ink);background:#fff;border:1.5px solid #b8ae98;border-radius:3px;padding:15px 14px}
+.row input:focus{border-color:var(--deep);outline:none;box-shadow:0 0 0 3px #d98a1e55}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:600 17px var(--sans);letter-spacing:.01em;border:0;border-radius:3px;padding:15px 24px;cursor:pointer;text-decoration:none;min-height:52px}
+.btn.amber{background:var(--amber);color:var(--ink)}
+.btn.amber:hover{background:#e69a33}
+.btn.dark{background:var(--deep);color:var(--cream)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.msg{margin:8px 0 0;font-size:15px;color:#8a3b12}.msg:empty{margin:0}
+.small{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.small a{color:var(--green)}
+.gift{display:flex;gap:14px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.gift img{width:48px;height:auto;border-radius:2px;box-shadow:0 2px 6px #0003;flex:none}
+.gift p{margin:0;font-size:15px;line-height:1.4}
+.gift b{font-weight:600}
+/* success */
+.done-view h2{font:500 30px/1.1 var(--serif);margin:0 0 6px}
+.done-view p{margin:0 0 16px}
+.done-view .acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.done-view .acts a.text{font-weight:600;color:var(--green)}
+.stamp{position:absolute;right:18px;top:14px;transform:rotate(-8deg);border:3px solid var(--green);color:var(--green);font:700 15px/1 var(--sans);letter-spacing:.08em;padding:8px 10px 7px;border-radius:4px;opacity:0}
+.slip.is-done .stamp{animation:stamp .45s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes stamp{0%{opacity:0;transform:rotate(-8deg) scale(1.6)}100%{opacity:.92;transform:rotate(-8deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){.slip.is-done .stamp{opacity:.92}}
+
+/* what arrives */
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.more{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+.more h2{font:500 clamp(30px,3.6vw,44px)/1.08 var(--serif);letter-spacing:-.02em;margin:0 0 28px;max-width:20ch}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,36px);margin:0 0 clamp(40px,6vw,64px);padding:0;list-style:none}
+.three li{border-top:2px solid var(--deep);padding-top:16px}
+.three h3{font:500 22px/1.2 var(--serif);margin:0 0 6px}
+.three p{margin:0;color:#3a3731;font-size:16px}
+.again{margin-top:clamp(40px,6vw,64px);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.again p{margin:0;font:500 22px/1.3 var(--serif)}
+.shelfnote{padding:clamp(28px,5vw,48px) 0 clamp(36px,6vw,64px);border-top:1px solid var(--line,#d9d1bf)}
+.sn{display:flex;align-items:flex-end;gap:22px;text-decoration:none;color:inherit;max-width:640px}
+.spines{display:flex;align-items:flex-end;gap:3px;flex:0 0 auto;padding-bottom:4px;border-bottom:4px solid #d9d1bf}
+.spines i{display:block;width:11px;border-radius:1px 1px 0 0;background:#1f5f3f;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.spines i:nth-child(1){height:52px}.spines i:nth-child(2){height:60px;background:#2c4a3a}.spines i:nth-child(3){height:48px;background:#0c0b0a}.spines i:nth-child(4){height:58px}.spines i:nth-child(5){height:54px;background:#d98a1e}.spines i:nth-child(6){height:62px;background:#0c0b0a}.spines i:nth-child(7){height:50px;background:#2c4a3a}
+.sn:hover .spines i:nth-child(5),.sn:focus-visible .spines i:nth-child(5){transform:translateY(-10px)}
+.snt{font-size:17px;line-height:1.45}.snt b{display:block;font:500 clamp(22px,3vw,28px)/1.15 var(--serif);margin-bottom:4px}
+.sn:hover .snt{text-decoration:underline;text-underline-offset:.2em}
+.indep{margin:28px 0 0;font-size:14px;color:var(--muted)}
+
+@media (max-width:860px){
+ .hero{grid-template-columns:1fr;min-height:0}
+ .qpanel{flex-direction:row;align-items:flex-end;gap:18px;padding:22px 20px 18px}
+ .ai{font-size:clamp(92px,26vw,150px)}
+ .by{font-size:15px;padding-top:10px;border-top-width:2px;max-width:14ch;margin-left:auto}
+ .copy{padding:26px 20px 40px}
+ h1{font-size:clamp(34px,9.6vw,44px)}
+ .row .btn{flex:1 1 100%}
+}
+@media (max-width:420px){ .ai{font-size:80px} .by{font-size:13.5px;max-width:12ch} .qpanel{gap:12px;padding:18px 16px 14px} }
+/* CI shell. Paste inside the page <style>, after the page's own rules. */
+.site-head,.sh-sheet,.site-foot{--bg:#f4efe4;--panel:#1f5f3f;--line:#d9d1bf;--amber:#d98a1e;--ink:#0c0b0a;--moss-text:#1f5f3f;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif}
+
+/* ===== CI shell: shared header and footer ===== */
+.site-head{color:var(--ink);position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:10px clamp(16px,3vw,32px);background:var(--bg);transition:box-shadow .2s}
+.site-head.scrolled{box-shadow:0 1px 0 var(--line)}
+.site-head.dark{background:var(--panel);color:#f4efe4}
+.site-head.dark.scrolled{box-shadow:0 1px 0 rgba(244,239,228,.18)}
+.sh-logo{display:block;margin-right:auto;line-height:0}
+.sh-logo img{height:44px;width:auto;display:block}
+.sh-nav{display:none;gap:26px;align-items:center}
+.sh-nav a,.sh-cta,.sh-menu{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0;border-bottom:1.5px solid transparent}
+.sh-nav a:hover{border-bottom-color:currentColor}
+.sh-nav a[aria-current="page"]{border-bottom-color:currentColor;font-weight:600}
+.sh-cta{font-weight:600;border-bottom-color:var(--amber)}
+.sh-menu{background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.sh-menu i{display:inline-block;width:18px;height:10px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transition:transform .2s}
+.sh-menu[aria-expanded="true"] i{transform:scaleY(.15)}
+.sh-quick{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0}
+@media(min-width:880px){.sh-nav{display:flex}.sh-menu,.sh-quick{display:none}}
+.sh-sheet{position:fixed;inset:0;z-index:19;background:var(--bg);color:var(--ink);padding:calc(env(safe-area-inset-top,0px) + 84px) clamp(20px,5vw,48px) calc(env(safe-area-inset-bottom,0px) + 32px);overflow-y:auto}
+.sh-sheet[hidden]{display:none}
+.sh-sheet ul{list-style:none;margin:0;padding:0}
+.sh-sheet li a{display:block;font-family:var(--serif);font-size:clamp(2rem,9vw,2.8rem);line-height:1.1;padding:10px 0;text-decoration:none;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sh-sheet li a[aria-current="page"]{color:var(--moss-text)}
+.sh-sheet .sh-more{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:12px}
+.sh-sheet .sh-more a{font:500 1.05rem var(--sans);color:var(--ink)}
+body.sh-open{overflow:hidden}
+footer.site-foot{opacity:1;margin:clamp(64px,10vw,120px) 0 0;padding:clamp(40px,6vw,64px) 0 calc(env(safe-area-inset-bottom,0px) + 40px);border-top:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.95rem;max-width:none}
+footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margin-top:0}
+.sf-in{max-width:1120px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+.sf-grid{display:grid;grid-template-columns:1fr;gap:32px 48px}
+@media(min-width:760px){.sf-grid{grid-template-columns:1.4fr 1fr 1fr}}
+.sf-grid img{height:44px;width:auto;display:block;margin-bottom:14px}
+.sf-tag{font-family:var(--serif);font-size:1.3rem;margin:0 0 10px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.site-foot a{color:inherit;text-underline-offset:.2em}
+.site-foot ul a{text-decoration:none}
+.site-foot ul a:hover{text-decoration:underline}
+.sf-legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;opacity:.75}
+.site-foot.dark .sf-legal{border-top-color:rgba(244,239,228,.18)}
+.sf-legal p{margin:0 0 8px;max-width:62em}
+@media (prefers-reduced-motion: reduce){.site-head,.sh-menu i{transition:none}}
+
+</style>
+</head>
+<body>
+<header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/">Build with CI</a></nav><a class="sh-quick" href="https://clinicallyintelligent.com/publication/">Publication</a><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
+<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://read.clinicallyintelligent.com/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
+<main id="main">
+ <section class="hero" aria-labelledby="h">
+  <div class="qpanel" aria-hidden="true">
+   <p class="ai">AI<i>?</i></p>
+   <p class="by">Written by a practising occupational therapist</p>
+  </div>
+  <div class="copy">
+   <h1 id="h">There’s a lot<br>of AI talk.<em>Let’s make sense of&nbsp;it.</em></h1>
+   <div class="rule"></div>
+   <p class="promise">Practical AI for healthcare professionals.<b>One useful idea every Wednesday, in plain English.</b></p>
+
+   <div class="slip" id="slip">
+    <span class="stamp" aria-hidden="true">Subscribed</span>
+    <form id="subForm" novalidate>
+     <label for="subEmail">Where should we send it?</label>
+     <div class="row">
+      <input id="subEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@youremail.com" required aria-describedby="subMsg">
+      <button class="btn amber" type="submit">Subscribe free</button>
+     </div>
+     <p class="msg" id="subMsg" role="status" aria-live="polite"></p>
+     <p class="small">Free. No spam. Unsubscribe any time. Or <a href="/publication/">read an issue first</a>.</p>
+     <div class="gift"><img src="/publication/fg02-cover.jpg" alt="" width="48" height="64"><p><b>Includes the AI Prompting Guide.</b> It opens as soon as you subscribe.</p></div>
+    </form>
+    <div class="done-view" id="done" hidden tabindex="-1">
+     <h2>You’re in.</h2>
+     <p>Check your inbox for a confirmation email. Your first issue arrives on Wednesday.</p>
+     <div class="acts"><a class="btn amber" href="/field-guides/ai-prompting-guide/">Open your AI Prompting Guide</a><a class="text" href="/publication/">Browse past issues</a></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section class="shelfnote" aria-labelledby="m">
+  <div class="wrap">
+   <a class="sn" href="/publication/">
+    <span class="spines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="snt"><b id="m">Not sure yet?</b> Pull an issue off the shelf and read it first.</span>
+   </a>
+   <p class="indep">An independent publication. Not affiliated with or endorsed by any NHS organisation.</p>
+  </div>
+ </section>
+</main>
+<footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://read.clinicallyintelligent.com/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/answers/">CI Answers</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
+<script>
+(function(){
+  // Subscribe through the existing Beehiiv connector (same as the homepage).
+  var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev';
+  var UNLOCK_KEY='ci_field_guide_02_unlocked';
+  var q=new URLSearchParams(location.search);
+  var UTM={utm_source:q.get('utm_source')||'subscribe_page',utm_medium:q.get('utm_medium')||'landing',utm_campaign:q.get('utm_campaign')||'newsletter_signup'};
+  var f=document.getElementById('subForm'),inp=document.getElementById('subEmail'),msg=document.getElementById('subMsg'),btn=f.querySelector('button'),slip=document.getElementById('slip'),done=document.getElementById('done');
+  var fix={'gamil.com':'gmail.com','gmal.com':'gmail.com','gmail.co':'gmail.com','nhs.nett':'nhs.net','nhs.ne':'nhs.net','nsh.net':'nhs.net','hotmial.com':'hotmail.com','outlok.com':'outlook.com'};
+  var suggested='';
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); var v=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ msg.textContent='Please enter a valid email address.'; inp.focus(); return; }
+    var dm=v.toLowerCase().split('@')[1];
+    if(fix[dm] && suggested!==v){ suggested=v.split('@')[0]+'@'+fix[dm]; msg.textContent='Did you mean '+suggested+'? Press Subscribe again to use it.'; inp.value=suggested; inp.focus(); return; }
+    btn.disabled=true; btn.textContent='Subscribing'; msg.textContent='';
+    fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({email:v},UTM))})
+      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok && d.ok!==false && !d.error, err:d.error}; }); })
+      .then(function(x){
+        if(!x.ok) throw (x.err||0);
+        try{ localStorage.setItem(UNLOCK_KEY,'1'); }catch(_e){}
+        f.hidden=true; done.hidden=false; slip.classList.add('is-done'); done.focus();
+      })
+      .catch(function(err){
+        msg.innerHTML=((typeof err==='string'&&err)?err.replace(/</g,'&lt;'):'Could not subscribe just now.')+' Please try again, or <a href="https://read.clinicallyintelligent.com/">subscribe on the publication</a>.';
+        btn.disabled=false; btn.textContent='Subscribe free';
+      });
+  });
+})();
+</script>
+<script>
+(function(){
+  var h=document.querySelector('.site-head'), b=h&&h.querySelector('.sh-menu'), s=document.getElementById('sh-sheet');
+  if(!h) return;
+  function onS(){ h.classList.toggle('scrolled', window.scrollY>4); } onS(); window.addEventListener('scroll',onS,{passive:true});
+  function set(open){ b.setAttribute('aria-expanded',open); s.hidden=!open; document.body.classList.toggle('sh-open',open); b.firstChild.nodeValue=open?'Close ':'Menu '; if(open){ var f=s.querySelector('a'); if(f) f.focus(); } }
+  b.addEventListener('click',function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  document.addEventListener('keydown',function(e){
+    if(s.hidden) return;
+    if(e.key==='Escape'){ set(false); b.focus(); return; }
+    if(e.key==='Tab'){
+      var f=[b].concat([].slice.call(s.querySelectorAll('a'))), i=f.indexOf(document.activeElement);
+      if(e.shiftKey && i<=0){ e.preventDefault(); f[f.length-1].focus(); }
+      else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); }
+    }
+  });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=880 && !s.hidden) set(false); });
+  s.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); });
+})();
+</script>
+</body>
+</html>

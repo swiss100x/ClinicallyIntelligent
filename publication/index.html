@@ -53,6 +53,38 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6.5vw,4.2rem)
 @keyframes pull{from{opacity:0;transform:translateY(46px) rotate(-1.4deg) scale(.96)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+
+/* sign-up (shared with /subscribe) */
+.join{margin:22px 0 0;max-width:34em}
+.join label,.join .jq{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.3;margin:0 0 10px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.jrow{display:flex;gap:8px;flex-wrap:wrap}
+.jrow input{flex:1 1 14em;min-width:0;font:400 1rem var(--sans);padding:14px 14px;border:1px solid #b9ad94;border-radius:3px;background:var(--paper);color:var(--ink)}
+.jrow input:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:transparent}
+.jbtn{font:600 1rem/1 var(--sans);padding:15px 20px;border:0;border-radius:3px;background:var(--amber);color:#0c0b0a;cursor:pointer;white-space:nowrap}
+.jmsg{margin:8px 0 0;font-size:.95rem;color:#8a3b12}.jmsg:empty{margin:0}
+.jsmall{margin:8px 0 0;font-size:.9rem;color:var(--ink-soft)}
+.jdone{margin:22px 0 0;font-size:1rem}.jdone b{font-family:var(--serif);font-weight:500;font-size:1.25rem;display:block}
+.slip2{margin:26px 0 0;padding:18px 18px 16px;background:var(--paper);border:1px solid var(--line);border-top:1.5px dashed #b9ad94;border-radius:2px;max-width:30em}
+.out .slip2 p.jq{font-family:var(--serif);font-size:1.2rem;line-height:1.3;margin:0 0 12px;max-width:none;font-variation-settings:"opsz" 36,"SOFT" 100}.out .slip2 .jmsg{margin:8px 0 0}.out .slip2 .jmsg:empty{margin:0}
+@media(max-width:520px){.jbtn{flex:1 1 100%}}
+
+
+.l-camp h2.camp{color:var(--ink);font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.02}
+.l-camp h2.camp em{display:block;color:var(--moss-text);margin-top:.12em}
+.camp-sub{max-width:32em}.camp-sub b{color:var(--ink);font-weight:600}
+.jmini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:20px 0 0}
+.jmini span{font-size:.95rem;color:var(--ink-soft)}
+.jopen{font:600 1rem/1 var(--sans);padding:13px 18px;border:0;border-radius:3px;background:var(--amber);color:#0c0b0a;cursor:pointer}
+.jmini[hidden]{display:none}
+/* the idea, in three lines */
+.three{margin:0 0 22px;padding:0;max-width:30em;border-top:1px solid var(--line)}
+.three div{display:grid;grid-template-columns:7.2em 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.three dt{font-family:var(--serif);font-style:italic;color:var(--moss-text);font-size:1.02rem;line-height:1.45}
+.three dd{margin:0;font-size:.98rem;line-height:1.45}
+@media(max-width:420px){.three div{grid-template-columns:1fr;gap:2px}}
+/* phones: the shelf comes first, so the interactive part is on the first screen */
+@media(max-width:859px){main.wrap{display:flex;flex-direction:column}main.wrap>.lead{order:1}main.wrap>.shelfwrap{order:2;margin-top:18px}main.wrap>.listview{order:2}main.wrap>.out{order:3}main.wrap>*{order:4}
+ .shelf{min-height:340px;padding-top:24px}.jmini{margin-top:16px}}
 /* the shelf */
 .shelfwrap{margin-top:clamp(40px,7vw,72px)}
 .shelf{display:flex;align-items:flex-end;gap:3px;overflow-x:auto;scroll-snap-type:x proximity;padding:40px clamp(20px,5vw,48px) 0;margin:0 calc(-1 * clamp(20px,5vw,48px));-webkit-overflow-scrolling:touch;scrollbar-width:none;min-height:380px}
@@ -155,12 +187,26 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
 </head>
 <body>
 <header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/" aria-current="page">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/">Build with CI</a></nav><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
-<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/" aria-current="page">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://read.clinicallyintelligent.com/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
+<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/" aria-current="page">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="/subscribe/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
 
 <main class="wrap">
   <div class="lead">
+    <div class="l-camp" hidden>
+      <h2 class="camp">There’s a lot of AI talk.<em>Let’s make sense of it.</em></h2>
+      <p class="sub camp-sub"><b>Written by a practising occupational therapist.</b> One useful idea every Wednesday, in plain English.</p>
+    </div>
+    <div class="l-norm">
     <h2>The publication.</h2>
     <p class="sub">Practical AI for clinicians, one issue at a time. The latest is out on the desk. The rest are on the shelf.</p>
+    </div>
+    <script>(function(){var s=new URLSearchParams(location.search).get('utm_source');if(/^(banner|poster|email|qr)$/.test(s||'')){document.querySelector('.l-camp').hidden=false;document.querySelector('.l-norm').hidden=true;}})();</script>
+    <div class="jmini"><button class="jopen" type="button" aria-expanded="false" aria-controls="jTopForm">Subscribe free</button><span>Comes with the AI Prompting Guide</span></div>
+    <form class="join" id="jTopForm" hidden data-join="top" novalidate>
+      <label for="jTop">Where should we send it?</label>
+      <div class="jrow"><input id="jTop" type="email" inputmode="email" autocomplete="email" placeholder="you@youremail.com" required><button class="jbtn" type="submit">Subscribe free</button></div>
+      <p class="jmsg" role="status" aria-live="polite"></p>
+      <p class="jsmall">Includes the AI Prompting Guide. No spam, unsubscribe any time.</p>
+    </form>
     <button class="viewtoggle" id="viewtoggle" type="button" aria-pressed="false">See as a list</button>
   </div>
 
@@ -172,11 +218,34 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     <p class="hint">Tap a spine to take it off the shelf. The Field Guides are at the end.</p>
   </div>
   <div class="listview" id="listview" hidden></div>
-  <p class="all"><a href="https://read.clinicallyintelligent.com/">Subscribe free, or read on the publication</a></p>
+  <p class="all"><a href="/subscribe/">Subscribe free</a>, or <a href="https://read.clinicallyintelligent.com/">read on the publication</a></p>
   <p class="note" id="src"></p>
 </main>
 <footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://read.clinicallyintelligent.com/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/answers/">CI Answers</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
 
+<script>
+(function(){
+  var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev', KEY='ci_field_guide_02_unlocked';
+  window.joined=function(){ try{return localStorage.getItem(KEY)==='1';}catch(e){return false;} };
+  var q=new URLSearchParams(location.search);
+  function done(f){ var d=document.createElement('div'); d.className='jdone'; d.tabIndex=-1;
+    d.innerHTML='<b>You’re in.</b>Check your inbox to confirm. <a href="/field-guides/ai-prompting-guide/">Open your AI Prompting Guide</a>';
+    f.replaceWith(d); d.focus(); var jm2=document.querySelector('.jmini'); if(jm2) jm2.hidden=true; [].forEach.call(document.querySelectorAll('form[data-join]'),function(o){ o.hidden=true; }); }
+  var jo=document.querySelector('.jopen'), jf=document.getElementById('jTopForm');
+  if(jo) jo.addEventListener('click',function(){ jf.hidden=false; jo.parentNode.hidden=true; jf.querySelector('input').focus(); });
+  if(joined()){ var jm=document.querySelector('.jmini'); if(jm) jm.hidden=true; }
+  if(joined()) [].forEach.call(document.querySelectorAll('form[data-join]'),function(o){ o.hidden=true; });
+  document.addEventListener('submit',function(e){
+    var f=e.target; if(!f.matches('form[data-join]')) return; e.preventDefault();
+    var inp=f.querySelector('input'), msg=f.querySelector('.jmsg'), btn=f.querySelector('button'), v=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ msg.textContent='Please check your email address.'; inp.focus(); return; }
+    btn.disabled=true; btn.textContent='Subscribing…'; msg.textContent='';
+    fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v,utm_source:q.get('utm_source')||'publication_page',utm_medium:q.get('utm_medium')||(f.dataset.join==='slip'?'issue_preview':'page_top'),utm_campaign:q.get('utm_campaign')||'newsletter_signup'})})
+      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ if(r.ok&&d.ok!==false&&!d.error){ try{localStorage.setItem(KEY,'1');}catch(x){} done(f); } else throw new Error(d.error||''); }); })
+      .catch(function(){ btn.disabled=false; btn.textContent='Subscribe free'; msg.innerHTML='Could not subscribe just now. Please try again, or <a href="https://read.clinicallyintelligent.com/">subscribe on the publication</a>.'; });
+  });
+})();
+</script>
 <script>
 (function(){
   // Sample used only when data/issues.json isn't available (e.g. this preview).
@@ -245,11 +314,15 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     var cover = item.cover ? '<img src="'+esc(item.cover)+'" alt="Cover of '+(guide?item.label:'issue '+item.number)+'"'+(guide?' class="portrait"':'')+'>' :
       '<div class="cover-fallback'+(guide?' portrait':'')+'"><span>'+(guide?item.label:'Issue '+pad(item.number))+'</span><b></b></div>';
     var meta = guide ? item.label+'. Free to download' : 'Issue '+pad(item.number)+(item.date?'. '+fmtDate(item.date):'')+(item.number===latest.number?'. Latest':'');
-    out.innerHTML='<figure>'+cover+'</figure><div class="txt"><p class="meta">'+meta+'</p><h3></h3>'+(item.subtitle?'<p class="dek"></p>':'')+
+    out.innerHTML='<figure>'+cover+'</figure><div class="txt"><p class="meta">'+meta+'</p><h3></h3>'+(item.subtitle?'<p class="dek"></p>':'')+(item.idea?'<dl class="three"><div><dt>The idea</dt><dd></dd></div><div><dt>Try this</dt><dd></dd></div><div><dt>Watch out for</dt><dd></dd></div></dl>':'')+
       '<p><a class="btn" href="'+(esc(item.url)||PUB)+'">'+(guide?'Open the guide':(specific(item.url)?'Read this issue':'Read on the publication'))+'</a>'+(item.id!==latest.id?'<button class="back" type="button">Back to the latest</button>':'')+'</p></div>';
+    if(animate && !guide && !joined()){ var sl=document.createElement('form'); sl.className='slip2'; sl.setAttribute('data-join','slip'); sl.noValidate=true;
+      sl.innerHTML='<p class="jq">Want the next one? It lands on Wednesday.</p><div class="jrow"><input type="email" inputmode="email" autocomplete="email" placeholder="you@youremail.com" aria-label="Email address" required><button class="jbtn" type="submit">Subscribe free</button></div><p class="jmsg" role="status" aria-live="polite"></p>';
+      out.querySelector('.txt').appendChild(sl); }
     out.querySelector('h3').textContent=item.title;
     var fb=out.querySelector('.cover-fallback b'); if(fb) fb.textContent=item.title;
     var dk=out.querySelector('.dek'); if(dk) dk.textContent=item.subtitle;
+    var dd=out.querySelectorAll('.three dd'); if(dd.length){ dd[0].textContent=item.idea; dd[1].textContent=item.try||''; dd[2].textContent=item.watch||''; }
     var bk=out.querySelector('.back'); if(bk) bk.addEventListener('click',function(){ pick(latest); });
     if(animate && !reduce){ out.classList.remove('enter'); void out.offsetWidth; out.classList.add('enter'); }
   }
