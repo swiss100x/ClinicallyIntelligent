@@ -201,26 +201,30 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
 (function(){
   // Subscribe through the existing Beehiiv connector (same as the homepage).
   var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev';
-  var UNLOCK_KEY='ci_field_guide_02_unlocked';
+  var CI_SUB={ALL:['ci_subscribed','ci_field_guide_01_unlocked','ci_field_guide_02_unlocked','ci_templates_unlocked'],mark:function(){ try{ CI_SUB.ALL.forEach(function(k){ localStorage.setItem(k,'1'); }); }catch(e){} },has:function(k){ try{ return localStorage.getItem(k)==='1'; }catch(e){ return false; } },confirmed:function(){ return CI_SUB.has('ci_subscribed')||CI_SUB.has('ci_field_guide_02_unlocked'); }};
   var q=new URLSearchParams(location.search);
   var UTM={utm_source:q.get('utm_source')||'subscribe_page',utm_medium:q.get('utm_medium')||'landing',utm_campaign:q.get('utm_campaign')||'newsletter_signup'};
   var f=document.getElementById('subForm'),inp=document.getElementById('subEmail'),msg=document.getElementById('subMsg'),btn=f.querySelector('button'),slip=document.getElementById('slip'),done=document.getElementById('done');
   var fix={'gamil.com':'gmail.com','gmal.com':'gmail.com','gmail.co':'gmail.com','nhs.nett':'nhs.net','nhs.ne':'nhs.net','nsh.net':'nhs.net','hotmial.com':'hotmail.com','outlok.com':'outlook.com'};
   var suggested='';
+  // states: idle -> (typo offered) -> submitting -> done | error -> submitting ...
+  f.dataset.state='idle';
   f.addEventListener('submit',function(e){
     e.preventDefault(); var v=inp.value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ msg.textContent='Please enter a valid email address.'; inp.focus(); return; }
     var dm=v.toLowerCase().split('@')[1];
     if(fix[dm] && suggested!==v){ suggested=v.split('@')[0]+'@'+fix[dm]; msg.textContent='Did you mean '+suggested+'? Press Subscribe again to use it.'; inp.value=suggested; inp.focus(); return; }
-    btn.disabled=true; btn.textContent='Subscribing'; msg.textContent='';
+    if(f.dataset.state==='submitting') return;
+    f.dataset.state='submitting'; btn.disabled=true; btn.textContent='Subscribing'; msg.textContent='';
     fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({email:v},UTM))})
       .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok && d.ok!==false && !d.error, err:d.error}; }); })
       .then(function(x){
         if(!x.ok) throw (x.err||0);
-        try{ localStorage.setItem(UNLOCK_KEY,'1'); }catch(_e){}
+        CI_SUB.mark(); f.dataset.state='done';
         f.hidden=true; done.hidden=false; slip.classList.add('is-done'); done.focus();
       })
       .catch(function(err){
+        f.dataset.state='error';
         msg.innerHTML=((typeof err==='string'&&err)?err.replace(/</g,'&lt;'):'Could not subscribe just now.')+' Please try again, or <a href="https://read.clinicallyintelligent.com/">subscribe on the publication</a>.';
         btn.disabled=false; btn.textContent='Subscribe free';
       });

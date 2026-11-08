@@ -577,17 +577,21 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
   else { var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.15}); els.forEach(function(e){io.observe(e);}); }
   // subscribe, through the existing Beehiiv connector
   var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev';
+  var CI_SUB={ALL:['ci_subscribed','ci_field_guide_01_unlocked','ci_field_guide_02_unlocked','ci_templates_unlocked'],mark:function(){ try{ CI_SUB.ALL.forEach(function(k){ localStorage.setItem(k,'1'); }); }catch(e){} },has:function(k){ try{ return localStorage.getItem(k)==='1'; }catch(e){ return false; } },confirmed:function(){ return CI_SUB.has('ci_subscribed')||CI_SUB.has('ci_field_guide_02_unlocked'); }};
   var f=document.getElementById('subForm'), inp=document.getElementById('subEmail'), msg=document.getElementById('subMsg'), btn=f.querySelector('button');
-  var fix={'gamil.com':'gmail.com','gmal.com':'gmail.com','nhs.nett':'nhs.net','nhs.ne':'nhs.net','nsh.net':'nhs.net','hotmial.com':'hotmail.com','outlok.com':'outlook.com'};
+  var fix={'gamil.com':'gmail.com','gmal.com':'gmail.com','nhs.nett':'nhs.net','nhs.ne':'nhs.net','nsh.net':'nhs.net','hotmial.com':'hotmail.com','outlok.com':'outlook.com'}, suggested='';
+  // states: idle -> (typo offered) -> submitting -> done | error -> submitting ...
+  f.dataset.state='idle';
   f.addEventListener('submit',function(e){
     e.preventDefault(); var v=inp.value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ msg.textContent='Please enter a valid email address.'; inp.focus(); return; }
-    var dm=v.toLowerCase().split('@')[1]; if(fix[dm]){ msg.textContent='Did you mean '+fix[dm]+'?'; inp.focus(); return; }
-    btn.disabled=true; btn.textContent='Subscribing'; msg.textContent='';
+    var dm=v.toLowerCase().split('@')[1]; if(fix[dm] && suggested!==v){ suggested=v.split('@')[0]+'@'+fix[dm]; inp.value=suggested; msg.textContent='Did you mean '+suggested+'? Press Subscribe again to use it.'; inp.focus(); return; }
+    if(f.dataset.state==='submitting') return;
+    f.dataset.state='submitting'; btn.disabled=true; btn.textContent='Subscribing'; msg.textContent='';
     fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v,utm_source:'homepage',utm_medium:'shelf_strip',utm_campaign:'newsletter_signup'})})
       .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok: r.ok && d.ok!==false && !d.error, err: d.error}; }); })
-      .then(function(x){ if(x.ok){ f.classList.add('done'); msg.textContent='You’re in. Check your inbox for a confirmation email.'; } else throw (x.err||0); })
-      .catch(function(e){ msg.textContent=(typeof e==='string'&&e)?e:'Could not subscribe just now. Please try again in a moment.'; btn.disabled=false; btn.textContent='Subscribe'; });
+      .then(function(x){ if(x.ok){ CI_SUB.mark(); f.dataset.state='done'; f.classList.add('done'); msg.textContent='You’re in. Check your inbox for a confirmation email.'; } else throw (x.err||0); })
+      .catch(function(e){ f.dataset.state='error'; msg.textContent=(typeof e==='string'&&e)?e:'Could not subscribe just now. Please try again in a moment.'; btn.disabled=false; btn.textContent='Subscribe'; });
   });
 })();
 </script>

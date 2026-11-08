@@ -855,9 +855,10 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     }, 100);
   }
 
-  // If already unlocked (returning visitor), skip the gate immediately
+  // Gate states: locked -> submitting -> unlocked | error -> submitting ...
+  // Unlocked if this guide was opened before, or the visitor has subscribed anywhere on the site.
   try {
-    if (localStorage.getItem(UNLOCK_KEY) === '1') { unlock(); }
+    if (['ci_field_guide_02_unlocked','ci_subscribed'].some(function(k){ return localStorage.getItem(k) === '1'; })) { unlock(); }
   } catch (e) {}
 
   // Wire the gate form
@@ -878,7 +879,8 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     }
     err.classList.remove('show');
 
-    // DEBOUNCE TRIGGER: Lock down the button interface instantly
+    if (form.dataset.state === 'submitting') return;
+    form.dataset.state = 'submitting';
     btn.disabled = true;
     const originalText = btn.textContent;
     btn.textContent = 'Subscribing…';
@@ -898,9 +900,12 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
       const data = await res.json().catch(() => ({}));
 
       if (data.ok || res.ok) {
-        try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
+        // Confirmed sign-up: record it for every page that checks it
+        try { ['ci_subscribed','ci_field_guide_01_unlocked','ci_field_guide_02_unlocked','ci_templates_unlocked'].forEach(function(k){ localStorage.setItem(k, '1'); }); } catch (_) {}
+        form.dataset.state = 'unlocked';
         unlock();
       } else {
+        form.dataset.state = 'error';
         err.textContent = data.error || 'Something went wrong. Please try again.';
         err.classList.add('show');
         // Release UI lock only on valid server rejection so they can fix input
@@ -909,7 +914,9 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
       }
     } catch (_) {
       // Network/Proxy exception safety fallback
+      // Unconfirmed: open this guide only, without marking the visitor as subscribed elsewhere
       console.warn('Beehiiv API unreachable — unlocking without confirmed subscription.');
+      form.dataset.state = 'unlocked';
       try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (_) {}
       unlock();
     }

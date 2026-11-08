@@ -20,3 +20,5 @@ Favicon: every page includes these four lines just before </head>, so the CI log
     <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
     <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+Interactive parts (sign-up forms, the Problems card, the shelf, exercises): see STATE-MACHINES.md at the repo root for each one's states and the shared subscriber keys.

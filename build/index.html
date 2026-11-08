@@ -198,7 +198,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     var url=location.href.split('#')[0];
     var data={title:'Build with CI',text:'People. Ideas. A collective. Find your people. Make things happen.',url:url};
     if(navigator.share){navigator.share(data).catch(function(){});return;}
-    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){b.textContent='Link copied';},function(){b.textContent=url;});}
+    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){var t=b.dataset.label||(b.dataset.label=b.textContent);b.textContent='Link copied';clearTimeout(b._t);b._t=setTimeout(function(){b.textContent=t;},2500);},function(){b.textContent=url;});}
     else{b.textContent=url;}
   });
 })();

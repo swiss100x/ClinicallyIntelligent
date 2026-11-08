@@ -225,8 +225,10 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
 
 <script>
 (function(){
-  var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev', KEY='ci_field_guide_02_unlocked';
-  window.joined=function(){ try{return localStorage.getItem(KEY)==='1';}catch(e){return false;} };
+  var PROXY='https://abeehiiv-proxy.juwonak1.workers.dev';
+  var CI_SUB={ALL:['ci_subscribed','ci_field_guide_01_unlocked','ci_field_guide_02_unlocked','ci_templates_unlocked'],mark:function(){ try{ CI_SUB.ALL.forEach(function(k){ localStorage.setItem(k,'1'); }); }catch(e){} },has:function(k){ try{ return localStorage.getItem(k)==='1'; }catch(e){ return false; } },confirmed:function(){ return CI_SUB.has('ci_subscribed')||CI_SUB.has('ci_field_guide_02_unlocked'); }};
+  // sign-up boxes: hidden once a confirmed sign-up is stored. Each form: idle -> submitting -> done | error
+  window.joined=function(){ return CI_SUB.confirmed(); };
   var q=new URLSearchParams(location.search);
   function done(f){ var d=document.createElement('div'); d.className='jdone'; d.tabIndex=-1;
     d.innerHTML='<b>You’re in.</b>Check your inbox to confirm. <a href="/field-guides/ai-prompting-guide/">Open your AI Prompting Guide</a>';
@@ -239,10 +241,11 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     var f=e.target; if(!f.matches('form[data-join]')) return; e.preventDefault();
     var inp=f.querySelector('input'), msg=f.querySelector('.jmsg'), btn=f.querySelector('button'), v=inp.value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ msg.textContent='Please check your email address.'; inp.focus(); return; }
-    btn.disabled=true; btn.textContent='Subscribing…'; msg.textContent='';
+    if(f.dataset.state==='submitting') return;
+    f.dataset.state='submitting'; btn.disabled=true; btn.textContent='Subscribing…'; msg.textContent='';
     fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v,utm_source:q.get('utm_source')||'publication_page',utm_medium:q.get('utm_medium')||(f.dataset.join==='slip'?'issue_preview':'page_top'),utm_campaign:q.get('utm_campaign')||'newsletter_signup'})})
-      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ if(r.ok&&d.ok!==false&&!d.error){ try{localStorage.setItem(KEY,'1');}catch(x){} done(f); } else throw new Error(d.error||''); }); })
-      .catch(function(){ btn.disabled=false; btn.textContent='Subscribe free'; msg.innerHTML='Could not subscribe just now. Please try again, or <a href="https://read.clinicallyintelligent.com/">subscribe on the publication</a>.'; });
+      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ if(r.ok&&d.ok!==false&&!d.error){ CI_SUB.mark(); f.dataset.state='done'; done(f); } else throw new Error(d.error||''); }); })
+      .catch(function(){ f.dataset.state='error'; btn.disabled=false; btn.textContent='Subscribe free'; msg.innerHTML='Could not subscribe just now. Please try again, or <a href="https://read.clinicallyintelligent.com/">subscribe on the publication</a>.'; });
   });
 })();
 </script>

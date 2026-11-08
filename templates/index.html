@@ -670,8 +670,9 @@ Notes from home.</div>
   const STORAGE_KEY = 'ci_templates_unlocked';
   const PROXY_URL   = 'https://abeehiiv-proxy.juwonak1.workers.dev';
 
+  // Gate states: locked -> submitting -> unlocked | error. Also unlocked for anyone who has subscribed elsewhere on the site.
   function isUnlocked() {
-    try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+    try { return [STORAGE_KEY,'ci_subscribed','ci_field_guide_02_unlocked'].some(function(k){ return localStorage.getItem(k) === '1'; }); } catch (e) { return false; }
   }
 
   function unlock() {
@@ -703,7 +704,8 @@ Notes from home.</div>
       return; 
     }
 
-    // Lock UI state immediately to prevent duplicate requests from multi-clicks
+    if (form.dataset.state === 'submitting') return;
+    form.dataset.state = 'submitting';
     btn.disabled = true;
     const originalText = btn.textContent;
     btn.textContent = 'Unlocking...';
@@ -723,9 +725,13 @@ Notes from home.</div>
       const data = await res.json().catch(() => ({}));
 
       if (data.ok || res.ok) {
+        // Confirmed sign-up: record it for every page that checks it
+        try { ['ci_subscribed','ci_field_guide_01_unlocked','ci_field_guide_02_unlocked','ci_templates_unlocked'].forEach(function(k){ localStorage.setItem(k, '1'); }); } catch (_) {}
+        form.dataset.state = 'unlocked';
         unlock();
         showToast('Unlocked. Welcome aboard.');
       } else {
+        form.dataset.state = 'error';
         showToast(data.error || 'Submission error. Please try again.');
         btn.disabled = false;
         btn.textContent = originalText;
@@ -733,6 +739,7 @@ Notes from home.</div>
     } catch (err) {
       // Graceful degradation fallback: let user read content even if network fails
       console.warn('Beehiiv proxy unreachable — authorizing local bypass entitlement.', err);
+      form.dataset.state = 'unlocked';
       unlock();
       showToast('Unlocked.');
     }
@@ -749,17 +756,18 @@ Notes from home.</div>
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', async function() {
       if (!isUnlocked()) return;
+      if (!this.dataset.label) this.dataset.label = this.innerHTML;
       const targetId = this.getAttribute('data-copy');
       const text = document.getElementById(targetId).innerText;
       try {
         await navigator.clipboard.writeText(text);
-        const original = this.innerHTML;
         this.classList.add('copied');
         this.innerHTML = '<span class="icn">✓</span> Copied';
         showToast('Prompt copied to clipboard');
-        setTimeout(() => {
+        clearTimeout(this._copyTimer);
+        this._copyTimer = setTimeout(() => {
           this.classList.remove('copied');
-          this.innerHTML = original;
+          this.innerHTML = this.dataset.label;
         }, 2200);
       } catch (err) {
         // Legacy textual fallback layout

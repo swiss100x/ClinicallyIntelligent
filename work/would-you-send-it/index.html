@@ -159,8 +159,10 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
   var added={15:1,16:1};
   var inSource={'football,':1,'reduce':1,'Lantus':1,'20':1,'units':1,'18':1,'On':1,'days':1};
   var ai=document.getElementById('ai'), fb=document.getElementById('fb'), rv=document.getElementById('reveal'), show=document.getElementById('show');
-  var found={};
+  var found={}, revealed=false;
+  // exercise states: searching -> revealed (found both, or "show me") -> searching again via "try again"
   function build(){
+    revealed=false; ai.dataset.state='searching';
     ai.innerHTML=''; found={}; fb.textContent=''; rv.classList.remove('on'); show.style.display='';
     words.forEach(function(w,i){
       var b=document.createElement('button'); b.type='button'; b.textContent=w; b.dataset.i=i;
@@ -169,6 +171,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     });
   }
   function tap(b,i,w){
+    if(revealed) return;
     if(added[i]){
       b.classList.add('found'); b.setAttribute('aria-pressed','true'); found[i]=1;
       var n=Object.keys(found).length;
@@ -180,6 +183,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     }
   }
   function done(){
+    revealed=true; ai.dataset.state='revealed';
     Array.prototype.forEach.call(ai.children,function(b){ if(added[b.dataset.i]) b.classList.add('found'); });
     show.style.display='none'; rv.classList.add('on');
   }
@@ -190,7 +194,7 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
     var url=location.href.split('#')[0];
     var data={title:'Would you send it?',text:'A 20 second test. The numbers were right. Was the meaning?',url:url};
     if(navigator.share){ navigator.share(data).catch(function(){}); return; }
-    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){st.textContent='Link copied';},function(){st.textContent=url;}); }
+    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ var t=st.dataset.label||(st.dataset.label=st.textContent); st.textContent='Link copied'; clearTimeout(st._t); st._t=setTimeout(function(){ st.textContent=t; },2500); },function(){st.textContent=url;}); }
     else { st.textContent=url; }
   });
   build();

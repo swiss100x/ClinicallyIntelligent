@@ -324,6 +324,8 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   function ui(){
     go.textContent=labels[page]; back.hidden = page<2; $('more').hidden = page!==1;
     document.body.classList.toggle('engaged', page>0);
+    // card states: invitation -> page1 -> (page2 <-> page3) -> posting -> posted | failed (see STATE-MACHINES.md)
+    document.body.dataset.card = ['invitation','page1','page2','page3'][page];
     var idx = page<=1?0:page-1;
     [].forEach.call($('steps').children,function(d,k){ d.classList.toggle('on',k===idx); });
     $('stepname').textContent = page===0 ? 'Please don’t include anything that could identify a patient.' : page===1 ? 'Drop it in now, or turn the page to add a little more.' : ['The problem','Where it happens','What it costs'][idx]+'. Optional. Step '+(idx+1)+' of 3.';
@@ -415,7 +417,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
   /* ---------- posting: pick the card up, carry it to the slot, slide it in ---------- */
   function post(){
-    stopVoice(); busy=true; $('acts').hidden=true; $('more').hidden=true; $('steps').hidden=true; $('stepname').hidden=true; $('intro').style.opacity='0'; $('fail').classList.remove('on'); document.activeElement && document.activeElement.blur();
+    stopVoice(); busy=true; document.body.dataset.card='posting'; $('acts').hidden=true; $('more').hidden=true; $('steps').hidden=true; $('stepname').hidden=true; $('intro').style.opacity='0'; $('fail').classList.remove('on'); document.activeElement && document.activeElement.blur();
     var sent=fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:(function(){var fd=new FormData(); for(var k in payload) fd.append(k,payload[k]); return fd;})()})
       .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return true; });
     var anim=new Promise(function(res){
@@ -440,9 +442,9 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     });
     Promise.all([sent.catch(function(e){ return {failed:true}; }), anim]).then(function(r){
       if(r[0] && r[0].failed){ card.getAnimations && card.getAnimations().forEach(function(x){x.cancel();}); card.style.visibility=''; card.style.transformOrigin='';
-        $('fail').classList.add('on'); $('acts').hidden=false; $('stepname').hidden=false; busy=false; ui(); $('steps').hidden=false; $('intro').style.opacity=''; return; }
+        $('fail').classList.add('on'); $('acts').hidden=false; $('stepname').hidden=false; busy=false; ui(); document.body.dataset.card='failed'; $('steps').hidden=false; $('intro').style.opacity=''; return; }
       var line=(payload&&payload.problem||'').replace(/\s+/g,' '); $('receipt').textContent=line; $('receipt').hidden=!line;
-      clearDraft(); dictated=typed=false; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
+      clearDraft(); dictated=typed=false; document.body.dataset.card='posted'; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
     });
   }
   $('retry').addEventListener('click',function(){ $('fail').classList.remove('on'); if(payload) post(); });
@@ -461,7 +463,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
     if(!SR) return;
     var rec=null, on=false, local=false, checked=false, mic=$('mic'), note=$('vnote'), said='';
-    function idle(){ on=false; mic.setAttribute('aria-pressed','false'); $('micLabel').textContent='Say it'; }
+    function idle(){ on=false; document.body.dataset.voice='idle'; mic.setAttribute('aria-pressed','false'); $('micLabel').textContent='Say it'; }
     stopVoice=function(){ if(on&&rec){ try{ rec.stop(); }catch(e){} } };
     function start(){
       var base=pr.value.replace(/\s+$/,''), heard='';
@@ -478,7 +480,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
           $('stepname').textContent='Check the words, then drop it in.';
           $('acts').scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'}); }
       };
-      try{ rec.start(); on=true; mic.setAttribute('aria-pressed','true'); $('micLabel').textContent='Listening. Tap to stop';
+      try{ rec.start(); on=true; document.body.dataset.voice='listening'; mic.setAttribute('aria-pressed','true'); $('micLabel').textContent='Listening. Tap to stop';
         note.textContent='Don’t say anything that could identify a patient or colleague. '+said; }
       catch(e){ idle(); note.textContent='That didn’t work. You can type instead.'; }
     }
