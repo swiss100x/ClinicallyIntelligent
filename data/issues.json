@@ -7,7 +7,10 @@
   "subtitle": "How I use Claude to complete CGAs and social histories in minutes, and the one IG rule every NHS clinician needs to know before using AI at work.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Claude"
+  "topic": "Claude",
+  "idea": "Paperwork is part of what burns us out. I type notes during the assessment and Claude turns them into a structured CGA or social history for me to check.",
+  "try": "Tell Claude your job and where you work, paste in the template, then add some made up notes underneath. See how close the draft gets.",
+  "watch": "Taking the name off isn’t enough, because someone can still be recognised from what’s left. AI is your first draft, not your final signature."
  },
  {
   "number": 2,
@@ -17,7 +20,10 @@
   "subtitle": "How to build a NotebookLM knowledge base that reduces interruptions, empowers junior staff and gives you back your focus.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "NotebookLM"
+  "topic": "NotebookLM",
+  "idea": "Every team has SOPs and pathways nobody can find, so the junior staff end up asking you. NotebookLM keeps them in one place and only answers from what you’ve put in.",
+  "try": "Upload one document or video you’ve been meaning to go through, and ask it three questions. It takes less than ten minutes.",
+  "watch": "It’s only as up to date as what you give it. If an SOP is out of date, the answers will be too, and nothing about a real patient or colleague goes in."
  },
  {
   "number": 3,
@@ -27,7 +33,10 @@
   "subtitle": "How I used Perplexity to find a NICE guideline update from April 2025 that most clinicians missed, and why it matters for your practice.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Perplexity"
+  "topic": "Perplexity",
+  "idea": "CPD gets harder to fit in the more senior you get. Perplexity does the searching and shows you the sources, and it found a NICE update I’d missed.",
+  "try": "Pick something you’ve been meaning to look up, ask Perplexity as a plain question, and check the sources it gives you.",
+  "watch": "It pulls from the whole web, good and bad. It’ll find you information, but it won’t tell you what to do with it."
  },
  {
   "number": 4,
@@ -37,7 +46,10 @@
   "subtitle": "How I used three AI tools to create carer guidance that actually works at home, and how you can use the same workflow this week.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Three Tools"
+  "topic": "Three Tools",
+  "idea": "ChatGPT gave me a list of local services with a link that went nowhere. Most clinical jobs need more than one tool, each doing what it’s good at.",
+  "try": "Ask ChatGPT to play a tired, worried family member. Explain something you say every week and see where it gets confused.",
+  "watch": "AI answers look right even when they’re not. Click the links before you pass anything on."
  },
  {
   "number": 5,
@@ -47,17 +59,23 @@
   "subtitle": "I got the hour after meetings back. Here’s the tool that helped me listen properly and leave with the minutes already done.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Otter"
+  "topic": "Otter",
+  "idea": "You can’t listen properly and type at the same time. Otter records the conversation so you can focus on the person in front of you.",
+  "try": "Try it at your next one to one. Ask first, and only record if they’re happy.",
+  "watch": "It’s not for anything where patients come up. When I wrote this, Otter used recordings to train its models, so keep it to non clinical meetings."
  },
  {
   "number": 6,
-  "title": "The Tool That Turns the Page Nobody Reads Into …",
+  "title": "The tool that turns the page nobody reads into a picture they can’t forget.",
   "date": "2026-05",
   "url": "https://read.clinicallyintelligent.com/",
   "subtitle": "The creativity did not leave. It just needed a faster way out.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Napkin"
+  "topic": "Napkin",
+  "idea": "Most NHS information is a wall of text that nobody reads. Napkin turns your writing into a visual in seconds.",
+  "try": "Paste in something you’ve written that never quite landed and see what Napkin makes of it. You don’t have to use the image. Just see your idea from the outside.",
+  "watch": "When you upload to Napkin, more than one company processes it. Stick to your own non clinical writing."
  },
  {
   "number": 7,
@@ -67,7 +85,10 @@
   "subtitle": "",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "Safety Check"
+  "topic": "Safety Check",
+  "idea": "I paused the usual issue to share something I think matters more. It’s nine checks to run before you use AI at work.",
+  "try": "Run the Safety Check against a tool you already use. It takes a few minutes.",
+  "watch": "It’s a starting point, not a sign off. If you’re ever unsure, ask your IG lead before you upload anything."
  },
  {
   "number": 8,
@@ -77,7 +98,10 @@
   "subtitle": "I thought the challenge would be technical. I was wrong.",
   "cover": "/publication/covers/issue-08.jpg",
   "spine": "type",
-  "topic": "Seven Issues"
+  "topic": "Seven Issues",
+  "idea": "The thing holding me back wasn’t technical know-how. I just didn’t know where the line was. Once I did, the confidence followed.",
+  "try": "Before you open an AI tool, spend a minute working out what you’re actually trying to do.",
+  "watch": "AI doesn’t always save time. Sometimes doing it yourself is quicker, and knowing which is which is the real skill."
  },
  {
   "number": 9,
@@ -86,7 +110,10 @@
   "url": "https://read.clinicallyintelligent.com/",
   "subtitle": "Gemini is not the chat. It is the front door.",
   "cover": "/publication/covers/issue-09.jpg",
-  "topic": "Gemini"
+  "topic": "Gemini",
+  "idea": "Gemini’s chat is fine. Where it gets interesting is that it’s already plugged into your Google Drive, Docs and Calendar.",
+  "try": "Pick three or four documents from your Drive, like old CPD notes or reflections, and ask Gemini what gaps it can spot. I was surprised by what it found in mine.",
+  "watch": "This is your personal Google account. Anything with real patient information shouldn’t be in your Drive in the first place."
  },
  {
   "number": 10,
@@ -96,7 +123,10 @@
   "subtitle": "What the NHS’s largest AI rollout reveals about adoption, training and clinical practice.",
   "cover": "/publication/covers/masthead.jpg",
   "spine": "type",
-  "topic": "NHS Rollout"
+  "topic": "NHS Rollout",
+  "idea": "505,000 NHS staff are getting Copilot. Every example in the announcement was admin, though. A licence isn’t a plan.",
+  "try": "Most of us already have the free Copilot Chat. Sign in with your NHS account and give it ten minutes on an email or a document summary.",
+  "watch": "Having access isn’t the same as using it well. Keep patient details out until your Trust tells you what’s allowed."
  },
  {
   "number": 11,
@@ -106,7 +136,10 @@
   "subtitle": "",
   "cover": "/publication/covers/issue-11.jpg",
   "spine": "type",
-  "topic": "Prompting"
+  "topic": "Prompting",
+  "idea": "A free guide to getting better answers out of AI. It’s three stages and nine checks, and it’s built for clinicians but works for anyone.",
+  "try": "Download the guide and pick a task you do all the time, like a discharge summary or a patient leaflet. Ask the way you normally would, then try again using the guide, and compare the two.",
+  "watch": "A better prompt gets you a better draft, not a correct one. If something feels clinically off, trust that over how sure it sounds."
  },
  {
   "number": 12,
@@ -117,9 +150,9 @@
   "cover": "/publication/covers/issue-12.jpg",
   "spine": "type",
   "topic": "Digital Literacy",
-  "idea": "Digital literacy isn’t knowing which buttons to press. It’s judging whether to trust what AI gives you.",
-  "try": "Ask your manager what AI training your Trust offers, and raise it at your next supervision or team meeting.",
-  "watch": "AI sounds just as confident when it’s wrong. Patient identifiable information never goes into a consumer AI tool."
+  "idea": "Being good with tech isn’t about knowing where the buttons are. It’s about knowing when to trust what you’re given.",
+  "try": "Next time AI tells you something, go and find where it got it from before you use it.",
+  "watch": "AI sounds exactly as sure of itself when it’s wrong as when it’s right."
  },
  {
   "number": 13,
@@ -130,9 +163,9 @@
   "cover": "/publication/covers/issue-13.jpg",
   "spine": "type",
   "topic": "Copilot",
-  "idea": "The NHS is committing to Copilot. You don’t have to prefer it, but you do need to understand it.",
-  "try": "Sign in with your Trust account and try one small task, like summarising a meeting note you wrote.",
-  "watch": "An approved tool doesn’t move responsibility. You’re still accountable for what you put in, so check your Trust’s guidance first."
+  "idea": "Copilot is the one the NHS is backing. You don’t have to love it, but it’s worth knowing how it works.",
+  "try": "Log in with your Trust account and ask it to summarise a meeting note you wrote.",
+  "watch": "Being approved doesn’t make it right. If your name’s on it, you’re still the one who has to check it."
  },
  {
   "number": 14,
@@ -143,9 +176,9 @@
   "cover": "",
   "spine": "type",
   "topic": "OneNote",
-  "idea": "OneNote’s Copilot Notebooks sits inside your Trust’s system, so it suits Trust material that can’t go into consumer AI.",
-  "try": "Upload one low-risk document, like a guideline or an email trail, and see what it does with it.",
-  "watch": "How it stores your uploads isn’t clear yet. Don’t upload anything you wouldn’t want a colleague outside your team to read."
+  "idea": "Copilot Notebooks lives in OneNote, inside your Trust’s system. So you can use it on work stuff you’d never put into ChatGPT.",
+  "try": "Upload something low risk, like a guideline or a long email chain, and ask it what the main points are.",
+  "watch": "Being inside your Trust’s system doesn’t automatically mean it’s cleared for patient information. Check your Trust’s guidance first."
  },
  {
   "number": 15,
@@ -156,9 +189,9 @@
   "cover": "/publication/covers/issue-15.jpg",
   "spine": "type",
   "topic": "PocketPal",
-  "idea": "Open source AI that runs on your phone. Because it’s local, it works offline and your questions stay on the device.",
-  "try": "Download PocketPal, pick a pal and ask it one question you’d normally ask ChatGPT. Compare the answers.",
-  "watch": "Local doesn’t mean cleared. Patient identifiable information still goes into no AI tool, and smaller models make more mistakes."
+  "idea": "You can now run AI on your phone without the internet. Nothing you type gets sent anywhere.",
+  "try": "Download PocketPal, pick a pal, and ask it something you’d normally ask ChatGPT. See how the answers compare.",
+  "watch": "Just because it’s on your phone doesn’t mean your Trust has approved it. Keep patient details out, and expect more mistakes from the smaller models."
  },
  {
   "number": 16,
@@ -168,9 +201,9 @@
   "subtitle": "Where does your work end and the machine’s begin?",
   "cover": "/publication/covers/issue-16.jpg",
   "topic": "Made With AI",
-  "idea": "“Was AI used?” is too blunt. Ask where the important decisions came from: made with, alongside or by AI.",
-  "try": "Next time you use AI, say how: “I wrote it and used AI to edit the language.”",
-  "watch": "Automation bias. An AI draft is easier to approve than to check. Sometimes the friction is the thinking."
+  "idea": "“Did you use AI?” doesn’t tell anyone much. What matters is who made the decisions: you, AI, or a bit of both.",
+  "try": "Next time you use AI for something, add a line saying how. Something like “I wrote this, AI helped tidy it up.”",
+  "watch": "It’s much easier to say yes to an AI draft than to actually check it. If checking feels slow, that’s usually because you’re thinking."
  },
  {
   "number": 17,
@@ -180,8 +213,8 @@
   "subtitle": "A tool can track the task. Someone still has to do it.",
   "cover": "/publication/covers/issue-17.jpg",
   "topic": "Planner",
-  "idea": "Agreed actions slip because nobody is tracking them. Sending the email isn’t the same as doing the job.",
-  "try": "Open Planner on your Trust account. Take three actions from your last meeting and give each an owner and a date.",
-  "watch": "Task names can carry identifiable information. Use composite wording and link to documents rather than pasting them in."
+  "idea": "We’ve all left a meeting with a list of actions that nobody picks up. Sending the minutes doesn’t get anything done.",
+  "try": "Open Planner on your Trust account. Put in three actions from your last meeting and give each one a name and a date.",
+  "watch": "It’s easy to put a patient’s details in a task name without thinking. Keep it vague and link to the document instead."
  }
 ]
