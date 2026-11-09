@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<script>document.documentElement.classList.add("js")</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#151412">
+<link rel="canonical" href="https://clinicallyintelligent.com/field-guides/safety-check/challenge/">
+<title>The AI Safety Challenge | Clinically Intelligent</title>
+<meta name="description" content="Four fictional decisions about one patient. Would you make the right call?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--fg:#151412;--fg2:#2a2824;--or:#e8843a;--or-d:#a24f12;--cream:#f6f5ed;--white:#fffdf8;--stone:#ecebe4;--line:#d6d2c6;--muted:#5d584e;
+--good:#1f6b48;--good-bg:#e6f1e9;--look:#a8541a;--look-bg:#fbefe4;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:"Inter Tight",Arial,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--fg);font:17px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+a{color:inherit;text-underline-offset:4px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--or);outline-offset:3px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.lab{font:700 13.5px/1.3 var(--sans);text-transform:none}
+
+/* top bar */
+.bar{background:var(--fg);color:#e9e5da;border-bottom:4px solid var(--or)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:56px;gap:12px}
+.bar a{text-decoration:none;font:700 12px/1.2 var(--sans);letter-spacing:0}
+.mono{font:600 26px/1 var(--serif);letter-spacing:-.14em;color:var(--or);margin-right:8px}
+.tag{background:var(--or);color:var(--fg);padding:5px 8px}
+
+/* screens */
+.screen{padding:28px 0 48px}
+.screen:focus{outline:none}
+
+/* entry */
+.entry{background:var(--fg);color:#f2efe6;padding:48px 0 44px;min-height:calc(100vh - 60px)}
+.entry h1{font-size:clamp(44px,11vw,76px);line-height:.98;letter-spacing:-.045em;margin:18px 0 18px}
+.entry h1 em{color:var(--or);font-style:italic}
+.entry p{color:#d6d1c4;max-width:44ch;margin:0 0 14px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
+.meta span{border:1px solid #4a463e;padding:7px 10px;font:700 12px/1.2 var(--sans);letter-spacing:0;color:#f2efe6}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 30px;padding:0;list-style:none}
+.stages li{border-top:4px solid #4a463e;padding-top:8px;font:700 13.5px/1.25 var(--sans);text-transform:none;color:#bdb8ad}
+.stages li:nth-child(1){border-color:#7fc39c}.stages li:nth-child(2){border-color:var(--or)}.stages li:nth-child(3){border-color:#f2efe6}.stages li:nth-child(4){border-color:#d0574a}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 22px;border:2px solid transparent;font:700 16px/1 var(--sans);cursor:pointer;text-decoration:none}
+.btn-or{background:var(--or);color:var(--fg)}.btn-or:hover{background:#f39752}
+.btn-dark{background:var(--fg);color:#fff}.btn-dark:hover{background:var(--fg2)}
+.btn-line{background:transparent;border-color:var(--fg);color:var(--fg)}.btn-line:hover{background:var(--fg);color:#fff}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn svg{width:16px;height:12px}
+.privacy{margin:26px 0 0;padding-top:16px;border-top:1px solid #3a3731;font-size:13.5px;color:#bdb8ad}
+
+/* decision */
+.prog{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 14px}
+.prog .lab{color:var(--or-d)}
+.pips{display:flex;gap:5px}.pips i{width:26px;height:5px;background:var(--line)}.pips i.on{background:var(--fg)}.pips i.now{background:var(--or)}
+.d-title{font-size:clamp(28px,6.4vw,40px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px}
+.scene{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--fg);padding:16px 18px;margin:0 0 18px;font-size:16px}
+.scene p{margin:0 0 8px}.scene p:last-child{margin:0}
+.ask{font:500 21px/1.3 var(--serif);margin:0 0 12px}
+.opts{display:grid;gap:10px;margin:0 0 16px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:var(--white);border:2px solid #b9b3a5;padding:14px 16px;cursor:pointer;font-size:16px;line-height:1.4;min-height:56px}
+.opt:hover{border-color:var(--fg)}
+.opt .k{font:700 13px/1 var(--sans);width:26px;height:26px;border-radius:50%;border:2px solid var(--fg);display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:-2px}
+.opt[aria-checked="true"]{border-color:var(--fg);background:var(--fg);color:#fff}
+.opt[aria-checked="true"] .k{background:var(--or);border-color:var(--or);color:var(--fg)}
+.opt.is-right{border-color:var(--good);box-shadow:inset 6px 0 0 var(--good)}
+.opt.is-wrong{border-color:var(--look);box-shadow:inset 6px 0 0 var(--look)}
+.opt[disabled]{cursor:default}
+
+/* chat request (D2) */
+.ai{background:#eef0f2;border-left:3px solid #8a96a0;padding:12px 14px;margin:0 0 14px;font-size:15.5px}
+.ai .who{display:block;font:700 13.5px/1.3 var(--sans);text-transform:none;color:var(--muted);margin-bottom:4px}
+.hint{font-size:14.5px;color:var(--muted);margin:-4px 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{background:var(--white);border:2px solid #b9b3a5;padding:11px 14px;font:600 15px/1.2 var(--sans);cursor:pointer;min-height:48px;display:inline-flex;align-items:center;gap:8px}
+.chip::before{content:"";width:16px;height:16px;border:2px solid currentColor;border-radius:3px;flex:none}
+.chip[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:#fff}
+.chip[aria-pressed="true"]::before{background:var(--or);border-color:var(--or);box-shadow:inset 0 0 0 2px var(--fg)}
+.chip.is-right{box-shadow:0 0 0 3px var(--good)}
+.chip.is-wrong{box-shadow:0 0 0 3px var(--look)}
+
+/* text compare (D3) */
+.cmp{display:grid;gap:10px;margin:0 0 16px}
+.card{background:var(--white);border:1px solid var(--line);padding:14px 16px}
+.card .lab{color:var(--muted);display:block;margin-bottom:6px}
+.card.ai-d .lab{color:var(--or-d)}
+.card p{margin:0;font-size:16.5px;line-height:1.9}
+.seg{background:transparent;border:0;border-bottom:2px dotted #9a9385;padding:1px 2px;margin:0 1px;cursor:pointer;font-size:16.5px;line-height:1.5;text-align:left}
+.seg:hover{background:#f3eee3}
+.seg[aria-pressed="true"]{background:var(--fg);color:#fff;border-bottom-color:var(--or)}
+.seg.is-right{outline:2px solid var(--good);outline-offset:1px}
+.seg.is-wrong{outline:2px solid var(--look);outline-offset:1px}
+.seg.missed{outline:2px dashed var(--good);outline-offset:1px}
+
+/* actions + feedback */
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fb{margin:18px 0 18px;padding:16px 18px;border-left:6px solid;background:var(--white)}
+.fb:focus{outline:none}
+.fb.good{border-color:var(--good);background:var(--good-bg)}
+.fb.look{border-color:var(--look);background:var(--look-bg)}
+.fb h3{font:500 24px/1.15 var(--serif);margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.fb h3 svg{width:22px;height:22px;flex:none}
+.fb p{margin:0 0 8px;font-size:15.5px}
+.fb ul{margin:4px 0 8px;padding-left:20px;font-size:15px}.fb li{margin:3px 0}
+.fb .check-link{font-size:14px;font-weight:700}
+.tries{font-size:13px;color:var(--muted);margin-left:auto}
+
+/* results */
+.res-h{font-size:clamp(34px,8vw,52px);line-height:1.02;letter-spacing:-.04em;margin:8px 0 12px}
+.res-h em{color:var(--or-d)}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0 20px}
+.tile{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--fg);padding:14px}
+.tile .lab{color:var(--muted)}
+.tile h3{font:500 19px/1.2 var(--serif);margin:6px 0 8px}
+.st{display:inline-flex;align-items:center;gap:6px;font:700 12px/1.3 var(--sans);padding:5px 8px}
+.st.first{background:var(--good-bg);color:var(--good)}
+.st.after{background:var(--look-bg);color:var(--look)}
+.st svg{width:14px;height:14px}
+.tile a{display:block;margin-top:8px;font-size:13.5px;font-weight:700}
+.disc{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:22px}
+.cue{background:var(--fg);color:#f2efe6;padding:18px 20px;margin:0 0 20px}
+.cue .lab{color:var(--or)}
+.cue p{margin:6px 0 0;font:500 22px/1.3 var(--serif)}
+.preview-mark{position:static;display:block;width:max-content;margin:0 auto 18px;padding:5px 8px;background:#fff4dc;border:1px solid #e3cba2;color:#684c2c;font:700 10px/1.4 var(--sans);letter-spacing:.04em;z-index:5}
+noscript p{background:var(--look-bg);padding:14px;border-left:5px solid var(--look)}
+@media (max-width:420px){.tiles{grid-template-columns:1fr}.stages li{font-size:9.5px;letter-spacing:0}}
+
+/* CI shell. Paste inside the page <style>, after the page's own rules. */
+.site-head,.sh-sheet,.site-foot{--bg:#f4efe4;--panel:#1f5f3f;--line:#d9d1bf;--amber:#d98a1e;--ink:#0c0b0a;--moss-text:#1f5f3f;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif}
+
+/* ===== CI shell: shared header and footer ===== */
+.site-head{color:var(--ink);position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:10px clamp(16px,3vw,32px);background:var(--bg);transition:box-shadow .2s}
+.site-head.scrolled{box-shadow:0 1px 0 var(--line)}
+.site-head.dark{background:var(--panel);color:#f4efe4}
+.site-head.dark.scrolled{box-shadow:0 1px 0 rgba(244,239,228,.18)}
+.sh-logo{display:block;margin-right:auto;line-height:0}
+.sh-logo img{height:44px;width:auto;display:block}
+.sh-nav{display:none;gap:26px;align-items:center}
+.sh-nav a,.sh-cta,.sh-menu{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0;border-bottom:1.5px solid transparent}
+.sh-nav a:hover{border-bottom-color:currentColor}
+.sh-nav a[aria-current="page"]{border-bottom-color:currentColor;font-weight:600}
+.sh-cta{font-weight:600;border-bottom-color:var(--amber)}
+.sh-menu{background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.sh-menu i{display:inline-block;width:18px;height:10px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transition:transform .2s}
+.sh-menu[aria-expanded="true"] i{transform:scaleY(.15)}
+.sh-quick{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0}
+@media(min-width:880px){.sh-nav{display:flex}.sh-menu,.sh-quick{display:none}}
+.sh-sheet{position:fixed;inset:0;z-index:19;background:var(--bg);color:var(--ink);padding:calc(env(safe-area-inset-top,0px) + 84px) clamp(20px,5vw,48px) calc(env(safe-area-inset-bottom,0px) + 32px);overflow-y:auto}
+.sh-sheet[hidden]{display:none}
+.sh-sheet ul{list-style:none;margin:0;padding:0}
+.sh-sheet li a{display:block;font-family:var(--serif);font-size:clamp(2rem,9vw,2.8rem);line-height:1.1;padding:10px 0;text-decoration:none;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sh-sheet li a[aria-current="page"]{color:var(--moss-text)}
+.sh-sheet .sh-more{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:12px}
+.sh-sheet .sh-more a{font:500 1.05rem var(--sans);color:var(--ink)}
+body.sh-open{overflow:hidden}
+footer.site-foot{opacity:1;margin:clamp(64px,10vw,120px) 0 0;padding:clamp(40px,6vw,64px) 0 calc(env(safe-area-inset-bottom,0px) + 40px);border-top:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.95rem;max-width:none}
+footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margin-top:0}
+.sf-in{max-width:1120px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+.sf-grid{display:grid;grid-template-columns:1fr;gap:32px 48px}
+@media(min-width:760px){.sf-grid{grid-template-columns:1.4fr 1fr 1fr}}
+.sf-grid img{height:44px;width:auto;display:block;margin-bottom:14px}
+.sf-tag{font-family:var(--serif);font-size:1.3rem;margin:0 0 10px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.site-foot a{color:inherit;text-underline-offset:.2em}
+.site-foot ul a{text-decoration:none}
+.site-foot ul a:hover{text-decoration:underline}
+.sf-legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;opacity:.75}
+.site-foot.dark .sf-legal{border-top-color:rgba(244,239,228,.18)}
+.sf-legal p{margin:0 0 8px;max-width:62em}
+@media (prefers-reduced-motion: reduce){.site-head,.sh-menu i{transition:none}}
+
+.sh-sheet{}
+.keep{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--or);padding:18px 18px 16px;margin:0 0 20px}.keep h3{font:500 22px/1.2 var(--serif);margin:0 0 8px}.keep p{margin:0 0 14px;font-size:15.5px}
+.chip{text-align:left}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+<header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/">Build with CI</a></nav><a class="sh-quick" href="https://clinicallyintelligent.com/publication/">Publication</a><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
+<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://clinicallyintelligent.com/subscribe/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
+
+<main id="app" data-state="entry">
+ <noscript><div class="wrap"><p>This challenge needs JavaScript. You can still read <a href="../">the full AI Safety Check guide</a>.</p></div></noscript>
+
+ <!-- ENTRY -->
+ <section class="entry" id="s-entry" aria-labelledby="entry-h">
+  <div class="wrap">
+   <span class="lab" style="color:var(--or)">The AI Safety Challenge</span>
+   <h1 id="entry-h">Would you make the <em>right call?</em></h1>
+   <p>Four decisions about one patient, Joan, across an ordinary working fortnight. Choose what you’d do, see why it matters, and try again if you need to.</p>
+   <div class="meta"><span>4 decisions</span><span>Fictional scenarios</span><span>Nothing saved</span></div>
+   <ol class="stages" aria-label="The four stages"><li>Before</li><li>During</li><li>After</li><li>If wrong</li></ol>
+   <button class="btn btn-or" type="button" id="start">Start the challenge</button>
+   <p class="privacy">Nothing you choose is saved or sent anywhere in this version. There’s no account, no name and no certificate. This is practice, not an assessment.</p>
+  </div>
+ </section>
+
+ <!-- DECISION -->
+ <section class="screen" id="s-dec" hidden tabindex="-1" aria-labelledby="d-title">
+  <div class="wrap">
+   <div class="prog"><span class="lab" id="d-stage"></span><span class="pips" id="pips" aria-hidden="true"></span></div>
+   <h2 class="d-title" id="d-title"></h2>
+   <div id="d-body"></div>
+   <div class="fb" id="fb" hidden tabindex="-1" role="status"></div>
+   <div class="actions">
+    <button class="btn btn-dark" type="button" id="check" disabled>Check my decision</button>
+    <button class="btn btn-line" type="button" id="retry" hidden>Try again</button>
+    <button class="btn btn-dark" type="button" id="next" hidden>Continue</button>
+    <span class="tries" id="tries"></span>
+   </div>
+  </div>
+ </section>
+
+ <!-- RESULTS -->
+ <section class="screen" id="s-res" hidden tabindex="-1" aria-labelledby="res-h">
+  <div class="wrap">
+   <span class="lab" style="color:var(--or-d)">Your four decisions</span>
+   <h2 class="res-h" id="res-h"></h2>
+   <p id="res-sub" style="margin:0 0 6px;max-width:52ch"></p>
+   <div class="tiles" id="tiles"></div>
+   <div class="keep"><h3>Good judgement is easier with something to refer back to.</h3><p>Keep the Safety Check nearby for the moments when you’re about to enter information, use an AI output or share it.</p><div class="actions"><a class="btn btn-dark" href="../AI_Safety_Check_one_page_reminder_A4.pdf" download="AI Safety Check reminder (Clinically Intelligent).pdf">Download the one-page reminder</a><a class="btn btn-line" href="../The_Clinicians_AI_Safety_Check_Field_Guide_01.pdf" download="The Clinician’s AI Safety Check (Clinically Intelligent).pdf">Download the full guide (PDF)</a></div></div>
+   <div class="cue"><span class="lab">Take this with you</span><p>Before you type: <b>what</b> am I entering, <b>where</b> is it going, <b>why</b> do I need it? After: <b>what changed?</b></p></div>
+   <div class="actions">
+    <a class="btn btn-dark" href="../">Back to the guide</a>
+    <button class="btn btn-line" type="button" id="again">Do it again</button>
+   </div>
+   <p class="disc">This challenge is an educational exercise. Your result reflects choices in four fictional scenarios. It is not a validated assessment of professional competence and does not replace local governance, training or authorisation.</p>
+  </div>
+ </section>
+</main>
+<footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://clinicallyintelligent.com/subscribe/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/answers/">CI Answers</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
+
+<script>
+(function(){
+'use strict';
+/* ------------------------------------------------------------------
+   CONTENT MANIFEST · challenge v1.0 · proposed copy, awaiting
+   clinical, IG and editorial sign-off. Edit content here only.
+   ------------------------------------------------------------------ */
+var CHALLENGE={id:'ai-safety-challenge',version:'1.0'};
+var Q=[
+ {id:'Q1',version:'2',stage:'Before',topic:'Is this use permitted?',guide:'../#before',type:'choice',
+  title:'The report that’s due tonight.',
+  scene:['It’s 16:40. You’re sitting in your car outside Joan’s house after a home visit. Your notes are half in your notebook, half in your head, and her report is due before you finish today.','A colleague swears by pasting hers into ChatGPT on her phone. Your Trust also has Copilot on your work login, but you’ve never checked what it’s approved for.'],
+  ask:'What do you do?',
+  options:[
+   {id:'A',text:'Paste your notes into ChatGPT on your phone, leaving out Joan’s name and address.',fb:'Leaving out a name and address doesn’t make your notes safe for a personal app. The rest can still point to Joan, and the app isn’t approved for patient information.'},
+   {id:'B',text:'Use Copilot on your work login. It’s the Trust’s own tool, so it’s covered.',fb:'Close, and the most common mistake. A Trust tool is approved for particular tasks and information, not everything. Being on your work login isn’t the same as being approved for this.'},
+   {id:'C',text:'Check what Copilot is approved for before you use it. Until then, write this one yourself.',fb:'Approval is specific to the tool, the information and the task. Until you know all three, patient notes stay out. It’s slower today, and it’s the right call.'}],
+  correct:'C',check:'Check 1. Where: approval'},
+ {id:'Q2',version:'2',stage:'During',topic:'What information is necessary?',guide:'../#during',type:'chips',
+  title:'Your thumb is over send.',
+  scene:['The next morning, your IG lead confirms Copilot on your work login can be used to draft from notes once identifying details are taken out.','You type a request for a discharge summary Joan can read herself. It’s ready to go.'],
+  aiWho:'Your message, not sent yet',
+  ai:'Write a discharge summary that Joan can read. Joan Ellis, born 3 February 1942, 14 Albion Road. Lives alone above the newsagent. Walks with a frame and one person beside her. Reads Bengali and needs large print.',
+  ask:'Tap every detail you’d take out before you press send.',hint:'Take out what the summary doesn’t need. Keep what makes it work for Joan.',
+  chips:[
+   {id:'name',text:'Joan Ellis',hold:true,fb:'Not needed to write the summary. You add her name later, inside approved systems.'},
+   {id:'dob',text:'Born 3 February 1942',hold:true,fb:'Not needed, and a strong identifier with almost anything else.'},
+   {id:'addr',text:'14 Albion Road',hold:true,fb:'Not needed for the wording, and it points straight to her front door.'},
+   {id:'shop',text:'Lives alone above the newsagent',hold:true,fb:'The easy one to miss. There’s no name in it, but anyone local could tell who it is.'},
+   {id:'walk',text:'Walks with a frame and one person beside her',hold:false,fb:'Keep it. It’s the advice the summary is there to give.'},
+   {id:'read',text:'Reads Bengali and needs large print',hold:false,fb:'Keep it. It decides how the summary is written, and on its own it doesn’t identify her.'}],
+  check:'Check 4. Minimise'},
+ {id:'Q3',version:'2',stage:'After',topic:'What changed?',guide:'../#after',type:'segments',
+  title:'It reads beautifully.',
+  scene:['Copilot sends back a summary for Joan. It’s warm, clear and ready to print. Before it goes to her, compare it with what you actually wrote.'],
+  srcLabel:'What you wrote',
+  aiLabel:'What came back. Tap to mark',
+  source:'Walk with your frame, with one person beside you. Avoid the stairs until your physio has seen you. Gentle practice each day may help your confidence. Ring the ward if you feel dizzy.',
+  segments:[
+   {id:'s1',text:'Walk with your frame,',changed:false},
+   {id:'s2',text:'with someone nearby.',changed:true,fb:'“One person beside you” became “someone nearby”. Supervision became company.'},
+   {id:'s3',text:'Take the stairs slowly until your physio has seen you.',changed:true,fb:'“Avoid the stairs” became “take them slowly”. Same tone, opposite advice.'},
+   {id:'s4',text:'Gentle practice each day',changed:false},
+   {id:'s5',text:'will rebuild your confidence.',changed:true,fb:'“May help” became “will rebuild”. Possible became certain.'},
+   {id:'s6',text:'Ring the ward if you feel dizzy.',changed:false}],
+  ask:'Tap every part whose meaning changed.',hint:'Every line reads well. Look for meaning, not wording.',
+  check:'Check 7. What changed?'},
+ {id:'Q4',version:'2',stage:'If wrong',topic:'If something goes wrong',guide:'../#wrong',type:'choice',
+  title:'The first line.',
+  scene:['A fortnight later, at the end of a long day, you paste a referral into ChatGPT on your phone to tidy up the wording.','As you press send, you see it: Joan’s name and address in the very first line.'],
+  ask:'What do you do now?',
+  options:[
+   {id:'A',text:'Delete the conversation straight away so her details aren’t kept.',fb:'It feels responsible, but deleting can’t undo the disclosure and can remove evidence your organisation needs. Delete only if they tell you to.'},
+   {id:'B',text:'Stop, report it through your Trust’s incident route today, and keep a note of what happened.',fb:'Stopping limits further harm. Reporting promptly lets your organisation assess and manage it. Your note helps them do that.'},
+   {id:'C',text:'Tell your manager at supervision on Thursday so it’s recorded properly.',fb:'Telling your manager is right, but waiting isn’t. Incidents need reporting promptly through the approved route, not at the next planned meeting.'}],
+  correct:'B',check:'If something goes wrong: Stop, Report, Record, Contain, Cooperate'}
+];
+var MAX_RETRIES=2;
+
+/* ------------------------------------------------------------------
+   ANALYTICS HOOK · v1b only. In v1a this does nothing and sends nothing.
+   Event shape follows the engineering brief section 6:
+   {session_id, challenge_version, question_id, question_version,
+    event_name, choice_id, attempt_number, event_time, referrer_source}
+   Correctness must be calculated server-side in v1b.
+   ------------------------------------------------------------------ */
+function record(evt){ /* intentionally empty in v1a */ }
+
+/* state */
+var S, i, attempts, locked, first;
+var $=function(id){return document.getElementById(id)};
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function shuffle(a){a=a.slice();for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=a[k];a[k]=a[j];a[j]=t}return a}
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+function show(id){document.getElementById('app').dataset.state={'s-entry':'entry','s-dec':'deciding','s-res':'results'}[id];['s-entry','s-dec','s-res'].forEach(function(s){$(s).hidden=s!==id});var el=$(id);window.scrollTo(0,0);el.focus({preventScroll:true})}
+var ICON_GOOD='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 12.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var ICON_LOOK='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="currentColor"/></svg>';
+
+function begin(){S={id:(crypto.randomUUID?crypto.randomUUID():String(Date.now())),results:[]};record({event_name:'started'});i=0;render()}
+
+function render(){
+ var q=Q[i];attempts=0;locked=false;first=null;
+ $('d-stage').textContent='Decision '+(i+1)+' of '+Q.length+'. '+q.stage;
+ $('pips').innerHTML=Q.map(function(_,k){return '<i class="'+(k<i?'on':k===i?'now':'')+'"></i>'}).join('');
+ $('d-title').textContent=q.title;
+ var h='<div class="scene">'+q.scene.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')+'</div>';
+ if(q.type==='choice'){
+  h+='<p class="ask" id="ask">'+esc(q.ask)+'</p><div class="opts" role="radiogroup" aria-labelledby="ask">';
+  shuffle(q.options).forEach(function(o,k){h+='<button type="button" class="opt" role="radio" aria-checked="false" data-id="'+o.id+'"><span class="k" aria-hidden="true">'+'ABC'[k]+'</span><span>'+esc(o.text)+'</span></button>'});
+  h+='</div>';
+ } else if(q.type==='chips'){
+  h+='<div class="ai"><span class="who">'+esc(q.aiWho||'AI tool')+'</span>'+esc(q.ai)+'</div><p class="ask" id="ask">'+esc(q.ask)+'</p><p class="hint">'+esc(q.hint)+'</p><div class="chips" role="group" aria-labelledby="ask">';
+  q.chips.forEach(function(c){h+='<button type="button" class="chip" aria-pressed="false" data-id="'+c.id+'">'+esc(c.text)+'</button>'});
+  h+='</div>';
+ } else {
+  h+='<div class="cmp"><div class="card"><span class="lab">'+esc(q.srcLabel||'Source note')+'</span><p>'+esc(q.source)+'</p></div><div class="card ai-d"><span class="lab">'+esc(q.aiLabel||'AI draft. Tap to mark')+'</span><p id="segs">';
+  q.segments.forEach(function(s){h+='<button type="button" class="seg" aria-pressed="false" data-id="'+s.id+'">'+esc(s.text)+'</button> '});
+  h+='</p></div></div><p class="ask" id="ask">'+esc(q.ask)+'</p><p class="hint">'+esc(q.hint)+'</p>';
+ }
+ $('d-body').innerHTML=h;
+ $('fb').hidden=true;$('check').hidden=false;$('check').disabled=q.type==='choice';
+ $('retry').hidden=true;$('next').hidden=true;$('tries').textContent='';
+ show('s-dec');
+}
+
+function selected(){
+ var q=Q[i];
+ if(q.type==='choice'){var b=$('d-body').querySelector('.opt[aria-checked="true"]');return b?b.dataset.id:null}
+ return [].map.call($('d-body').querySelectorAll('[aria-pressed="true"]'),function(b){return b.dataset.id});
+}
+
+$('d-body').addEventListener('click',function(e){
+ if(locked)return;
+ var o=e.target.closest('.opt'),c=e.target.closest('.chip,.seg');
+ if(o){$('d-body').querySelectorAll('.opt').forEach(function(x){x.setAttribute('aria-checked',String(x===o))});$('check').disabled=false}
+ if(c){c.setAttribute('aria-pressed',String(c.getAttribute('aria-pressed')!=='true'));$('check').disabled=false}
+});
+$('d-body').addEventListener('keydown',function(e){
+ var o=e.target.closest('.opt');if(!o||locked)return;
+ var all=[].slice.call($('d-body').querySelectorAll('.opt')),k=all.indexOf(o);
+ if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();all[(k+1)%all.length].focus()}
+ if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();all[(k-1+all.length)%all.length].focus()}
+});
+
+function grade(){
+ var q=Q[i],sel=selected(),ok,parts=[];
+ if(q.type==='choice'){
+  ok=sel===q.correct;
+  var picked=q.options.filter(function(o){return o.id===sel})[0];
+  parts.push('<p>'+esc(picked.fb)+'</p>');
+  $('d-body').querySelectorAll('.opt').forEach(function(b){if(b.dataset.id===sel)b.classList.add(ok?'is-right':'is-wrong')});
+ } else if(q.type==='chips'){
+  var want=q.chips.filter(function(c){return c.hold}).map(function(c){return c.id});
+  ok=want.length===sel.length&&want.every(function(w){return sel.indexOf(w)>-1});
+  var notes=[];
+  q.chips.forEach(function(c){var on=sel.indexOf(c.id)>-1;var b=$('d-body').querySelector('[data-id="'+c.id+'"]');
+   if(on!==c.hold){b.classList.add('is-wrong');notes.push('<li><b>'+esc(c.text)+':</b> '+esc(c.fb)+'</li>')}
+   else if(on){b.classList.add('is-right')}});
+  if(ok)parts.push('<p>You took out the four details that point to Joan and kept the two the summary needs. It loses nothing, and Joan stays out of it.</p>');
+  else{var over=q.chips.some(function(c){return !c.hold&&sel.indexOf(c.id)>-1});
+   parts.push('<ul>'+notes.join('')+'</ul>');
+   if(over)parts.push('<p>Taking out something the summary needs makes it worse without making it safer.</p>')}
+ } else {
+  var ch=q.segments.filter(function(s){return s.changed}).map(function(s){return s.id});
+  ok=ch.length===sel.length&&ch.every(function(w){return sel.indexOf(w)>-1});
+  var found=0,extra=0;
+  q.segments.forEach(function(s){var on=sel.indexOf(s.id)>-1;var b=$('d-body').querySelector('[data-id="'+s.id+'"]');
+   if(on&&s.changed){found++;b.classList.add('is-right')} else if(on&&!s.changed){extra++;b.classList.add('is-wrong')}});
+  parts.push('<p>You found '+found+' of '+ch.length+' changes'+(extra?' and marked '+extra+' part'+(extra>1?'s':'')+' that didn’t change':'')+'.</p>');
+ }
+ return {ok:ok,sel:sel,html:parts.join('')};
+}
+
+function reveal(){ /* show full answer after correct or out of retries */
+ var q=Q[i],h='';
+ if(q.type==='choice'){var r=q.options.filter(function(o){return o.id===q.correct})[0];
+  $('d-body').querySelectorAll('.opt').forEach(function(b){if(b.dataset.id===q.correct)b.classList.add('is-right')});
+  h='<p><b>The right call:</b> '+esc(r.text)+'</p>';}
+ else if(q.type==='chips'){h='<p><b>Hold back:</b> '+q.chips.filter(function(c){return c.hold}).map(function(c){return esc(c.text)}).join(', ')+'. <b>Keep:</b> '+q.chips.filter(function(c){return !c.hold}).map(function(c){return esc(c.text)}).join(', ')+'.</p>';}
+ else {h='<ul>'+q.segments.filter(function(s){return s.changed}).map(function(s){
+   var b=$('d-body').querySelector('[data-id="'+s.id+'"]');if(!b.classList.contains('is-right'))b.classList.add('missed');
+   return '<li><b>“'+esc(s.text)+'”</b> '+esc(s.fb)+'</li>'}).join('')+'</ul>';}
+ return h;
+}
+
+$('check').addEventListener('click',function(){
+ var q=Q[i],g=grade();attempts++;locked=true;
+ if(first===null){first=g.ok;record({event_name:'answer_submitted',question_id:q.id,question_version:q.version,choice_id:g.sel,attempt_number:1})}
+ else record({event_name:'retry_submitted',question_id:q.id,choice_id:g.sel,attempt_number:attempts});
+ var done=g.ok||attempts>MAX_RETRIES;
+ var fb=$('fb');fb.className='fb '+(g.ok?'good':'look');
+ fb.innerHTML='<h3>'+(g.ok?ICON_GOOD+'Good call.':ICON_LOOK+'Look again.')+'</h3>'+g.html+(done?reveal():'')+'<a class="check-link" href="'+q.guide+'">'+esc(q.check)+'</a>';
+ fb.hidden=false; $('app').dataset.state='feedback';
+ $('d-body').querySelectorAll('.opt,.chip,.seg').forEach(function(b){b.disabled=true});
+ $('check').hidden=true;
+ $('retry').hidden=done;$('next').hidden=false;
+ $('next').textContent=i<Q.length-1?'Continue':'See your results';
+ $('tries').textContent=(!done)?('Retries left: '+(MAX_RETRIES-attempts+1)):'';
+ if(done&&!S.results[i])S.results[i]={first:first};
+ if(!S.results[i])S.results[i]={first:first};
+ fb.focus({preventScroll:true});
+ fb.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
+});
+$('retry').addEventListener('click',function(){
+ $('app').dataset.state='deciding'; locked=false;$('fb').hidden=true;$('retry').hidden=true;$('next').hidden=true;$('check').hidden=false;$('check').disabled=false;$('tries').textContent='';
+ $('d-body').querySelectorAll('.opt,.chip,.seg').forEach(function(b){b.disabled=false;b.classList.remove('is-right','is-wrong','missed')});
+ var f=$('d-body').querySelector('.opt,.chip,.seg');if(f)f.focus();
+});
+$('next').addEventListener('click',function(){
+ record({event_name:'feedback_viewed',question_id:Q[i].id});
+ if(i<Q.length-1){i++;render()}else results();
+});
+
+function results(){
+ record({event_name:'completed'});
+ var n=S.results.filter(function(r){return r&&r.first}).length;
+ $('res-h').innerHTML=n===Q.length?'You recognised <em>all four</em> first time.':'You recognised <em>'+['none','one','two','three'][n]+' of four</em> first time.';
+ $('res-sub').textContent=n===Q.length?'That’s the pause working. The real test is the next time you’re about to paste something in.':'The ones you revisited are worth a second look in the guide. Those are the decisions most worth slowing down for.';
+ $('tiles').innerHTML=Q.map(function(q,k){var f=S.results[k]&&S.results[k].first;
+  return '<div class="tile"><span class="lab">'+esc(q.stage)+'</span><h3>'+esc(q.topic)+'</h3><span class="st '+(f?'first':'after')+'">'+(f?ICON_GOOD+'Recognised first time':ICON_LOOK+'Revisited after feedback')+'</span>'+(f?'':'<a href="'+q.guide+'">Revisit in the guide</a>')+'</div>'}).join('');
+ show('s-res');
+}
+$('start').addEventListener('click',begin);
+$('again').addEventListener('click',begin);
+})();
+</script>
+<script>
+(function(){
+  var h=document.querySelector('.site-head'), b=h&&h.querySelector('.sh-menu'), s=document.getElementById('sh-sheet');
+  if(!h) return;
+  function onS(){ h.classList.toggle('scrolled', window.scrollY>4); } onS(); window.addEventListener('scroll',onS,{passive:true});
+  function set(open){ b.setAttribute('aria-expanded',open); s.hidden=!open; document.body.classList.toggle('sh-open',open); b.firstChild.nodeValue=open?'Close ':'Menu '; if(open){ var f=s.querySelector('a'); if(f) f.focus(); } }
+  b.addEventListener('click',function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  document.addEventListener('keydown',function(e){
+    if(s.hidden) return;
+    if(e.key==='Escape'){ set(false); b.focus(); return; }
+    if(e.key==='Tab'){
+      var f=[b].concat([].slice.call(s.querySelectorAll('a'))), i=f.indexOf(document.activeElement);
+      if(e.shiftKey && i<=0){ e.preventDefault(); f[f.length-1].focus(); }
+      else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); }
+    }
+  });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=880 && !s.hidden) set(false); });
+  s.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); });
+})();
+</script>
+</body>
+</html>

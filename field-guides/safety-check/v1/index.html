@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archived: version 1.0 | The Clinician's AI Safety Check</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://clinicallyintelligent.com/field-guides/safety-check/">
+<meta name="description" content="Archived record of version 1.0 of The Clinician’s AI Safety Check, superseded in November 2026. Use the current version.">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,300,100,1;9..144,400,100,1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0c0b0a;
+    --ink-2: #141210;
+    --ink-3: #1c1916;
+    --paper: #f4ede0;
+    --paper-2: #ebe2d1;
+    --paper-dim: #a49a88;
+    --paper-mute: #8a8273;
+    --rule: #2a2621;
+    --amber: #d98a1e;
+    --amber-soft: #e9b367;
+    --ember: #b4601a;
+    --moss: #1f5f3f;
+    --moss-soft: #4a8a68;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(217, 138, 30, 0.08), transparent 60%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+  /* MASTHEAD */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 0;
+    position: sticky; top: 0;
+    background: rgba(12, 11, 10, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+  .masthead-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand-link { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark { width: 32px; height: 32px; flex-shrink: 0; }
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
+  .wordmark {
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 20px; letter-spacing: -0.02em;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+  }
+  .wordmark em { font-style: italic; font-weight: 400; color: var(--amber-soft); }
+  .mast-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .mast-meta a { color: var(--paper-mute); text-decoration: none; transition: color 0.2s ease; }
+  .mast-meta a:hover { color: var(--amber-soft); }
+
+  /* HERO */
+  .hero { padding: 80px 0 50px; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--moss-soft);
+    margin-bottom: 36px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(44px, 7vw, 92px); line-height: 0.98;
+    letter-spacing: -0.035em; margin-bottom: 32px;
+    max-width: 14ch;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  .hero h1 em {
+    font-style: italic; font-weight: 300; color: var(--amber-soft);
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 1.8vw, 24px); line-height: 1.5;
+    color: var(--paper-2); max-width: 48ch; margin-bottom: 20px;
+  }
+  .hero-sub-2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--paper-mute);
+    margin-bottom: 48px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .hero-sub-2 .dot { color: var(--rule); }
+
+  .cta-row {
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 30px;
+    background: var(--amber); color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.04em; text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .btn-primary:hover { background: var(--amber-soft); transform: translateY(-1px); }
+  .btn-primary .arrow { transition: transform 0.25s ease; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  .btn-secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--paper-mute);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.25s ease;
+  }
+  .btn-secondary:hover { color: var(--paper); }
+
+  /* PREVIEW */
+  .preview { padding: 30px 0 90px; }
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 28px;
+    align-items: flex-start;
+  }
+  .preview-cell {
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  }
+  .preview-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .preview-cell .placeholder {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--paper-mute); text-transform: uppercase;
+    text-align: center; padding: 30px;
+  }
+  .preview-cell:nth-child(2) { transform: translateY(36px); }
+  .preview-cell:nth-child(3) { transform: translateY(72px); }
+  .preview-caption {
+    margin-top: 50px;
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-size: 17px;
+    color: var(--paper-dim); max-width: 60ch;
+    font-variation-settings: "SOFT" 80, "WONK" 1;
+  }
+
+  @media (max-width: 720px) {
+    .preview-grid { grid-template-columns: 1fr; gap: 24px; }
+    .preview-cell:nth-child(2),
+    .preview-cell:nth-child(3) { transform: none; }
+  }
+
+  /* GATE. The email capture, shown until unlock */
+  .gate {
+    padding: 110px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(217, 138, 30, 0.08), transparent 70%),
+      var(--ink-2);
+  }
+  .gate-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .gate-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--amber);
+    margin-bottom: 32px;
+  }
+  .gate-h {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 42px); line-height: 1.2;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    max-width: 22ch; margin-left: auto; margin-right: auto;
+  }
+  .gate-h em {
+    font-style: italic; color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+  .gate-body {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; line-height: 1.55;
+    color: var(--paper-2); max-width: 52ch;
+    margin: 0 auto 36px;
+  }
+  .subform {
+    display: flex; max-width: 480px; margin: 0 auto;
+    border: 1px solid var(--rule);
+    background: rgba(20, 18, 16, 0.6);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .subform:focus-within {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(217, 138, 30, 0.12);
+  }
+  .subform input {
+    flex: 1; padding: 18px 22px;
+    background: transparent; border: none; outline: none;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px; color: var(--paper);
+    min-width: 0;
+  }
+  .subform input::placeholder { color: var(--paper-mute); }
+  .subform input:-webkit-autofill,
+  .subform input:-webkit-autofill:hover,
+  .subform input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--paper);
+    -webkit-box-shadow: 0 0 0 1000px rgba(20, 18, 16, 0.9) inset;
+    transition: background-color 9999s;
+  }
+  .subform button {
+    padding: 18px 26px;
+    background: var(--amber); color: var(--ink);
+    border: none; cursor: pointer;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.03em; white-space: nowrap;
+    transition: background 0.25s ease;
+  }
+  .subform button:hover { background: var(--amber-soft); }
+  .subform button:disabled { background: var(--paper-mute); color: var(--paper-2); cursor: not-allowed; }
+
+  .gate-fineprint {
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .gate-error {
+    display: none;
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #e04b27;
+  }
+  .gate-error.show { display: block; }
+
+  /* UNLOCKED. The download surface, hidden until unlock */
+  .unlocked {
+    padding: 100px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(31, 95, 63, 0.12), transparent 60%),
+      var(--ink-2);
+    display: none;
+  }
+  .unlocked.show { display: block; }
+  .unlocked-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .unlocked-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--moss-soft);
+    margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .unlocked-label::before {
+    content: '✓';
+    display: inline-block;
+    width: 18px; height: 18px;
+    line-height: 18px;
+    background: var(--moss);
+    color: var(--paper);
+    border-radius: 50%;
+    font-size: 11px;
+    text-align: center;
+  }
+  .unlocked-h {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 40px); line-height: 1.2;
+    letter-spacing: -0.025em; color: var(--paper);
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    max-width: 22ch; margin-left: auto; margin-right: auto;
+  }
+  .unlocked-h em {
+    font-style: italic; color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+  .unlocked-body {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; line-height: 1.55;
+    color: var(--paper-2); max-width: 52ch;
+    margin: 0 auto 40px;
+  }
+  .download-card {
+    display: inline-flex; flex-direction: column;
+    align-items: center; gap: 20px;
+    padding: 36px 48px;
+    background: rgba(12, 11, 10, 0.6);
+    border: 1px solid var(--rule);
+  }
+  .download-card .file-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .download-card a {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 28px;
+    background: var(--amber); color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.04em; text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .download-card a:hover { background: var(--amber-soft); transform: translateY(-1px); }
+  .download-card a .arrow { transition: transform 0.25s ease; }
+  .download-card a:hover .arrow { transform: translateY(2px); }
+  .issue-nudge {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--paper-mute);
+    line-height: 1.8;
+  }
+  .issue-nudge a {
+    color: var(--amber-soft);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .issue-nudge a:hover { color: var(--paper); }
+
+  /* SECTION */
+  section.block { padding: 100px 0; border-top: 1px solid var(--rule); }
+  .sec-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: baseline;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em;
+    color: var(--moss-soft);
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1;
+    letter-spacing: -0.025em; color: var(--paper);
+    font-variation-settings: "SOFT" 50;
+    max-width: 22ch;
+  }
+  .sec-title em {
+    font-style: italic; color: var(--amber-soft);
+    font-variation-settings: "WONK" 1;
+  }
+
+  /* INSIDE LIST */
+  .inside-list { border-top: 1px solid var(--rule); }
+  .inside-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .inside-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--paper-mute);
+  }
+  .inside-body {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 1.7vw, 21px);
+    line-height: 1.5; color: var(--paper-2);
+    max-width: 60ch;
+  }
+  .inside-body em {
+    font-style: italic; color: var(--amber-soft);
+    font-variation-settings: "WONK" 1, "SOFT" 100;
+  }
+
+  /* WHY */
+  .why-prose p {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.45; color: var(--paper);
+    letter-spacing: -0.012em;
+    margin-bottom: 28px;
+    max-width: 56ch;
+  }
+  .why-prose p:last-child {
+    color: var(--amber-soft);
+    font-style: italic;
+    font-variation-settings: "SOFT" 80, "WONK" 1;
+    border-left: 2px solid var(--amber);
+    padding-left: 28px;
+    margin-bottom: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 80px 0 50px;
+  }
+  .foot-line {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(24px, 2.6vw, 34px);
+    line-height: 1.35; letter-spacing: -0.02em;
+    color: var(--paper); max-width: 32ch;
+    margin-bottom: 50px;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+  .foot-line span:nth-child(2) { color: var(--paper-dim); }
+  .foot-line span:nth-child(3) { color: var(--amber-soft); font-style: italic; font-variation-settings: "WONK" 1, "SOFT" 100; }
+  .foot-row {
+    display: flex; justify-content: space-between;
+    gap: 30px; flex-wrap: wrap; align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--paper-mute);
+  }
+  .foot-mark { display: flex; align-items: center; gap: 12px; }
+  .foot-mark svg { width: 22px; height: 22px; opacity: 0.7; }
+
+  .foot-disclaimer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; line-height: 1.7;
+    color: var(--paper-mute);
+    max-width: 880px;
+  }
+  .foot-disclaimer strong {
+    display: block;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  /* MOTION */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(18px); animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+    .reveal.d1 { animation-delay: 0.10s; }
+    .reveal.d2 { animation-delay: 0.22s; }
+    .reveal.d3 { animation-delay: 0.34s; }
+    .reveal.d4 { animation-delay: 0.46s; }
+    .reveal.d5 { animation-delay: 0.58s; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  }
+  .obs {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .obs.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 50px 0 30px; }
+    .preview { padding: 20px 0 60px; }
+    section.block { padding: 70px 0; }
+    .gate, .unlocked { padding: 70px 0; }
+    footer { padding: 60px 0 40px; }
+    .sec-head { grid-template-columns: 1fr; gap: 16px; }
+    .download-card { padding: 28px 24px; }
+  }
+
+/* CI shell. Paste inside the page <style>, after the page's own rules. */
+.site-head,.sh-sheet,.site-foot{--bg:#f4efe4;--panel:#1f5f3f;--line:#d9d1bf;--amber:#d98a1e;--ink:#0c0b0a;--moss-text:#1f5f3f;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter Tight",Arial,Helvetica,sans-serif}
+
+/* ===== CI shell: shared header and footer ===== */
+.site-head{color:var(--ink);position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:10px clamp(16px,3vw,32px);background:var(--bg);transition:box-shadow .2s}
+.site-head.scrolled{box-shadow:0 1px 0 var(--line)}
+.site-head.dark{background:var(--panel);color:#f4efe4}
+.site-head.dark.scrolled{box-shadow:0 1px 0 rgba(244,239,228,.18)}
+.sh-logo{display:block;margin-right:auto;line-height:0}
+.sh-logo img{height:44px;width:auto;display:block}
+.sh-nav{display:none;gap:26px;align-items:center}
+.sh-nav a,.sh-cta,.sh-menu{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0;border-bottom:1.5px solid transparent}
+.sh-nav a:hover{border-bottom-color:currentColor}
+.sh-nav a[aria-current="page"]{border-bottom-color:currentColor;font-weight:600}
+.sh-cta{font-weight:600;border-bottom-color:var(--amber)}
+.sh-menu{background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.sh-menu i{display:inline-block;width:18px;height:10px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transition:transform .2s}
+.sh-menu[aria-expanded="true"] i{transform:scaleY(.15)}
+.sh-quick{font:500 .95rem/1 var(--sans);color:inherit;text-decoration:none;padding:10px 0}
+@media(min-width:880px){.sh-nav{display:flex}.sh-menu,.sh-quick{display:none}}
+.sh-sheet{position:fixed;inset:0;z-index:19;background:var(--bg);color:var(--ink);padding:calc(env(safe-area-inset-top,0px) + 84px) clamp(20px,5vw,48px) calc(env(safe-area-inset-bottom,0px) + 32px);overflow-y:auto}
+.sh-sheet[hidden]{display:none}
+.sh-sheet ul{list-style:none;margin:0;padding:0}
+.sh-sheet li a{display:block;font-family:var(--serif);font-size:clamp(2rem,9vw,2.8rem);line-height:1.1;padding:10px 0;text-decoration:none;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 96,"SOFT" 100}
+.sh-sheet li a[aria-current="page"]{color:var(--moss-text)}
+.sh-sheet .sh-more{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:12px}
+.sh-sheet .sh-more a{font:500 1.05rem var(--sans);color:var(--ink)}
+body.sh-open{overflow:hidden}
+footer.site-foot{opacity:1;margin:clamp(64px,10vw,120px) 0 0;padding:clamp(40px,6vw,64px) 0 calc(env(safe-area-inset-bottom,0px) + 40px);border-top:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.95rem;max-width:none}
+footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margin-top:0}
+.sf-in{max-width:1120px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+.sf-grid{display:grid;grid-template-columns:1fr;gap:32px 48px}
+@media(min-width:760px){.sf-grid{grid-template-columns:1.4fr 1fr 1fr}}
+.sf-grid img{height:44px;width:auto;display:block;margin-bottom:14px}
+.sf-tag{font-family:var(--serif);font-size:1.3rem;margin:0 0 10px;font-variation-settings:"opsz" 36,"SOFT" 100}
+.site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.site-foot a{color:inherit;text-underline-offset:.2em}
+.site-foot ul a{text-decoration:none}
+.site-foot ul a:hover{text-decoration:underline}
+.sf-legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;opacity:.75}
+.site-foot.dark .sf-legal{border-top-color:rgba(244,239,228,.18)}
+.sf-legal p{margin:0 0 8px;max-width:62em}
+@media (prefers-reduced-motion: reduce){.site-head,.sh-menu i{transition:none}}
+.fg-legal{padding:56px 0 0}
+
+/* archive notice */
+.arch{background:#2a1410;color:#f7e9e4;border-bottom:6px solid #f0715a;padding:28px 0 26px}
+.arch-in{max-width:760px;margin:0 auto;padding:0 22px;font-family:"Inter Tight",Arial,sans-serif}
+.arch-tag{display:inline-block;background:#f0715a;color:#14191e;font:700 14px/1 "Inter Tight",Arial,sans-serif;padding:7px 10px;margin:0 0 14px;letter-spacing:0;text-transform:none}
+.arch h2{font:500 clamp(22px,4.6vw,30px)/1.2 Fraunces,Georgia,serif;margin:0 0 10px;color:#fff;letter-spacing:-.01em}
+.arch p{margin:0 0 12px;font-size:17px;line-height:1.5}
+.arch-btn{display:inline-block;background:#f4ede0;color:#14191e;font-weight:700;padding:13px 18px;border-radius:3px;text-decoration:none}
+.arch details{margin-top:6px;border-top:1px solid #6b3a30;padding-top:12px}
+.arch summary{cursor:pointer;font-weight:700;font-size:16px}
+.arch ul{margin:12px 0 0;padding-left:20px;font-size:15.5px;line-height:1.5}.arch li{margin:0 0 8px}.arch li b{color:#fff}
+.arch-dl{background:#efe7d8;padding:40px 0}
+.arch-dl .wrap p{max-width:640px}
+.arch-dl a.dl{display:inline-block;background:#14191e;color:#fff;font-weight:700;padding:14px 20px;border-radius:3px;text-decoration:none;margin-top:6px}
+</style>
+<link rel="canonical" href="https://clinicallyintelligent.com/field-guides/safety-check/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+<header class="site-head"><a class="sh-logo" href="https://clinicallyintelligent.com/" aria-label="Clinically Intelligent home"><img src="/assets/ci-logo.png" width="83" height="120" alt="Clinically Intelligent"></a><nav class="sh-nav" aria-label="Main"><a href="https://clinicallyintelligent.com/publication/">Publication</a><a href="https://clinicallyintelligent.com/overview/">Overview</a><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a><a href="https://clinicallyintelligent.com/build/">Build with CI</a></nav><a class="sh-quick" href="https://clinicallyintelligent.com/publication/">Publication</a><button class="sh-menu" type="button" aria-expanded="false" aria-controls="sh-sheet">Menu <i aria-hidden="true"></i></button></header>
+<section class="arch" role="note" aria-labelledby="arch-h">
+ <div class="arch-in">
+  <p class="arch-tag">Archived</p>
+  <h2 id="arch-h">This is version 1.0, published in May 2026. It was superseded by version 2.0 in November 2026.</h2>
+  <p>It’s kept as a record of what was published. Don’t use it for practical guidance.</p>
+  <p><a class="arch-btn" href="/field-guides/safety-check/">Use the current Safety Check</a></p>
+  <details><summary>What changed in version 2.0</summary><ul><li><b>It asked you to answer yes to every question before going ahead.</b> Version 2.0 gives a specific outcome for each answer: stop, change approach, ask first or continue with care.</li><li><b>It described a composite patient as safe to use.</b> Version 2.0 shows that details add up, and says there’s no safe number of details.</li><li><b>It didn’t ask whether the tool, account and use were approved.</b> Version 2.0 starts with that question.</li><li><b>It said to delete the chat after a mistake.</b> Version 2.0 says stop, report, record, contain and cooperate, and not to assume deleting the chat undoes anything.</li><li><b>It promised a 30 second check and spoke broadly about consumer tools.</b> Both are removed. Version 2.0 is a brief pause, and it doesn’t approve any tool or use.</li><li><b>Check 3 was missing.</b> Version 2.0 has all nine checks.</li></ul></details>
+ </div>
+</section>
+
+<div class="sh-sheet" id="sh-sheet" hidden><nav aria-label="Menu"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li></ul></nav><div class="sh-more"><a href="https://read.clinicallyintelligent.com/">Subscribe to the publication</a><a href="https://clinicallyintelligent.com/founder/">About the founder</a><a href="https://clinicallyintelligent.com/problems">Problems</a><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></div></div>
+
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow reveal d1">FIELD GUIDE 01 · FREE DOWNLOAD</div>
+    <h1 class="reveal d2">The Clinician's AI <em>Safety Check.</em></h1>
+    <p class="hero-sub reveal d3">A 30 second, 9 question framework for NHS clinicians using consumer AI tools at work.</p>
+    <div class="hero-sub-2 reveal d4">
+      <span>Free</span>
+      <span class="dot">·</span>
+      <span>30 seconds</span>
+      <span class="dot">·</span>
+      <span>9 questions</span>
+      <span class="dot">·</span>
+      <span>3 stages</span>
+    </div>
+    <div class="cta-row reveal d5">
+      <a class="btn-primary" href="/field-guides/safety-check/">Use the current version</a>
+      <a class="btn-secondary" href="#inside">See what's inside ↓</a>
+    </div>
+  </div>
+</section>
+
+<section class="preview">
+  <div class="wrap">
+    <div class="preview-grid">
+      <div class="preview-cell">
+        <img src="previews/preview-1-cover.png" alt="Field Guide 01 cover page" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;placeholder&quot;>COVER PAGE</div>'">
+      </div>
+      <div class="preview-cell">
+        <img src="previews/preview-2-stage-01.png" alt="Stage 01. Before you open the tool" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;placeholder&quot;>STAGE 01<br>MRS COMPOSITE</div>'">
+      </div>
+      <div class="preview-cell">
+        <img src="previews/preview-3-if-wrong.png" alt="If something goes wrong" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;placeholder&quot;>IF SOMETHING<br>GOES WRONG</div>'">
+      </div>
+    </div>
+    <p class="preview-caption">Eight pages. Three stages. Nine questions. One check to run every time, before proceeding, or not.</p>
+  </div>
+</section>
+
+<section class="block" id="inside">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 / WHAT'S INSIDE</div>
+      <h2 class="sec-title">A practical field guide for clinicians using AI under <em>real time pressure.</em></h2>
+    </div>
+    <div class="inside-list">
+      <div class="inside-row obs">
+        <div class="inside-num">i.</div>
+        <p class="inside-body">The <em>nine-question framework</em> to run before, during, and after every AI session at work.</p>
+      </div>
+      <div class="inside-row obs">
+        <div class="inside-num">ii.</div>
+        <p class="inside-body">What clinicians should never paste into consumer AI tools, and how to recognise <em>identifying combinations</em> that single details miss.</p>
+      </div>
+      <div class="inside-row obs">
+        <div class="inside-num">iii.</div>
+        <p class="inside-body">A side-by-side composite scenario worked example. Safe inputs. Unsafe inputs. The difference matters.</p>
+      </div>
+      <div class="inside-row obs">
+        <div class="inside-num">iv.</div>
+        <p class="inside-body">How to think about AI governance without getting overwhelmed. <em>Plain English</em>, no policy soup.</p>
+      </div>
+      <div class="inside-row obs">
+        <div class="inside-num">v.</div>
+        <p class="inside-body">A clear five-step process for <em>if something goes wrong</em>. Reported mistakes get managed. Hidden ones become incidents.</p>
+      </div>
+      <div class="inside-row obs">
+        <div class="inside-num">vi.</div>
+        <p class="inside-body">The questions your IG lead can answer, and how to find them before you need them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 / WHY THIS EXISTS</div>
+      <h2 class="sec-title">AI entered clinical practice before governance <em>caught up.</em></h2>
+    </div>
+    <div class="why-prose">
+      <p class="obs">Clinicians are already using these tools. The unease is already there. What's missing is a way to think clearly about safety in the thirty seconds between opening the tool and pasting the first line.</p>
+      <p class="obs">Trust policies are catching up slowly. Most clinicians do not know who their IG lead is until they urgently need them. The gap between the technology and the governance is currently sitting on the clinician's shoulders, alone.</p>
+      <p class="obs">This Field Guide is the smallest useful thing that closes that gap.</p>
+    </div>
+  </div>
+</section>
+
+<section class="arch-dl" id="download">
+  <div class="wrap">
+    <h2 class="gate-h">The archived PDF</h2>
+    <p class="gate-body">Version 1.0 as published in May 2026, nine pages. Each page is marked as archived. For practical guidance, use the <a href="/field-guides/safety-check/">current Safety Check</a>.</p>
+    <a class="dl" href="/field-guides/safety-check/v1/AI_Safety_Check_v1_archived.pdf">Download the archived version 1.0 (PDF)</a>
+  </div>
+</section>
+
+<section class="fg-legal">
+  <div class="wrap">
+    <div class="foot-disclaimer">
+      <strong>Important. Please read.</strong>
+      The AI tools discussed in this Field Guide and across Clinically Intelligent are consumer products. They have not been independently assessed against DCB0129 or DCB0160 clinical risk management standards, and they may not be approved for clinical use by your employer. Before using any tool described in this publication in connection with your clinical practice, you must satisfy yourself that its use is permitted under your Trust information governance policy, your DSP Toolkit obligations, your professional registration requirements, and any applicable contractual terms with your employer. The author accepts no liability for use of any tool or workflow described in this publication. Patient identifiable information must not be entered into any consumer AI tool under any circumstances, irrespective of any guidance contained in this Field Guide.
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot"><div class="sf-in"><div class="sf-grid"><div><img src="/assets/ci-logo.png" width="83" height="120" alt=""><p class="sf-tag">Education. Design. Change.</p><p style="margin:0">A clinician-led initiative exploring better ways to learn and work in healthcare.</p><p style="margin:14px 0 0"><a href="mailto:hello@clinicallyintelligent.com">hello@clinicallyintelligent.com</a></p></div><nav aria-label="Site"><ul><li><a href="https://clinicallyintelligent.com/publication/">Publication</a></li><li><a href="https://clinicallyintelligent.com/overview/">Overview</a></li><li><a href="https://clinicallyintelligent.com/work-with-ci/">Work with CI</a></li><li><a href="https://clinicallyintelligent.com/build/">Build with CI</a></li><li><a href="https://clinicallyintelligent.com/founder/">About the founder</a></li></ul></nav><nav aria-label="Resources"><ul><li><a href="https://read.clinicallyintelligent.com/">Subscribe free</a></li><li><a href="https://clinicallyintelligent.com/answers/">CI Answers</a></li><li><a href="https://clinicallyintelligent.com/field-guides/safety-check/">The AI Safety Check</a></li><li><a href="https://clinicallyintelligent.com/field-guides/ai-prompting-guide/">The AI Prompting Guide</a></li><li><a href="https://clinicallyintelligent.com/work/would-you-send-it/">Would you send it?</a></li><li><a href="https://clinicallyintelligent.com/problems">Problems</a></li></ul></nav></div><div class="sf-legal"><p>Clinically Intelligent is written in a personal capacity and is not affiliated with Barts Health NHS Trust. Nothing here implies NHS endorsement.</p><p>Consumer AI tools discussed have not been assessed against DCB0129 or DCB0160. Nothing here is clinical advice. Never enter patient identifiable information into a consumer AI tool. If you are ever unsure ask your IG lead before you upload anything.</p></div></div></footer>
+
+<script>
+  // Scroll reveals
+  const scrollObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        scrollObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.obs').forEach(el => scrollObs.observe(el));
+</script>
+
+<script>
+(function(){
+  var h=document.querySelector('.site-head'), b=h&&h.querySelector('.sh-menu'), s=document.getElementById('sh-sheet');
+  if(!h) return;
+  function onS(){ h.classList.toggle('scrolled', window.scrollY>4); } onS(); window.addEventListener('scroll',onS,{passive:true});
+  function set(open){ b.setAttribute('aria-expanded',open); s.hidden=!open; document.body.classList.toggle('sh-open',open); b.firstChild.nodeValue=open?'Close ':'Menu '; if(open){ var f=s.querySelector('a'); if(f) f.focus(); } }
+  b.addEventListener('click',function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  document.addEventListener('keydown',function(e){
+    if(s.hidden) return;
+    if(e.key==='Escape'){ set(false); b.focus(); return; }
+    if(e.key==='Tab'){
+      var f=[b].concat([].slice.call(s.querySelectorAll('a'))), i=f.indexOf(document.activeElement);
+      if(e.shiftKey && i<=0){ e.preventDefault(); f[f.length-1].focus(); }
+      else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); }
+    }
+  });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=880 && !s.hidden) set(false); });
+  s.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); });
+})();
+</script>
+</body>
+</html>
