@@ -12,19 +12,19 @@ One fact, read across the whole site: has this visitor signed up?
 |---|---|---|
 | `ci_subscribed` | Any confirmed sign-up, on any page | Everything below |
 | `ci_field_guide_02_unlocked` | Confirmed sign-up (older pages set only this), or the Prompting Guide's own offline fallback | Publication sign-up boxes, both Field Guides, templates |
-| `ci_field_guide_01_unlocked` | Confirmed sign-up, or the Safety Check's offline fallback | Safety Check |
+| `ci_field_guide_01_unlocked` | Confirmed sign-up | Nothing at present. The Safety Check has no gate since v2 (November 2026); the key is still set so older pages stay consistent. |
 | `ci_templates_unlocked` | Confirmed sign-up, or "Already subscribed?" / offline fallback on `/templates/` | Templates |
 
 Rules:
 
 - **A confirmed sign-up sets all four keys.** "Confirmed" means the Beehiiv Worker answered without an error.
-- **Gates (Field Guides, templates) open on their own key, `ci_subscribed` or `ci_field_guide_02_unlocked`.** Over-opening is harmless: the content is free.
+- **Gates (the Prompting Guide, templates) open on their own key, `ci_subscribed` or `ci_field_guide_02_unlocked`.** Over-opening is harmless: the content is free.
 - **Sign-up boxes hide only for a confirmed subscriber** (`ci_subscribed` or the older `ci_field_guide_02_unlocked`). An offline fallback on a Field Guide opens that guide only and never hides sign-up elsewhere.
 - Every read and write sits in `try/catch`, so the site still works with storage blocked.
 
 In code: `CI_SUB` on `/`, `/subscribe/` and `/publication/`; the key arrays in the Field Guide and templates scripts.
 
-## 2. Sign-up form (homepage, `/subscribe/`, `/publication/` top box and reply slip, both Field Guides, `/templates/`)
+## 2. Sign-up form (homepage, `/subscribe/`, `/publication/` top box and reply slip, the Prompting Guide, `/templates/`)
 
 ```
 idle --submit--> [typo offered] --submit again--> submitting --ok--> done (Field Guides, templates: unlocked)
@@ -69,6 +69,34 @@ invitation -> page1 -> page2 <-> page3
 | Menu sheet (shared header) | closed -> open -> closed (Escape, link, or wider screen) | `.sh-menu[aria-expanded]` |
 | Share buttons (`/build/`, "Would you send it?", `/overview/`) | idle -> "Link copied" -> idle after 2.5s | button text |
 | Copy prompt (`/templates/`) | idle -> "Copied" -> idle after 2.2s, also on a double tap | `.copied` |
+
+## 6. The Clinician's AI Safety Check (`/field-guides/safety-check/`)
+
+Free and open: no gate, no email, nothing saved or sent. Its "Subscribe free" link goes to `/subscribe/`.
+
+```
+quick check:  q1 --yes--> q2 --yes--> q3 --no--> clear
+              any question --no / not sure (or yes on q3)--> stop | change | ask
+              any outcome --start again--> q1
+```
+
+- `#qc[data-state]`: `q1`, `q2`, `q3`, `stop`, `change`, `ask`, `clear`. The outcome words and wording live in the `R` table in the page script.
+- "The details add up": `#lesson[data-step]` is `0` to `3`. "Add the next detail" moves forward; "Start again" returns to `0`.
+- Practice chat: `#chat[data-state]` is `asking`, then `stop`, `better` or `best` for the reply chosen. Choosing again replaces the verdict.
+- Print the reminder: adds `body.card-mode`, prints, and removes it on `afterprint`. The card is a hidden section of the same page, so any wording change goes in both places.
+- Archive: version 1.0 is kept at `/field-guides/safety-check/v1/` with no gate and no interactive parts. It is `noindex` and linked only from "Version history".
+- Downloads: `AI_Safety_Check_one_page_reminder_A4.pdf` and `The_Clinicians_AI_Safety_Check_Field_Guide_01.pdf`, regenerated from the page, plus three posters (`CI_AI_Safety_Check_Wall_Poster_A3.pdf`, `..._A4.pdf`, `CI_AI_Safety_Check_Reference_Poster_A3.pdf`). Poster wording must match the page; change both together. The old link `downloads/AI Safety Checklist.pdf` serves the current guide.
+
+### The AI Safety Challenge (`/field-guides/safety-check/challenge/`)
+
+```
+entry --start--> deciding --check--> feedback --try again (up to 2)--> deciding
+                                         \--continue--> deciding (next) ... --> results --do it again--> deciding
+```
+
+- `#app[data-state]`: `entry`, `deciding`, `feedback`, `results`.
+- Choices are locked while feedback shows. Answers are graded on the page; nothing is stored or sent (`record()` is an empty hook for a future version that needs a privacy review first).
+- The results screen offers the one-page reminder first and the full guide second.
 
 ## Adding a new interactive part
 
