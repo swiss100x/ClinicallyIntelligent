@@ -113,6 +113,26 @@ refresh in the same tab --> unlocking --> opened, using the key kept for this ta
 - Only the locked page is ever committed. The unlocked file and the locking tool stay off the repo, because everything here is public, history included. Previews are not linked, not in the sitemap and not named in robots.txt; they ask search engines not to list or archive them.
 - A new password or new content means re-locking with the locking tool and replacing the page.
 
+## 8. CI Sim Lab private trial (`/sim-lab/`)
+
+A password-locked home for invite-only experiences, using the lock in section 7. The experience, its title and its description are inside the encrypted payload; nothing about them is in the public page.
+
+```
+locked --submit--> unlocking --right password--> ready --start--> playing --I've finished--> finished
+                        \--wrong password--> error             |                          |--share feedback--> feedback
+                                                               |--report a problem--> report  \--not now--> skipped --share after all--> feedback
+feedback or report --send--> sending --ok--> sent
+                                    \--error--> send_error --send--> sending
+```
+
+- `#app[data-state]`: `locked`, `unlocking`, `error`, `ready`, `playing`, `report`, `finished`, `feedback`, `sending`, `send_error`, `sent`, `skipped`.
+- The experience runs in an iframe and is only hidden, never reloaded, while another screen shows, so "Back to the experience" returns to the same moment.
+- "Report a problem" is on the bar the whole time and on the ready screen, so it works even if the experience freezes. It sends `feedback_route` `report_a_problem`; the end of the experience sends `end_of_game`.
+- Feedback: five required single-choice questions, one per screen, then an optional comment of up to 500 characters. Back keeps answers. Close returns to where you were.
+- Sending: success is only `response.ok`. An error keeps every answer and the retry reuses the same `submission_id`, so a duplicate row can be spotted. Answers clear only after a success.
+- Settings at the top of the page script: `FEEDBACK_ENDPOINT`, `FORM_ID`. Comments starting with `=`, `+`, `-` or `@` get a leading `'` so spreadsheets don't run them.
+- `/perspectives/` forwards here. `/sim-lab/privacy/` explains what is kept. Neither page is in the sitemap or linked from the site.
+
 ## Adding a new interactive part
 
 1. Write its states down here first.
