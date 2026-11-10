@@ -98,6 +98,21 @@ entry --start--> deciding --check--> feedback --try again (up to 2)--> deciding
 - Choices are locked while feedback shows. Answers are graded on the page; nothing is stored or sent (`record()` is an empty hook for a future version that needs a privacy review first).
 - The results screen offers the one-page reminder first and the full guide second.
 
+## 7. Password-locked previews
+
+Some private previews are published as a single page whose content is encrypted (AES-256-GCM, key from the password with PBKDF2-SHA256, 600,000 rounds). The content can only be read with the password; the page is safe on public hosting.
+
+```
+locked --submit--> unlocking --right password--> opened (the content replaces the page)
+                        \--wrong password--> error --submit--> unlocking
+refresh in the same tab --> unlocking --> opened, using the key kept for this tab
+```
+
+- `form[data-state]`: `locked`, `unlocking`, `error`, `opened`.
+- The tab keeps the derived key for that one file in `sessionStorage`, never the password, and forgets it when the tab closes or the key stops working.
+- Only the locked page is ever committed. The unlocked file and the locking tool stay off the repo, because everything here is public, history included. Previews are not linked, not in the sitemap and not named in robots.txt; they ask search engines not to list or archive them.
+- A new password or new content means re-locking with the locking tool and replacing the page.
+
 ## Adding a new interactive part
 
 1. Write its states down here first.
