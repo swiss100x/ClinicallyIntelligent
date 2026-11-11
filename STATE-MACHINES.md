@@ -48,6 +48,8 @@ invitation -> page1 -> page2 <-> page3
 - `body[data-card]`: `invitation`, `page1`, `page2`, `page3`, `posting`, `posted`, `failed`.
 - `busy` blocks taps while a page turn or the posting animation runs.
 - Draft: an unfinished card is kept in `localStorage` (`ci_problems_card`) for 12 hours and restored with "Your card is where you left it".
+- Stub (v5, November 2026): the strip at the top of the card (`#stub`) tears off when the card is posted and comes back as the receipt slip (`#slip`) in the `posted` state, with the person's words and the time. It is display only and sends nothing. During `posting` the card body (`#face`) is what travels to the slot, not `#card`.
+- `body.ready` is set while page 1 has any text. It lights the slot of the box. It is display only.
 - Voice (`body[data-voice]`: `idle`, `listening`): the "Say it" mic on page 1. It stops when the page turns or the card is sent. It records `input_method` as `typed`, `dictated` or `both`. `route` is `quick` or `full`.
 
 ## 4. Publication shelf (`/` and `/publication/`)

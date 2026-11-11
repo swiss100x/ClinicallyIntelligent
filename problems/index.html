@@ -176,6 +176,60 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .line.big{font-size:1.28rem;padding:8px 2px}
 .hint2{font-size:.84rem;color:var(--soft);margin:6px 0 18px}
 .line.small{font-size:1.05rem;max-width:340px;margin:0 auto}
+
+/* ===== v5: the desk, the box that answers, the stub you keep ===== */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.085;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .85  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.top,main,.foot{position:relative;z-index:1}
+:root{--boxw:min(430px,96%);--boxh:clamp(124px,39vw,170px)}
+.desk::before{content:"";position:absolute;left:50%;bottom:calc(var(--boxh)*-.42);width:min(100vw,900px);height:calc(var(--boxh)*1.5);transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(112,80,46,.42) 0%,rgba(74,52,30,.2) 45%,rgba(30,23,16,0) 72%)}
+.face{border-top:0;border-radius:0 0 5px 5px;box-shadow:0 2px 0 #d9ccb1,0 30px 60px -28px rgba(0,0,0,.8),0 12px 24px -12px rgba(0,0,0,.5)}
+.face::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:.5;mix-blend-mode:multiply;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .62  0 0 0 0 .5  0 0 0 0 .32  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.stub{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;background:var(--card);color:var(--soft);border:1px solid var(--card-edge);border-bottom:2px dotted rgba(70,55,30,.5);border-radius:5px 5px 0 0;
+  padding:9px clamp(20px,5vw,34px) 8px;font-size:.78rem;letter-spacing:.04em;text-align:left;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
+.stub b{font-weight:600;color:var(--moss)}
+.stub::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:.5;mix-blend-mode:multiply;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .62  0 0 0 0 .5  0 0 0 0 .32  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* main action in amber, one per screen */
+.btn{background:#d98a1e;color:#15120e;box-shadow:0 12px 26px -14px rgba(217,138,30,.85),inset 0 1px 0 rgba(255,255,255,.28)}
+.btn:hover{background:#e79a31}
+/* ticks become cards you mark, in a tidy grid */
+.ticks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.tick{position:relative;justify-content:flex-start;text-align:left;gap:10px;min-height:46px;padding:8px 12px;border:1px solid #dccfb3;border-radius:8px;background:#fffdf6;line-height:1.2;transition:border-color .2s,background .2s,transform .15s}
+.tick:hover{border-color:#b9a985}
+.tick:active{transform:scale(.985)}
+.tick:has(input:checked){border-color:var(--moss);background:#eef3e8;box-shadow:inset 0 0 0 1px var(--moss)}
+.tick:has(input:focus-visible){outline:2px solid var(--amber);outline-offset:2px}
+.tick input:focus-visible + .sq{outline:none}
+.tick input:checked + .sq::after{content:"";position:absolute;left:-3px;top:-9px;width:30px;height:26px;border:0;border-radius:0;transform:none;opacity:1;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 26'><path d='M3 14.5c2.6 2.2 4.6 4.9 6.4 8.2C13.2 14.6 18.6 8 27 2.6' fill='none' stroke='%23cf7b38' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center/contain;animation:drawTick .3s ease-out both}
+@keyframes drawTick{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@media (min-width:540px){.ticks{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* how often: one mark on a scale */
+.often .ticks{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;margin-top:6px}
+.often .ticks::before{content:"";position:absolute;left:12.5%;right:12.5%;top:21px;height:2px;border-radius:2px;background:rgba(31,95,63,.28)}
+.often .tick{flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;gap:8px;border:0;background:none;box-shadow:none!important;padding:11px 2px 6px;font-size:.92rem;min-height:64px}
+.often .tick .sq{width:22px;height:22px;border-width:2px;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.often .tick input:checked + .sq{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 6px rgba(207,123,56,.2);transform:scale(1.08)}
+.often .tick input:checked + .sq::after{display:none}
+.often .tick:has(input:checked){background:none;font-weight:600}
+/* the slot answers when there is something to post */
+.glow{opacity:0;transition:opacity .7s}
+body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.85;animation:glow 2.8s ease-in-out infinite}
+@keyframes glow{50%{opacity:.4}}
+/* the stub, kept on the desk after posting */
+.slip{max-width:340px;margin:8px auto 22px;background:var(--card);color:var(--ink);border-top:2px dotted rgba(70,55,30,.5);border-radius:0 0 5px 5px;padding:9px 16px 14px;text-align:left;position:relative;transform:rotate(-1.6deg);
+  box-shadow:0 2px 0 #d9ccb1,0 22px 36px -20px rgba(0,0,0,.8),0 8px 16px -10px rgba(0,0,0,.5)}
+.done.on .slip{animation:slip .7s cubic-bezier(.2,.9,.3,1.15) .15s both}
+@keyframes slip{from{opacity:0;transform:translateY(-26px) rotate(3deg)}to{opacity:1;transform:rotate(-1.6deg)}}
+.slip-top{display:flex;justify-content:space-between;gap:12px;font-size:.76rem;letter-spacing:.04em;color:var(--soft);margin:0 0 6px}
+.slip-top b{font-weight:600;color:var(--moss)}
+.done .slip .receipt{font-family:var(--hand);font-style:italic;font-size:1.1rem;line-height:1.35;color:var(--ink);margin:0;max-width:none;white-space:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (min-width:900px){
+  main{max-width:760px}
+  .card{max-width:600px}
+  :root{--boxw:min(470px,94%);--boxh:186px}
+  .q{font-size:2.6rem}
+}
+@media (prefers-reduced-motion: reduce){.tick input:checked + .sq::after,.done.on .slip,body.ready .glow{animation:none!important}}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
@@ -189,6 +243,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   <p class="resume" id="resume" hidden>Your card is where you left it. <button class="link" id="fresh" type="button">Start a fresh card</button></p>
   <div class="desk" id="desk">
     <div class="card" id="card">
+      <div class="stub" id="stub" aria-hidden="true"><b>Your stub</b><span id="stubdate"></span></div>
       <div class="face" id="face">
 
         <section class="page on" id="p1" aria-labelledby="q">
@@ -216,7 +271,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             <input class="line small" id="service" maxlength="120" placeholder="Team or service, if you’re happy to say">
           </div>
           <fieldset class="f"><legend>Who does it affect?</legend><div class="ticks"><label class="tick"><input type="checkbox" name="who" value="me"><span class="sq" aria-hidden="true"></span>Me</label><label class="tick"><input type="checkbox" name="who" value="my-team"><span class="sq" aria-hidden="true"></span>My team</label><label class="tick"><input type="checkbox" name="who" value="other-staff"><span class="sq" aria-hidden="true"></span>Other staff</label><label class="tick"><input type="checkbox" name="who" value="patients"><span class="sq" aria-hidden="true"></span>Patients</label><label class="tick"><input type="checkbox" name="who" value="families"><span class="sq" aria-hidden="true"></span>Families and carers</label><label class="tick"><input type="checkbox" name="who" value="organisation"><span class="sq" aria-hidden="true"></span>The organisation</label><label class="tick"><input type="checkbox" name="who" value="other"><span class="sq" aria-hidden="true"></span>Someone else</label></div><div class="other" id="who-other-wrap" hidden><label class="sr" for="who-other">Who else?</label><input class="line" id="who-other" maxlength="80" placeholder="Who else?"></div></fieldset>
-          <fieldset class="f" style="margin-bottom:0"><legend>How often does it happen?</legend><div class="ticks"><label class="tick"><input type="radio" name="often" value="daily"><span class="sq" aria-hidden="true"></span>Daily</label><label class="tick"><input type="radio" name="often" value="weekly"><span class="sq" aria-hidden="true"></span>Weekly</label><label class="tick"><input type="radio" name="often" value="monthly"><span class="sq" aria-hidden="true"></span>Monthly</label><label class="tick"><input type="radio" name="often" value="less-often"><span class="sq" aria-hidden="true"></span>Less often</label></div></fieldset>
+          <fieldset class="f often" style="margin-bottom:0"><legend>How often does it happen?</legend><div class="ticks"><label class="tick"><input type="radio" name="often" value="daily"><span class="sq" aria-hidden="true"></span>Daily</label><label class="tick"><input type="radio" name="often" value="weekly"><span class="sq" aria-hidden="true"></span>Weekly</label><label class="tick"><input type="radio" name="often" value="monthly"><span class="sq" aria-hidden="true"></span>Monthly</label><label class="tick"><input type="radio" name="often" value="less-often"><span class="sq" aria-hidden="true"></span>Less often</label></div></fieldset>
           
         </section>
 
@@ -234,29 +289,43 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       </div>
     </div>
     <svg class="bx bx-back" viewBox="0 0 380 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-      <defs><linearGradient id="lidg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a8a61"/><stop offset="1" stop-color="#2a7250"/></linearGradient></defs>
-      <ellipse cx="190" cy="146" rx="176" ry="6" fill="rgba(0,0,0,.45)"/>
+      <defs>
+        <linearGradient id="lidg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#409468"/><stop offset="1" stop-color="#2a7250"/></linearGradient>
+        <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c482"/><stop offset=".5" stop-color="#b98a45"/><stop offset="1" stop-color="#8a6330"/></linearGradient>
+        <radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffdca6"/><stop offset=".6" stop-color="#e9a35a" stop-opacity=".55"/><stop offset="1" stop-color="#e3a165" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="190" cy="146" rx="186" ry="7" fill="rgba(0,0,0,.55)"/>
       <path d="M44 8 H336 L355.4 30 H24.6 Z" fill="url(#lidg)"/>
-      <path d="M44 8 H336" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+      <path d="M44 8 H336" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <path d="M56 13 H324" stroke="rgba(255,255,255,.07)" stroke-width="6" stroke-linecap="round"/>
+      <rect x="110.5" y="14.5" width="159" height="16" rx="4.5" fill="url(#brass)"/>
       <rect x="116" y="18" width="148" height="12.5" rx="2.5" fill="#060504"/>
       <rect x="118" y="20" width="144" height="3" rx="1.5" fill="#000"/>
+      <ellipse class="glow" cx="190" cy="25" rx="72" ry="5.5" fill="url(#gl)"/>
     </svg>
     <svg class="bx bx-front" viewBox="0 0 380 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
       <defs>
-        <linearGradient id="lidf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d7853"/><stop offset="1" stop-color="#256a49"/></linearGradient>
-        <linearGradient id="frontg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#226546"/><stop offset=".55" stop-color="#1b5539"/><stop offset="1" stop-color="#143f2b"/></linearGradient>
-        <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf4e3"/><stop offset="1" stop-color="#efe3c8"/></linearGradient>
+        <linearGradient id="lidf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#318058"/><stop offset="1" stop-color="#256a49"/></linearGradient>
+        <linearGradient id="frontg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#246a49"/><stop offset=".5" stop-color="#1b5539"/><stop offset="1" stop-color="#123a27"/></linearGradient>
+        <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf7e8"/><stop offset="1" stop-color="#eee1c4"/></linearGradient>
+        <linearGradient id="brassf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2bd7a"/><stop offset="1" stop-color="#8f6832"/></linearGradient>
+        <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
       </defs>
       <path d="M24.6 30 H355.4 L366 42 H14 Z" fill="url(#lidf)"/>
-      <path d="M116 30 H264" stroke="rgba(0,0,0,.55)" stroke-width="1.5"/>
-      <path d="M14 42 H366" stroke="rgba(255,255,255,.22)" stroke-width="1"/>
+      <path d="M110.5 31.2 H269.5" stroke="#9a7238" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M116 30 H264" stroke="rgba(0,0,0,.6)" stroke-width="1.5"/>
+      <path d="M14 42 H366" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
       <rect x="14" y="42" width="352" height="102" rx="2" fill="url(#frontg)"/>
-      <rect x="14" y="42" width="6" height="102" fill="rgba(255,255,255,.05)"/>
-      <rect x="360" y="42" width="6" height="102" fill="rgba(0,0,0,.18)"/>
-      <rect x="128" y="70" width="124" height="44" rx="2" fill="#b7894a"/>
-      <rect x="131" y="73" width="118" height="38" rx="1.5" fill="url(#plate)"/>
-      <circle cx="134.5" cy="76.5" r="1.4" fill="#9c7440"/><circle cx="245.5" cy="76.5" r="1.4" fill="#9c7440"/><circle cx="134.5" cy="107.5" r="1.4" fill="#9c7440"/><circle cx="245.5" cy="107.5" r="1.4" fill="#9c7440"/>
-      <text x="190" y="97" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" fill="#1d1a16">Problems</text>
+      <rect x="14" y="42" width="352" height="102" rx="2" fill="url(#sheen)"/>
+      <g stroke="#000" stroke-opacity=".07" stroke-width="1"><path d="M20 58H360M20 79H360M20 101H360M20 122H360"/></g>
+      <rect x="14" y="42" width="6" height="102" fill="rgba(255,255,255,.06)"/>
+      <rect x="360" y="42" width="6" height="102" fill="rgba(0,0,0,.22)"/>
+      <rect x="14" y="134" width="352" height="10" fill="rgba(0,0,0,.2)"/>
+      <rect x="126" y="68" width="128" height="48" rx="3" fill="rgba(0,0,0,.28)"/>
+      <rect x="127" y="67" width="126" height="46" rx="2.5" fill="url(#brassf)"/>
+      <rect x="131" y="71" width="118" height="38" rx="1.5" fill="url(#plate)"/>
+      <circle cx="134.5" cy="74.5" r="1.4" fill="#9c7440"/><circle cx="245.5" cy="74.5" r="1.4" fill="#9c7440"/><circle cx="134.5" cy="105.5" r="1.4" fill="#9c7440"/><circle cx="245.5" cy="105.5" r="1.4" fill="#9c7440"/>
+      <text x="190" y="96" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="17" letter-spacing=".4" fill="#1d1a16">Problems</text>
     </svg>
   </div>
 
@@ -270,7 +339,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
   <div class="done" id="done" role="status">
     <h1>It’s in. Thank you.</h1>
-    <p class="receipt" id="receipt"></p>
+    <div class="slip" id="slip"><p class="slip-top"><b>Your stub</b><span id="slipdate"></span></p><p class="receipt" id="receipt"></p></div>
     <p>Every card is read. The patterns we find shape what Clinically Intelligent writes and builds next.</p>
     <div class="acts"><button class="btn" id="again" type="button">Fill in another card</button></div>
     <div class="more"><a href="https://read.clinicallyintelligent.com/">Get the newsletter</a><a href="https://clinicallyintelligent.com/build/">Build with us</a></div>
@@ -316,9 +385,17 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     var t=ctx.currentTime+nt[1], o=ctx.createOscillator(), g=ctx.createGain(); o.type='sine'; o.frequency.value=nt[0];
     g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.12,t+.02); g.gain.exponentialRampToValueAtTime(.0008,t+1.1);
     o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+1.15); }); }
+  var lastScratch=0;
+  function scratch(){ var now=Date.now(); if(now-lastScratch<70) return; lastScratch=now; var ctx=A(); if(!ctx) return; var t=ctx.currentTime, n=noise(ctx,.06), f=ctx.createBiquadFilter(), g=ctx.createGain();
+    f.type='bandpass'; f.Q.value=1.4; f.frequency.value=2600+Math.random()*2200;
+    g.gain.setValueAtTime(.0001,t); g.gain.linearRampToValueAtTime(.05,t+.012); g.gain.exponentialRampToValueAtTime(.001,t+.055);
+    n.connect(f); f.connect(g); g.connect(ctx.destination); n.start(t); n.stop(t+.06); }
   function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 
   /* ---------- pages ---------- */
+  var face=$('face'), stub=$('stub');
+  function stamp(t){ try{ var d=new Date(); return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})+(t?', '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):''); }catch(e){ return ''; } }
+  $('stubdate').textContent=stamp(false);
   var card=$('card'), go=$('go'), back=$('back'), page=0 /* 0 = invitation */, startedAt=null, payload=null, busy=false, stopVoice=function(){};
   var labels={0:'Fill in a card',1:'Drop it in now',2:'Turn the page',3:'Drop it in the box'};
   function ui(){
@@ -378,7 +455,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       card.style.setProperty('--ry',(x*5).toFixed(2)+'deg'); card.style.setProperty('--rx',(10+y*-4).toFixed(2)+'deg');
     });
   }
-  ['problem','improve','service','org'].forEach(function(id){ $(id).addEventListener('input',saveDraft); });
+  ['problem','improve','service','org'].forEach(function(id){ $(id).addEventListener('input',saveDraft); $(id).addEventListener('input',scratch); });
   document.querySelectorAll('.tick input').forEach(function(i){ i.addEventListener('change',saveDraft); });
   function syncOther(name,focus){ var box=document.querySelector('input[name="'+name+'"][value="other"]'), w=$(name+'-other-wrap'); if(!box||!w) return;
     w.hidden=!box.checked; if(box.checked&&focus) setTimeout(function(){ $(name+'-other').focus({preventScroll:true}); },60); if(!box.checked) $(name+'-other').value=''; }
@@ -391,7 +468,7 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   pr.placeholder='For example: '+EX[Math.floor(Math.random()*EX.length)];
   pr.addEventListener('keydown',function(e){ if(e.key.length===1||e.key==='Backspace') typed=true; });
   function method(){ return dictated&&typed?'both':dictated?'dictated':'typed'; }
-  pr.addEventListener('input',function(){ var ok=pr.value.trim().length>=25; $('plen').textContent=pr.value.length+'/700'; $('pmin').textContent= ok?'✓ Enough detail':'25 characters is a good start'; $('pmin').classList.toggle('ok',ok); if(ok) $('perr').textContent=''; });
+  pr.addEventListener('input',function(){ document.body.classList.toggle('ready',pr.value.trim().length>0); var ok=pr.value.trim().length>=25; $('plen').textContent=pr.value.length+'/700'; $('pmin').textContent= ok?'✓ Enough detail':'25 characters is a good start'; $('pmin').classList.toggle('ok',ok); if(ok) $('perr').textContent=''; });
 
   card.addEventListener('click',function(e){ if(page===0 && !busy) go.click(); });
   go.addEventListener('click',function(){
@@ -422,17 +499,19 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return true; });
     var anim=new Promise(function(res){
       if(reduce || !card.animate){ card.style.visibility='hidden'; return res(); }
-      var cr=card.getBoundingClientRect(), br=document.querySelector('.bx-front').getBoundingClientRect(), k=br.width/380, padX=0;
+      var cr=face.getBoundingClientRect(), br=document.querySelector('.bx-front').getBoundingClientRect(), k=br.width/380, padX=0;
       var sr={left:br.left+116*k, width:148*k, top:br.top+(br.height-150*k)+25*k, height:0};
       var s=Math.min(1,(sr.width*0.94)/cr.width);
       var dx=(sr.left+sr.width/2)-(cr.left+cr.width/2);
       var dyTop=sr.top+sr.height/2-cr.top;          /* card top to slot */
       var above=dyTop-cr.height*s-14;   /* card held just above the slot */
       var inside=dyTop+6;               /* card top has passed the slot */
-      card.style.transformOrigin='50% 0';
-      var a=card.animate([
-        {transform:'translate(0,-6px) rotateX(0deg) scale(1)',easing:'cubic-bezier(.3,.6,.3,1)'},
-        {transform:'translate(0,-38px) rotateX(-8deg) scale(1.05)',offset:.2,easing:'cubic-bezier(.5,0,.3,1)'},
+      face.style.transformOrigin='50% 0';
+      /* the stub tears off and stays; the card goes in the box */
+      paper(); stub.animate([{transform:'none'},{transform:'translateY(-14px) rotate(-1.4deg)'}],{duration:300,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
+      var a=face.animate([
+        {transform:'translate(0,0) rotateX(0deg) scale(1)',easing:'cubic-bezier(.3,.6,.3,1)'},
+        {transform:'translate(0,-30px) rotateX(-8deg) scale(1.04)',offset:.2,easing:'cubic-bezier(.5,0,.3,1)'},
         {transform:'translate('+dx+'px,'+above+'px) rotateX(6deg) scale('+s+')',offset:.58,easing:'cubic-bezier(.4,0,.2,1)'},
         {transform:'translate('+dx+'px,'+(above+6)+'px) rotateX(4deg) scale('+s+')',offset:.68,easing:'cubic-bezier(.6,0,.9,.4)'},
         {transform:'translate('+dx+'px,'+inside+'px) rotateX(0deg) scale('+s+')'}],
@@ -441,17 +520,17 @@ html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       a.onfinish=function(){ res(); };
     });
     Promise.all([sent.catch(function(e){ return {failed:true}; }), anim]).then(function(r){
-      if(r[0] && r[0].failed){ card.getAnimations && card.getAnimations().forEach(function(x){x.cancel();}); card.style.visibility=''; card.style.transformOrigin='';
+      if(r[0] && r[0].failed){ [card,face,stub].forEach(function(el){ el.getAnimations && el.getAnimations().forEach(function(x){x.cancel();}); }); face.style.transformOrigin=''; card.style.visibility=''; card.style.transformOrigin='';
         $('fail').classList.add('on'); $('acts').hidden=false; $('stepname').hidden=false; busy=false; ui(); document.body.dataset.card='failed'; $('steps').hidden=false; $('intro').style.opacity=''; return; }
-      var line=(payload&&payload.problem||'').replace(/\s+/g,' '); $('receipt').textContent=line; $('receipt').hidden=!line;
+      var line=(payload&&payload.problem||'').replace(/\s+/g,' '); $('receipt').textContent=line; $('receipt').hidden=!line; $('slipdate').textContent=stamp(true);
       clearDraft(); dictated=typed=false; document.body.dataset.card='posted'; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
     });
   }
   $('retry').addEventListener('click',function(){ $('fail').classList.remove('on'); if(payload) post(); });
   $('again').addEventListener('click',function(){
-    pr.value=''; $('plen').textContent='0/700'; $('pmin').textContent='25 characters is a good start'; $('pmin').classList.remove('ok'); ['service','org','improve','email','who-other','what-other'].forEach(function(id){$(id).value='';}); ['who','what'].forEach(function(n){ $(n+'-other-wrap').hidden=true; });
+    pr.value=''; document.body.classList.remove('ready'); $('stubdate').textContent=stamp(false); $('plen').textContent='0/700'; $('pmin').textContent='25 characters is a good start'; $('pmin').classList.remove('ok'); ['service','org','improve','email','who-other','what-other'].forEach(function(id){$(id).value='';}); ['who','what'].forEach(function(n){ $(n+'-other-wrap').hidden=true; });
     document.querySelectorAll('.tick input').forEach(function(i){i.checked=false;});
-    card.getAnimations && card.getAnimations().forEach(function(x){x.cancel();});
+    [card,face,stub].forEach(function(el){ el.getAnimations && el.getAnimations().forEach(function(x){x.cancel();}); }); face.style.transformOrigin='';
     $('receipt').textContent=''; $('done').classList.remove('on'); document.querySelectorAll('.bx').forEach(function(x){x.classList.remove('bump');}); card.hidden=false; card.style.visibility=''; card.style.transformOrigin='';
     $('acts').hidden=false; $('steps').hidden=false; $('stepname').hidden=false; $('intro').style.opacity=''; payload=null; startedAt=Date.now();
     showPage(1); page=1; $('invite').hidden=true; $('write').hidden=false; ui(); focusPage();
