@@ -21,6 +21,7 @@ Rules:
 - **Gates (the Prompting Guide, templates) open on their own key, `ci_subscribed` or `ci_field_guide_02_unlocked`.** Over-opening is harmless: the content is free.
 - **Sign-up boxes hide only for a confirmed subscriber** (`ci_subscribed` or the older `ci_field_guide_02_unlocked`). An offline fallback on a Field Guide opens that guide only and never hides sign-up elsewhere.
 - Every read and write sits in `try/catch`, so the site still works with storage blocked.
+- The Prompting Guide also opens for `?from=welcome`, the link in the Beehiiv welcome email, and sets its own key only. It never hides sign-up boxes.
 
 In code: `CI_SUB` on `/`, `/subscribe/` and `/publication/`; the key arrays in the Field Guide and templates scripts.
 

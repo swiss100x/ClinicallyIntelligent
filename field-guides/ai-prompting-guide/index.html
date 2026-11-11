@@ -860,6 +860,11 @@ footer.site-foot.dark{border-top-color:rgba(244,239,228,.18);color:#f4efe4;margi
   try {
     if (['ci_field_guide_02_unlocked','ci_subscribed'].some(function(k){ return localStorage.getItem(k) === '1'; })) { unlock(); }
   } catch (e) {}
+  // Links in the welcome email end in ?from=welcome, so a new subscriber isn't asked for their email again
+  if (new URLSearchParams(location.search).get('from') === 'welcome') {
+    try { localStorage.setItem('ci_field_guide_02_unlocked', '1'); } catch (e) {}
+    unlock();
+  }
 
   // Wire the gate form
   const form  = document.getElementById('gateForm');
