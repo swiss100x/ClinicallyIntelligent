@@ -255,7 +255,30 @@ body.armed .glow{opacity:1!important;animation:none!important}
 .in-dust b{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,232,190,.55);animation:dust 7s linear infinite}
 @keyframes dust{0%{transform:translate(0,0);opacity:0}15%{opacity:1}85%{opacity:.8}100%{transform:translate(14px,60px);opacity:0}}
 @media (prefers-reduced-motion: reduce){.pull{animation:none!important}}
+
+/* ===== v7: the room keeps time. html[data-light] is set from the visitor's clock: night, morning, day, evening, late ===== */
+:root{--lt-x:50%;--lt-y:38%;--lt-w:70%;--lt-h:55%;--lt-0:#2b2219;--lt-1:#1b1611;--pool0:rgba(112,80,46,.42);--pool1:rgba(74,52,30,.2);--shx:0px;--sha:.8;--wop:0;--wcol:#ffeccf;--wl:0vw;--wt:0vh;--wsk:0deg;--slit:#ffe9c4}
+html[data-light="morning"]{--lt-x:30%;--lt-y:24%;--lt-w:85%;--lt-h:62%;--lt-0:#322c24;--lt-1:#201c17;--surface:#171410;--card:#fcf8ee;--pool0:rgba(122,98,68,.36);--shx:11px;--sha:.7;--wop:.1;--wcol:#ffeccf;--wl:-8vw;--wt:7vh;--wsk:-22deg;--slit:#fff1d8}
+html[data-light="day"]{--lt-x:50%;--lt-y:22%;--lt-w:96%;--lt-h:70%;--lt-0:#383027;--lt-1:#231e18;--surface:#191511;--card:#fdf9f0;--pool0:rgba(128,106,76,.34);--shx:3px;--sha:.62;--wop:.11;--wcol:#fff6e4;--wl:10vw;--wt:3vh;--wsk:-9deg;--slit:#fff6e6}
+html[data-light="evening"]{--lt-x:74%;--lt-y:36%;--lt-w:80%;--lt-h:52%;--lt-0:#3a281a;--lt-1:#1f1711;--card:#faf1de;--pool0:rgba(142,90,40,.46);--shx:-14px;--sha:.82;--wop:.14;--wcol:#ffb673;--wl:30vw;--wt:17vh;--wsk:30deg;--slit:#ffd9a0}
+html[data-light="late"]{--lt-x:50%;--lt-y:42%;--lt-w:58%;--lt-h:46%;--lt-0:#2f2114;--lt-1:#19140f;--surface:#120f0c;--card:#f8eedb;--pool0:rgba(130,88,42,.5);--sha:.88;--slit:#ffd595}
+html[data-light="night"]{--lt-x:50%;--lt-y:46%;--lt-w:48%;--lt-h:40%;--lt-0:#2a1e12;--lt-1:#15110d;--surface:#0e0c0a;--card:#f5ead4;--pool0:rgba(122,80,36,.56);--sha:.92;--slit:#ffcf88}
+body{background:radial-gradient(ellipse var(--lt-w) var(--lt-h) at var(--lt-x) var(--lt-y),var(--lt-0) 0%,var(--lt-1) 55%,var(--surface) 100%) fixed,var(--surface)}
+/* window light across the desk, by day only */
+body::after{content:"";position:fixed;z-index:0;pointer-events:none;left:var(--wl);top:var(--wt);width:min(72vw,660px);height:min(54vh,480px);opacity:var(--wop);background:var(--wcol);transform:skewX(var(--wsk));
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 44%,transparent 48.5%,transparent 51.5%,#000 56%,#000 93%,transparent 100%),linear-gradient(transparent 0,#000 7%,#000 44%,transparent 48.5%,transparent 51.5%,#000 56%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 44%,transparent 48.5%,transparent 51.5%,#000 56%,#000 93%,transparent 100%),linear-gradient(transparent 0,#000 7%,#000 44%,transparent 48.5%,transparent 51.5%,#000 56%,#000 93%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.desk::before{background:radial-gradient(ellipse 50% 50% at 50% 50%,var(--pool0) 0%,var(--pool1) 45%,rgba(30,23,16,0) 72%)}
+.face{box-shadow:0 2px 0 #d9ccb1,var(--shx) 30px 60px -28px rgba(0,0,0,var(--sha)),calc(var(--shx)*.4) 12px 24px -12px rgba(0,0,0,.5)}
+.in-slit{background:var(--slit)}
+@media print{body::after{display:none}}
 </style>
+<script>
+/* the room's light, set before first paint so it never flashes. ?light=night|morning|day|evening|late previews one. */
+function ciLight(){try{var h=new Date().getHours(),q=new URLSearchParams(location.search).get('light');document.documentElement.dataset.light=/^(night|morning|day|evening|late)$/.test(q)?q:h<6?'night':h<10?'morning':h<16?'day':h<20?'evening':'late';}catch(e){}}
+ciLight();
+</script>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
@@ -645,6 +668,14 @@ body.armed .glow{opacity:1!important;animation:none!important}
     $('voice').hidden=false;
     note.textContent='Short on time? Say it instead of typing.';
   })();
+
+  /* ---------- the light keeps time, and the card's shadow leans a little as a phone tilts (no permission prompt is ever shown) ---------- */
+  setInterval(ciLight,600000);
+  if(!reduce && window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission!=='function' && window.matchMedia('(hover:none)').matches){
+    var tiltRaf=0, tiltG=0, shBase=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--shx'))||0;
+    window.addEventListener('deviceorientation',function(e){ if(e.gamma==null) return; tiltG=Math.max(-14,Math.min(14,e.gamma)); if(tiltRaf) return;
+      tiltRaf=requestAnimationFrame(function(){ tiltRaf=0; card.style.setProperty('--shx',(shBase-tiltG*.9).toFixed(1)+'px'); }); },{passive:true});
+  }
 
   ui();
   // restore an unfinished card
