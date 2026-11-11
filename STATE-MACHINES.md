@@ -49,6 +49,8 @@ invitation -> page1 -> page2 <-> page3
 - `busy` blocks taps while a page turn or the posting animation runs.
 - Draft: an unfinished card is kept in `localStorage` (`ci_problems_card`) for 12 hours and restored with "Your card is where you left it".
 - Stub (v5, November 2026): the strip at the top of the card (`#stub`) tears off when the card is posted and comes back as the receipt slip (`#slip`) in the `posted` state, with the person's words and the time. It is display only and sends nothing. During `posting` the card body (`#face`) is what travels to the slot, not `#card`.
+- Pull tab (v6): `#pull`, under the card on `page1` (once there is text) and `page3`. Dragging it down past the threshold sets `body.armed`; letting go then calls the same code as the main button, so validation and the payload are identical. It is hidden from assistive technology; the button is the accessible route.
+- Inside the box (v6): after a successful send, `fall()` shows `#inside` for about two seconds (the card lands on a pile), then reveals `posted`. A tap skips it. It never runs for reduced motion or after a failed send.
 - `body.ready` is set while page 1 has any text. It lights the slot of the box. It is display only.
 - Voice (`body[data-voice]`: `idle`, `listening`): the "Say it" mic on page 1. It stops when the page turns or the card is sent. It records `input_method` as `typed`, `dictated` or `both`. `route` is `quick` or `full`.
 

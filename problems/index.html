@@ -230,6 +230,31 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
   .q{font-size:2.6rem}
 }
 @media (prefers-reduced-motion: reduce){.tick input:checked + .sq::after,.done.on .slip,body.ready .glow{animation:none!important}}
+
+/* ===== v6: post it by hand, then follow it inside ===== */
+.pull{display:none;position:absolute;left:50%;top:100%;width:116px;height:21px;margin-left:-58px;background:var(--card);border:1px solid var(--card-edge);border-top:0;border-radius:0 0 11px 11px;cursor:grab;touch-action:none;z-index:3;
+  box-shadow:0 2px 0 #d9ccb1,0 10px 16px -8px rgba(0,0,0,.65);-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.pull::before{content:"";position:absolute;inset:-18px -22px -22px}
+.pull i{position:absolute;left:50%;top:6px;width:36px;height:8px;margin-left:-18px;border-top:2px solid #b3a27d;border-bottom:2px solid #b3a27d}
+.pull:active{cursor:grabbing}
+body.ready[data-card="page1"] .pull,body[data-card="page3"] .pull{display:block;animation:nudge 1.4s .6s 1 both}
+@keyframes nudge{0%,100%{transform:none}22%{transform:translateY(7px)}46%{transform:none}68%{transform:translateY(4px)}}
+body.armed .glow{opacity:1!important;animation:none!important}
+.inside{position:fixed;inset:0;z-index:60;overflow:hidden;cursor:pointer;
+  background:radial-gradient(ellipse 58% 46% at 50% 0,rgba(255,214,150,.26),rgba(255,214,150,0) 72%),linear-gradient(#0d2016 0%,#08140e 58%,#040906 100%)}
+.in-slit{position:absolute;top:0;left:50%;width:min(58vw,380px);height:13px;transform:translateX(-50%);background:#ffe9c4;border-radius:0 0 7px 7px;box-shadow:0 0 46px 16px rgba(255,214,150,.6),0 0 120px 50px rgba(255,200,130,.22)}
+.in-beam{position:absolute;top:0;left:50%;width:min(120vw,900px);height:86vh;transform:translateX(-50%);clip-path:polygon(34% 0,66% 0,100% 100%,0 100%);background:linear-gradient(rgba(255,222,170,.2),rgba(255,222,170,.06) 62%,rgba(255,222,170,0));filter:blur(7px)}
+.in-ground{position:absolute;left:0;right:0;bottom:0;height:30vh;background:linear-gradient(#11271b,#07100b);box-shadow:0 -1px 0 rgba(255,255,255,.06)}
+.in-ground::after{content:"";position:absolute;left:50%;top:-10px;width:min(110vw,760px);height:150px;transform:translateX(-50%);background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,214,150,.2),rgba(255,214,150,0) 70%)}
+.in-pile{position:absolute;left:50%;bottom:19vh;width:min(76vw,430px);height:0;transform:translateX(-50%);perspective:900px;perspective-origin:50% -260px}
+.in-pile::before{content:"";position:absolute;left:-12%;right:-12%;bottom:-46px;height:110px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,0,0,.75),rgba(0,0,0,0) 70%)}
+.in-pile i,.in-mine{position:absolute;left:50%;bottom:0;width:66%;aspect-ratio:1.55;margin-left:-33%;border-radius:3px;transform-origin:50% 100%;background:linear-gradient(#f4ecd9,#e2d5b8);box-shadow:0 0 0 1px rgba(0,0,0,.1),0 6px 10px rgba(0,0,0,.35)}
+.in-pile i{transform:rotateX(68deg) rotateZ(var(--r)) translate3d(var(--x),var(--y),var(--z));filter:brightness(var(--b))}
+.in-mine{transform:rotateX(68deg) rotateZ(5deg) translate3d(4px,-4px,44px);
+  background:linear-gradient(#cf7b38,#cf7b38) 50% 13%/84% 2.5px no-repeat,repeating-linear-gradient(transparent 0 17%,rgba(31,95,63,.22) 17% 18.4%) 50% 60%/84% 62% no-repeat,linear-gradient(#fdf8ec,#f1e7cf)}
+.in-dust b{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,232,190,.55);animation:dust 7s linear infinite}
+@keyframes dust{0%{transform:translate(0,0);opacity:0}15%{opacity:1}85%{opacity:.8}100%{transform:translate(14px,60px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.pull{animation:none!important}}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
@@ -285,6 +310,7 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
           <div class="f" style="margin-bottom:0"><span>Your email, only if you’re happy for us to follow up</span><label class="sr" for="email">Email</label><input class="line" id="email" type="email" maxlength="120" autocomplete="email" placeholder="you@youremail.com"></div>
           <p class="err" id="cerr" role="alert"></p>
         </section>
+        <div class="pull" id="pull" aria-hidden="true"><i></i></div>
 
       </div>
     </div>
@@ -350,6 +376,7 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
     <div class="acts"><button class="btn" id="retry" type="button">Try again</button></div>
   </div>
 </main>
+<div class="inside" id="inside" aria-hidden="true" hidden><div class="in-ground"></div><div class="in-beam"></div><div class="in-slit"></div><div class="in-dust"><b style="left:41%;top:22%;animation-delay:-3.8s;animation-duration:7.3s"></b><b style="left:37%;top:44%;animation-delay:-3.5s;animation-duration:5.2s"></b><b style="left:48%;top:10%;animation-delay:-3.3s;animation-duration:5.5s"></b><b style="left:60%;top:17%;animation-delay:-3.2s;animation-duration:7.3s"></b><b style="left:45%;top:14%;animation-delay:-3.5s;animation-duration:7.6s"></b><b style="left:57%;top:14%;animation-delay:-3.3s;animation-duration:5.3s"></b><b style="left:37%;top:47%;animation-delay:-1.2s;animation-duration:7.7s"></b><b style="left:61%;top:57%;animation-delay:-1.9s;animation-duration:7.3s"></b><b style="left:63%;top:31%;animation-delay:-1.8s;animation-duration:8.2s"></b><b style="left:49%;top:13%;animation-delay:-3.4s;animation-duration:7.1s"></b><b style="left:55%;top:54%;animation-delay:-2.7s;animation-duration:7.4s"></b><b style="left:38%;top:15%;animation-delay:-3.1s;animation-duration:5.7s"></b></div><div class="in-pile" id="inPile"><i style="--r:4deg;--x:-17px;--y:-2px;--z:0px;--b:0.62"></i><i style="--r:-13deg;--x:-22px;--y:12px;--z:5px;--b:0.67"></i><i style="--r:-10deg;--x:-3px;--y:4px;--z:10px;--b:0.71"></i><i style="--r:-13deg;--x:6px;--y:-8px;--z:15px;--b:0.76"></i><i style="--r:-14deg;--x:-21px;--y:-1px;--z:20px;--b:0.80"></i><i style="--r:10deg;--x:-22px;--y:-7px;--z:25px;--b:0.84"></i><i style="--r:-11deg;--x:9px;--y:-1px;--z:30px;--b:0.89"></i><i style="--r:-13deg;--x:26px;--y:4px;--z:35px;--b:0.94"></i><div class="in-mine" id="inMine"></div></div></div>
 <footer class="foot">
   <p><a href="/problems/privacy/">How we look after your card</a></p>
   <p>Not for patient safety incidents. Please use your organisation’s usual process for those.</p>
@@ -483,6 +510,39 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
   back.addEventListener('click',function(){ if(page>=2) turn(page-1,-1); });
   $('more').addEventListener('click',function(){ if(busy) return; stopVoice(); if(!pr.value.trim()){ $('perr').textContent='Write a few words first.'; pr.focus(); return; } turn(2,1); });
 
+  /* ---------- post it by hand: pull the tab under the card down into the slot. The button does the same thing. ---------- */
+  var dragStart=null;
+  (function(){ var pull=$('pull'), y0=0, on=false, armed=false, MAX=54, cur={dy:0,sc:1};
+    function set(dy){ var sc=1-.03*Math.min(1,dy/MAX); face.style.transformOrigin='50% 0'; face.style.transform='translate(0,'+dy.toFixed(1)+'px) scale('+sc.toFixed(3)+')'; return sc; }
+    function back(){ var from=face.style.transform; face.style.transform=''; face.style.transformOrigin='';
+      if(from && !reduce && face.animate) face.animate([{transform:from,transformOrigin:'50% 0'},{transform:'none',transformOrigin:'50% 0'}],{duration:260,easing:'cubic-bezier(.2,.9,.3,1.2)'}); }
+    pull.addEventListener('pointerdown',function(e){ if(busy||(page!==1&&page!==3)) return; on=true; armed=false; y0=e.clientY; cur={dy:0,sc:1}; try{ pull.setPointerCapture(e.pointerId); }catch(x){} e.preventDefault(); });
+    pull.addEventListener('pointermove',function(e){ if(!on) return; var raw=Math.max(0,e.clientY-y0), dy=MAX*(1-Math.exp(-raw/MAX)); cur={dy:dy,sc:set(dy)};
+      var a=raw>=46; if(a!==armed){ armed=a; document.body.classList.toggle('armed',a); if(a) buzz(10); } });
+    function up(){ if(!on) return; on=false; document.body.classList.remove('armed');
+      if(armed){ armed=false; dragStart=cur; go.click(); if(document.body.dataset.card==='posting') return; dragStart=null; }
+      back(); }
+    pull.addEventListener('pointerup',up); pull.addEventListener('pointercancel',up);
+  })();
+
+  /* ---------- inside the box: the card lands on the pile. About two seconds, tap to skip, skipped for reduced motion. ---------- */
+  function fall(done){
+    var ov=$('inside'), mine=$('inMine');
+    if(reduce || !ov.animate){ done(); return; }
+    var br=document.querySelector('.bx-front').getBoundingClientRect(), k=br.width/380, cx=br.left+br.width/2, cy=br.top+(br.height-150*k)+25*k, fin=false, t=null;
+    function end(){ if(fin) return; fin=true; clearTimeout(t); ov.onpointerdown=null; done();
+      var f=ov.animate([{opacity:1},{opacity:0}],{duration:450,easing:'ease-out'});
+      f.onfinish=function(){ ov.hidden=true; [ov,mine,$('inPile')].forEach(function(el){ el.getAnimations().forEach(function(x){x.cancel();}); }); }; }
+    ov.hidden=false;
+    ov.animate([{clipPath:'circle(0px at '+cx+'px '+cy+'px)'},{clipPath:'circle(150vmax at '+cx+'px '+cy+'px)'}],{duration:420,easing:'cubic-bezier(.5,0,.3,1)'});
+    var m=mine.animate([
+      {transform:'translate3d(0,-82vh,0) rotateX(6deg) rotateZ(-11deg)',easing:'cubic-bezier(.5,0,.9,.6)'},
+      {transform:'translate3d(0,-30vh,0) rotateX(42deg) rotateZ(7deg)',offset:.62,easing:'cubic-bezier(.4,0,.8,.7)'},
+      {transform:'rotateX(68deg) rotateZ(5deg) translate3d(4px,-4px,44px)'}],{duration:820,delay:240,fill:'both'});
+    m.onfinish=function(){ if(fin) return; drop(); buzz(18); $('inPile').animate([{transform:'translateX(-50%) translateY(0)'},{transform:'translateX(-50%) translateY(5px)'},{transform:'translateX(-50%) translateY(0)'}],{duration:260,easing:'ease-out'}); };
+    ov.onpointerdown=end; t=setTimeout(end,1800);
+  }
+
   function vals(name){ return [].map.call(document.querySelectorAll('input[name="'+name+'"]:checked'),function(i){return i.value;}).join(', '); }
   function build(route){
     var quick=route==='quick';
@@ -498,6 +558,7 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
     var sent=fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:(function(){var fd=new FormData(); for(var k in payload) fd.append(k,payload[k]); return fd;})()})
       .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return true; });
     var anim=new Promise(function(res){
+      var D=dragStart; dragStart=null; face.style.transform='';
       if(reduce || !card.animate){ card.style.visibility='hidden'; return res(); }
       var cr=face.getBoundingClientRect(), br=document.querySelector('.bx-front').getBoundingClientRect(), k=br.width/380, padX=0;
       var sr={left:br.left+116*k, width:148*k, top:br.top+(br.height-150*k)+25*k, height:0};
@@ -509,21 +570,28 @@ body.ready:not([data-card="posting"]):not([data-card="posted"]) .glow{opacity:.8
       face.style.transformOrigin='50% 0';
       /* the stub tears off and stays; the card goes in the box */
       paper(); stub.animate([{transform:'none'},{transform:'translateY(-14px) rotate(-1.4deg)'}],{duration:300,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
-      var a=face.animate([
+      var F=[
         {transform:'translate(0,0) rotateX(0deg) scale(1)',easing:'cubic-bezier(.3,.6,.3,1)'},
         {transform:'translate(0,-30px) rotateX(-8deg) scale(1.04)',offset:.2,easing:'cubic-bezier(.5,0,.3,1)'},
         {transform:'translate('+dx+'px,'+above+'px) rotateX(6deg) scale('+s+')',offset:.58,easing:'cubic-bezier(.4,0,.2,1)'},
         {transform:'translate('+dx+'px,'+(above+6)+'px) rotateX(4deg) scale('+s+')',offset:.68,easing:'cubic-bezier(.6,0,.9,.4)'},
-        {transform:'translate('+dx+'px,'+inside+'px) rotateX(0deg) scale('+s+')'}],
-        {duration:1600,fill:'forwards'});
-      setTimeout(function(){ drop(); buzz(18); document.querySelectorAll('.bx').forEach(function(x){x.classList.add('bump');}); }, 1540);
+        {transform:'translate('+dx+'px,'+inside+'px) rotateX(0deg) scale('+s+')'}];
+      if(D) F=[
+        {transform:'translate(0,'+D.dy+'px) scale('+D.sc+')',easing:'cubic-bezier(.4,0,.2,1)'},
+        {transform:'translate('+dx+'px,'+(above+6)+'px) rotateX(4deg) scale('+s+')',offset:.5,easing:'cubic-bezier(.6,0,.9,.4)'},
+        {transform:'translate('+dx+'px,'+inside+'px) rotateX(0deg) scale('+s+')'}];
+      /* the card disappears into the box: clip whatever would show below it */
+      var clipB=Math.max(0,cr.height-(94*k-14)/s);
+      F.forEach(function(f,i){ f.clipPath='inset(0 0 '+(i===F.length-1?clipB.toFixed(1):0)+'px 0)'; });
+      var dur=D?850:1300, a=face.animate(F,{duration:dur,fill:'forwards'});
+      setTimeout(function(){ paper(); buzz(8); document.querySelectorAll('.bx').forEach(function(x){x.classList.add('bump');}); }, dur-70);
       a.onfinish=function(){ res(); };
     });
     Promise.all([sent.catch(function(e){ return {failed:true}; }), anim]).then(function(r){
       if(r[0] && r[0].failed){ [card,face,stub].forEach(function(el){ el.getAnimations && el.getAnimations().forEach(function(x){x.cancel();}); }); face.style.transformOrigin=''; card.style.visibility=''; card.style.transformOrigin='';
         $('fail').classList.add('on'); $('acts').hidden=false; $('stepname').hidden=false; busy=false; ui(); document.body.dataset.card='failed'; $('steps').hidden=false; $('intro').style.opacity=''; return; }
       var line=(payload&&payload.problem||'').replace(/\s+/g,' '); $('receipt').textContent=line; $('receipt').hidden=!line; $('slipdate').textContent=stamp(true);
-      clearDraft(); dictated=typed=false; document.body.dataset.card='posted'; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false;
+      fall(function(){ clearDraft(); dictated=typed=false; document.body.dataset.card='posted'; $('resume').hidden=true; card.hidden=true; $('done').classList.add('on'); setTimeout(chime,120); busy=false; });
     });
   }
   $('retry').addEventListener('click',function(){ $('fail').classList.remove('on'); if(payload) post(); });
