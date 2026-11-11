@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-8YYDTYIGrNfmNc4QT3tTa4/yiy6wHBtLpmPVvp5amjg='; style-src 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'; manifest-src 'none'">
+<title>Bring one example | Clinically Intelligent</title>
+<style>
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/fraunces-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/fraunces-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:500 700;font-display:swap;src:url(fonts/fraunces-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:400 500;font-display:swap;src:url(fonts/inter-tight-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:600 800;font-display:swap;src:url(fonts/inter-tight-latin-700-normal.woff2) format("woff2")}
+</style>
+<style>
+:root{--bg:#F6EEDF;--ink:#13201A;--grn:#1F5A3F;--side:#0B2A20;--rust:#B5481A;--amb:#D98A1E;--soft:#55605A;--pale:#FBE3B8;--card:#FFFFFF;--line:#E0D6C4;--mint:#D5E7DA}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Inter Tight",Arial,sans-serif;-webkit-text-size-adjust:100%;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.app{max-width:430px;margin:0 auto;padding-block:0 40px}
+.top{display:flex;align-items:center;gap:10px;background:var(--side);margin:0 -16px;padding:14px 16px;color:#E6E0D2;font-size:11px;letter-spacing:.12em}
+.top b{font:600 22px Fraunces,Georgia,serif;letter-spacing:0}.c{color:#3A8A62}.i{color:#E08E3E}
+.top .dots{margin-left:auto;display:flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:#3b5a4c;transition:background .3s}.dots i.on{background:var(--amb)}
+.screen{display:none;padding-top:22px;animation:in .4s ease both}.screen.show{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.k{font-weight:700;color:var(--grn);font-size:14px;margin:0}.ph{background:var(--pale);color:var(--rust);padding:0 5px;border-radius:3px}
+h1{font:600 40px/1.05 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:6px 0 14px;text-wrap:balance}h1 em{font-weight:400;color:var(--rust);display:block}
+h2{font:600 26px/1.15 Fraunces,Georgia,serif;margin:0 0 8px;text-wrap:balance}
+.lead{font:400 18px/1.5 Fraunces,Georgia,serif;margin:0 0 20px}
+.hint{color:var(--soft);font-size:14.5px;margin:0 0 10px}
+.objs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.obj{appearance:none;border:2px solid transparent;background:var(--card);border-radius:14px;padding:10px 8px 12px;font:inherit;color:var(--ink);cursor:pointer;box-shadow:0 2px 0 var(--line);display:grid;gap:6px;justify-items:center;transition:transform .2s,border-color .2s;min-height:44px}
+.obj svg{width:100%;height:auto;max-width:96px}.obj span{font-weight:700;font-size:14px;color:var(--grn)}
+.obj:hover{transform:translateY(-2px)}.obj[aria-pressed=true]{border-color:var(--grn);transform:translateY(-2px) rotate(-1deg)}
+:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.stage{margin-top:14px;background:var(--card);border-radius:14px;border:1px solid var(--line);padding:16px;display:none}.stage.show{display:block;animation:in .35s ease both}
+.cap{font-size:12.5px;color:var(--soft);font-style:italic;margin:10px 0 0}
+.paper{border:1.5px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;background:#FFFEFB}
+.paper h3{margin:0;font-size:13.5px;font-weight:700;color:var(--grn);background:var(--mint);padding:3px 8px;border-radius:5px;justify-self:start}
+.row{display:grid;grid-template-columns:78px 1fr;gap:8px;align-items:center;font-size:14px;color:var(--soft)}
+.fld{min-height:30px;border:1.5px dashed #B9B2A3;border-radius:6px;padding:4px 8px;color:var(--ink);font-weight:600;transition:all .4s;display:flex;align-items:center}
+.fld.on{border:1.5px solid var(--mint);background:var(--mint);border-style:solid}
+.ck{display:flex;gap:10px;align-items:center;font-size:14.5px}.ck b{width:20px;height:20px;border-radius:5px;border:2px solid var(--grn);display:grid;place-items:center;color:#fff;font-size:13px;flex:none;transition:background .3s}
+.ck.done b{background:var(--grn)}.ck.done b::after{content:"✓"}.why{margin:0;color:var(--rust);font-weight:700;font-size:14px;max-height:0;opacity:0;overflow:hidden;transition:all .4s}.why.on{max-height:60px;opacity:1}.sum{margin:12px 0 0;font-size:14px;color:var(--ink)}.sum b{color:var(--grn)}.fld.ghost{border:1.5px dashed var(--rust);color:var(--rust);background:#FBE9DB;opacity:0;transition:opacity .4s}.fld.ghost.on{opacity:1}
+.note{background:var(--pale);border-radius:8px;padding:14px;font:italic 19px/1.3 Fraunces,Georgia,serif;display:grid;gap:4px}
+.note span{transition:all .4s}.note .gone{text-decoration:line-through;color:var(--soft);opacity:.55}
+.sq{width:60px;height:12px;display:block}
+.becomes{text-align:center;color:var(--amb);font-size:20px;line-height:1;height:0;opacity:0;overflow:hidden;transition:all .4s}.becomes.on{height:30px;opacity:1;padding-top:6px}
+.act{background:var(--side);color:#F7F1E3;border-radius:12px;padding:0 16px;max-height:0;opacity:0;overflow:hidden;transition:all .5s}.act.on{max-height:200px;opacity:1;padding:14px 16px}
+.act small{color:#C9DCCF;font-size:13px;display:block}.act b{display:block;font:400 20px/1.3 Fraunces,Georgia,serif;margin:4px 0}
+.btn{appearance:none;border:0;border-radius:12px;font:700 17px "Inter Tight",Arial,sans-serif;padding:15px 20px;min-height:50px;cursor:pointer;width:100%}
+.main{background:var(--amb);color:#1B1208}.main:hover{filter:brightness(1.05)}
+.ghost{background:transparent;color:var(--grn);border:2px solid var(--grn)}
+.link{appearance:none;background:none;border:0;color:var(--soft);font:inherit;text-decoration:underline;padding:12px 4px;cursor:pointer;min-height:44px}
+.acts{display:grid;gap:10px;margin-top:18px}
+.choice{appearance:none;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px 16px;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:2px;min-height:44px;width:100%}
+.choice b{font-size:16.5px}.choice span{color:var(--soft);font-size:14.5px}.choice[aria-pressed=true]{border-color:var(--grn);background:#F1F7F3}
+.result{margin-top:14px;border-radius:14px;padding:14px 16px;font-size:15px;display:none}.result.show{display:block;animation:in .3s ease both}
+.result.ok{background:var(--mint)}.result.care{background:#FBE9DB;border:2px solid var(--rust)}.result b{display:block;margin-bottom:2px}
+label{display:block;font-weight:700;margin:18px 0 6px}
+textarea{width:100%;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:12px;padding:12px;background:var(--card);color:var(--ink);resize:vertical;min-height:84px}
+textarea:focus{border-color:var(--grn);outline:none}
+.msg{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;font-size:15px;user-select:all;margin-top:12px}
+.safe{background:#FBE9DB;border:2px solid var(--rust);border-radius:14px;padding:14px 16px;margin-top:18px;font-size:14.5px}.safe b{color:var(--rust);font:600 18px Fraunces,Georgia,serif;display:block;margin-bottom:4px}
+.back{margin-top:16px;text-align:center}
+.foot{font-size:12.5px;color:var(--soft);margin:22px 0 0}
+.sr{position:absolute;left:-9999px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><div class="app">
+<header class="top"><svg role="img" aria-label="Clinically Intelligent" style="height:34px;width:auto;display:block" xmlns="http://www.w3.org/2000/svg" viewBox="333 145 583 878"><path fill="#f6f1e7" d="M580.5 780.0C550.1 775.4 520.7 765.7 492.0 750.9C451.1 729.7 417.0 698.6 388.9 656.5C338.6 581.3 322.0 472.5 346.1 375.5C357.5 329.6 378.3 286.9 406.8 251.0C417.1 238.1 442.3 213.2 454.5 203.9C486.2 179.8 518.4 164.5 557.4 154.9C570.7 151.7 593.8 148.2 604.4 147.9L611.3 147.7L611.2 159.5L611.1 171.4L604.3 172.6C591.3 174.8 581.4 178.1 568.5 184.5C552.1 192.6 544.6 198.2 529.5 213.4C514.7 228.4 504.6 242.6 493.5 264.3C477.2 296.0 467.0 326.2 459.5 364.9C447.3 428.3 448.2 509.6 462.1 579.4C473.3 635.4 495.5 682.8 526.0 715.3C545.4 736.0 572.7 751.7 596.8 756.0L604.0 757.3L604.0 769.7L604.0 782.0L598.2 781.9C595.1 781.9 587.1 781.0 580.5 780.0ZM630.0 769.2L630.0 756.5L635.8 755.1C642.8 753.5 657.6 747.3 665.7 742.6C679.6 734.5 695.4 720.9 708.3 706.0L714.0 699.5L713.7 731.0L713.5 762.5L699.7 767.1C678.7 774.2 643.5 782.0 632.8 782.0L630.0 782.0L630.0 769.2ZM773.0 277.4C772.4 276.0 772.0 274.4 772.0 273.8C772.0 271.5 764.7 254.7 760.4 247.1C736.9 205.2 693.9 176.1 649.7 172.1L642.5 171.5L642.5 159.5L642.5 147.5L651.0 147.8C662.0 148.3 681.5 151.2 696.4 154.5C713.1 158.3 730.2 163.9 755.6 174.0C784.5 185.6 787.0 186.3 798.3 185.8C807.4 185.5 807.5 185.5 808.4 188.2C809.2 190.4 808.8 191.6 806.2 195.7C794.6 213.7 785.9 241.2 782.9 268.8L781.7 280.0L777.8 280.0C774.6 280.0 773.8 279.6 773.0 277.4Z"/><path fill="#cf7a37" d="M686.0 1013.6L686.0 1005.3L693.8 1004.6C709.5 1003.3 723.1 998.1 732.4 989.8C743.7 979.8 748.6 967.4 750.1 945.6C751.2 927.7 751.2 453.7 750.0 435.1C749.0 419.8 747.2 411.5 743.0 402.4C735.2 386.0 719.5 376.4 696.8 374.0C691.7 373.5 687.2 373.0 686.8 373.0C686.3 373.0 686.0 369.4 686.0 365.0L686.0 357.0L694.2 357.0C698.8 357.0 750.2 357.0 808.5 356.9L914.5 356.9L914.8 364.8L915.1 372.7L904.8 373.9C874.9 377.5 859.9 389.9 852.8 417.0L850.5 425.5L850.5 690.5C850.5 941.7 850.6 955.8 852.3 962.0C856.5 977.2 864.4 988.4 876.0 995.5C883.0 999.7 897.1 1003.9 907.2 1004.7L915.0 1005.3L915.0 1013.6L915.0 1022.0L800.5 1022.0L686.0 1022.0L686.0 1013.6Z"/></svg><span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></header>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<section class="screen show" id="s0" aria-labelledby="h0">
+<p class="k">Before your workshop on <span class="ph" data-ph="date">[date]</span></p>
+<h1 id="h0">Bring one example.<em>Let’s start with your work.</em></h1>
+<p class="lead">A document, a workflow or something frustrating. Share a suitable example and we’ll explore how it could shape your team’s session.</p>
+<p class="hint">Tap one to see how it could inspire an activity.</p>
+<div class="objs" id="objs">
+<button class="obj" data-k="doc" aria-pressed="false"><svg viewBox="0 0 96 70" aria-hidden="true"><rect x="2" y="2" width="92" height="66" rx="8" fill="#FFFEFB" stroke="#E0D6C4"/><rect x="10" y="10" width="40" height="8" rx="3" fill="#D5E7DA"/><rect x="10" y="26" width="34" height="14" rx="3" fill="none" stroke="#B9B2A3" stroke-dasharray="3 3"/><rect x="50" y="26" width="34" height="14" rx="3" fill="none" stroke="#B9B2A3" stroke-dasharray="3 3"/><rect x="10" y="50" width="60" height="3" fill="#E0D6C4"/></svg><span>A document</span></button>
+<button class="obj" data-k="flow" aria-pressed="false"><svg viewBox="0 0 96 70" aria-hidden="true"><rect x="2" y="2" width="92" height="66" rx="8" fill="#FFFEFB" stroke="#E0D6C4"/><g fill="#1F5A3F"><rect x="12" y="12" width="12" height="12" rx="3"/><rect x="12" y="30" width="12" height="12" rx="3"/></g><rect x="12" y="48" width="12" height="12" rx="3" fill="none" stroke="#1F5A3F" stroke-width="2"/><g fill="#E0D6C4"><rect x="32" y="16" width="50" height="4" rx="2"/><rect x="32" y="34" width="38" height="4" rx="2"/><rect x="32" y="52" width="46" height="4" rx="2"/></g></svg><span>A workflow</span></button>
+<button class="obj" data-k="frus" aria-pressed="false"><svg viewBox="0 0 96 70" aria-hidden="true"><rect x="2" y="2" width="92" height="66" rx="6" fill="#FBE3B8"/><path d="M12 22 q8 -10 16 0 t16 0 t16 0" fill="none" stroke="#B5481A" stroke-width="3" stroke-linecap="round"/><rect x="12" y="40" width="56" height="4" rx="2" fill="#B5481A" opacity=".45"/><rect x="12" y="50" width="38" height="4" rx="2" fill="#B5481A" opacity=".45"/></svg><span>A frustration</span></button>
+</div>
+<div class="stage" id="stage" aria-live="polite"></div>
+<div class="acts"><button class="btn main" id="go">I have one</button><button class="link" id="skip">Nothing to bring? That is fine</button></div>
+<p class="foot">Optional. Nothing to prepare. Questions? Ask your organiser. Clinically Intelligent is independent of the NHS.</p>
+</section>
+
+<section class="screen" id="s1" aria-labelledby="h1b">
+<h2 id="h1b">Quick check before you share</h2>
+<p class="hint">Is it public, blank or explicitly authorised? Nothing here is saved.</p>
+<div class="acts" style="margin-top:6px">
+<button class="choice" data-r="ok" aria-pressed="false"><b>Yes, I know it can be shared</b><span>It is public, or I have approval to share it.</span></button>
+<button class="choice" data-r="unsure" aria-pressed="false"><b>I’m not sure</b><span>A blank form is not always cleared to share.</span></button>
+<button class="choice" data-r="no" aria-pressed="false"><b>It has patient or confidential information</b><span>Real records, names or internal documents.</span></button></div>
+<div class="result" id="res" role="status"></div>
+<div class="acts"><button class="btn main" id="to2" style="display:none">Continue</button></div>
+<div class="back"><button class="link" data-back="0">Back</button></div>
+</section>
+
+<section class="screen" id="s2" aria-labelledby="h2b">
+<h2 id="h2b">Two questions</h2>
+<p class="hint">A sentence or two is plenty. Skip any you like.</p>
+<label for="q1">What do you use it for?</label><textarea id="q1" rows="3"></textarea>
+<label for="q2">What makes it difficult, repetitive or frustrating?</label><textarea id="q2" rows="3"></textarea>
+<div class="safe" id="reminder"><b>Remember</b>Describe the task. Please leave out real patient information.</div>
+<div class="acts"><button class="btn main" id="to3">Write my message</button></div>
+<div class="back"><button class="link" data-back="1">Back</button></div>
+</section>
+
+<section class="screen" id="s3" aria-labelledby="h3b">
+<p class="k">Final step</p>
+<h2 id="h3b">Share your example with your organiser.</h2>
+<p class="hint">Copy your message and send it through the agreed channel, <span class="ph" data-ph="channel">[agreed channel]</span>. If you’re sharing an approved document, attach it separately. Nothing is uploaded or saved here.</p>
+<div class="msg" id="msg" tabindex="0"></div>
+<div class="acts"><button class="btn main" id="copy">Copy message</button><button class="btn ghost" id="again">Start again</button></div>
+<div class="safe" style="background:var(--mint);border-color:var(--grn)"><b style="color:var(--grn)">Not sure your document can be shared?</b>That’s fine. Describe the task instead. We can still build a useful fictional activity around the problem.</div>
+<div class="safe"><b>What must never be shared</b>Only public, blank or explicitly authorised materials, and only where you are authorised to share them for this purpose. No real patient information, confidential records or internal documents without approval. A blank form is not automatically cleared.</div>
+<p class="foot">We use what you share only to prepare your team’s session.</p>
+<div class="back"><button class="link" data-back="2">Back</button></div>
+</section>
+
+<section class="screen" id="s4" aria-labelledby="h4b">
+<h2 id="h4b">That’s completely fine.</h2>
+<p class="lead">If nothing arrives, we use our own fictional scenarios. No penalty, and no chasing.</p>
+<div class="acts"><button class="btn ghost" data-back="0">Take another look</button></div>
+</section>
+</div>
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var timers=[];function later(f,ms){if(reduce){f();return}timers.push(setTimeout(f,ms))}
+function clear(){timers.forEach(clearTimeout);timers=[]}
+var Q=new URLSearchParams(location.search);
+var CONFIG={date:(Q.get('date')||'').slice(0,40),channel:(Q.get('channel')||'').slice(0,80)};
+function P(k){return CONFIG[k]||'['+(k==='channel'?'agreed channel':k)+']'}
+$$('[data-ph]').forEach(function(e){var v=CONFIG[e.dataset.ph];if(v){e.textContent=v;e.classList.remove('ph')}});
+var cur=0,state={safety:''};
+function show(n){clear();cur=n;$$('.screen').forEach(function(s,i){s.classList.toggle('show',i===n)});
+$$('.dots i').forEach(function(d,i){d.classList.toggle('on',i<=Math.min(n,3))});
+var h=$('.screen.show h1, .screen.show h2');if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+window.scrollTo(0,0)}
+$$('[data-back]').forEach(function(b){b.onclick=function(){show(+b.dataset.back)}});
+var DATA={
+doc:{title:'Falls screening form',rows:[['Mobility','Uses frame indoors'],['Home','Lives alone, stairs'],['Next step','Review in two weeks']],ghost:'What isn’t asked',sum:'In words: the fictional form fills in, then a gap appears, something it never asks.',act:['Spot what this form never asks','What would you want to know that it doesn’t capture?']},
+flow:{title:'End of shift checks',items:['Check bed rails','Confirm equipment delivered','Update the board'],why:'What happens to this step on a busy shift?',sum:'In words: two steps are completed, and the third prompts a question about what happens to it on a busy shift.',act:['What happens to this step on a busy shift?','What would you want to understand before changing it?']},
+frus:{sum:'In words: the same details are written three times, then we ask whether they could be captured once.',act:['What would need to be true to capture this once?','We would explore it together in the session.']}};
+function stage(k){var d=DATA[k],h='',st=$('#stage');
+if(k==='doc'){h='<div class="paper"><h3>'+d.title+'</h3>'+d.rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><div class="fld" data-v="'+r[1]+'">&nbsp;</div></div>'}).join('')+'<div class="row"><span>'+d.ghost+'</span><div class="fld ghost">?</div></div></div>'}
+if(k==='flow'){h='<div class="paper" style="gap:12px"><h3>'+d.title+'</h3>'+d.items.map(function(t){return '<div class="ck"><b></b>'+t+'</div>'}).join('')+'<p class="why">'+d.why+'</p></div>'}
+if(k==='frus'){h='<div class="note"><span>Same details,</span><span>same details,</span><span>same details.</span></div>'}
+h+='<p class="sum"><b>In words:</b>'+d.sum.slice(9)+'</p><div class="becomes" id="bec" aria-hidden="true">●</div><div class="act" id="act"><small>Here’s one way an everyday example could inspire a workshop activity</small><b>'+d.act[0]+'</b><small>'+d.act[1]+'</small></div><p class="cap">A fictional illustration, not a promise. Examples inform the session where they fit.</p>';
+st.innerHTML=h;st.classList.add('show');
+var steps=function(){
+if(k==='doc'){$$('.fld:not(.ghost)',st).forEach(function(f,i){later(function(){f.textContent=f.dataset.v;f.classList.add('on')},500+i*450)});later(function(){$('.fld.ghost',st).classList.add('on')},2000)}
+if(k==='flow'){var c=$$('.ck',st);later(function(){c[0].classList.add('done')},500);later(function(){c[1].classList.add('done')},950);later(function(){$('.why',st).classList.add('on')},1400)}
+if(k==='frus'){var s=$$('.note span',st);later(function(){s[0].classList.add('gone')},500);later(function(){s[1].classList.add('gone')},950);later(function(){s[2].textContent='Could we capture this once?';s[2].style.color='#B5481A';s[2].style.fontWeight='600'},1400)}
+later(function(){$('#bec').classList.add('on');$('#act').classList.add('on');$('#live').textContent=d.sum+' Activity: '+d.act[0]},k==='doc'?2400:1800)};
+clear();steps();
+st.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'})}
+$$('.obj').forEach(function(o){o.onclick=function(){$$('.obj').forEach(function(x){x.setAttribute('aria-pressed','false')});o.setAttribute('aria-pressed','true');stage(o.dataset.k)}});
+$('#go').onclick=function(){show(1)};$('#skip').onclick=function(){show(4)};
+var R={ok:['ok','Thank you for checking.','A blank form is not automatically cleared, so confirm before it leaves your team.'],unsure:['care','Describe the task instead.','That is the safe and simple route. You don’t need to share a document at all.'],no:['care','Please don’t share it.','Describe the task in your own words and leave out anything identifiable. That is all we need.']};
+$$('.choice').forEach(function(c){c.onclick=function(){$$('.choice').forEach(function(x){x.setAttribute('aria-pressed','false')});c.setAttribute('aria-pressed','true');var r=R[c.dataset.r];state.safety=c.dataset.r;var el=$('#res');el.className='result show '+r[0];el.innerHTML='<b>'+r[1]+'</b>'+r[2];$('#to2').style.display='block';
+$('#reminder').innerHTML=c.dataset.r==='ok'?'<b>Remember</b>Share only what you have confirmed can be shared.':'<b>Remember</b>Describe the task. Please leave out real patient information.'}});
+$('#to2').onclick=function(){show(2)};
+$('#to3').onclick=function(){var a=$('#q1').value.trim(),b=$('#q2').value.trim();var t='Hello, here is my example for the workshop on '+P('date')+'.\n\nWhat I use it for: '+(a||'(skipped)')+'\nWhat makes it difficult, repetitive or frustrating: '+(b||'(skipped)')+'\n\n'+(state.safety==='ok'?'I have confirmed it can be shared. I will attach it separately through '+P('channel')+'.':'I am describing the task only, with no documents attached.');$('#msg').textContent=t;show(3)};
+$('#copy').onclick=function(){var b=$('#copy'),t=$('#msg').textContent;function ok(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy message'},1800)}
+function sel(){var r=document.createRange();r.selectNodeContents($('#msg'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected. Copy it now'}
+try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}};
+$('#again').onclick=function(){$$('.obj').forEach(function(x){x.setAttribute('aria-pressed','false')});$('#stage').className='stage';$('#stage').innerHTML='';$$('.choice').forEach(function(x){x.setAttribute('aria-pressed','false')});$('#res').className='result';$('#to2').style.display='none';$('#q1').value='';$('#q2').value='';show(0)};
+})();
+</script></body></html>
