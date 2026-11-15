@@ -21,4 +21,6 @@ Favicon: every page includes these four lines just before </head>, so the CI log
     <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+Email links: add `<script src="/assets/email.js" defer></script>` before </body> on any page with a mailto: link. Clicking the link then offers copy the address, Outlook on the web (NHSmail), Gmail or the email app, instead of the app picker NHS computers show.
+
 Interactive parts (sign-up forms, the Problems card, the shelf, exercises): see STATE-MACHINES.md at the repo root for each one's states and the shared subscriber keys.

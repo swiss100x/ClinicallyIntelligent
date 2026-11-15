@@ -69,6 +69,7 @@ invitation -> page1 -> page2 <-> page3
 | Homepage reel | playing or paused, on slide n | `#reelPlay[aria-label]` |
 | Menu sheet (shared header) | closed -> open -> closed (Escape, link, or wider screen) | `.sh-menu[aria-expanded]` |
 | Share buttons (`/build/`, "Would you send it?", `/overview/`) | idle -> "Link copied" -> idle after 2.5s | button text |
+| Email chooser (every page with an email link, `/assets/email.js`) | closed -> open (any `mailto:` link) -> copied -> closed (Escape, ×, tap outside, or an inbox chosen). Ctrl, Cmd or middle click still opens the email app. | `dialog.ci-mail[data-state]` |
 | Copy prompt (`/templates/`) | idle -> "Copied" -> idle after 2.2s, also on a double tap | `.copied` |
 
 ## 6. The Clinician's AI Safety Check (`/field-guides/safety-check/`)
