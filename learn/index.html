@@ -181,7 +181,7 @@ const $=(t,a={},h='')=>{const e=document.createElement(t);for(const k in a){if(k
    To go live: paste your Supabase project URL and PUBLISHABLE key (sb_publishable_...).
    Never paste the secret key here. NOTICE must match the privacy notice version shown. */
 const BACKEND={url:'https://niobpbtaaojurhppkmpi.supabase.co',key:'sb_publishable_0goUWTLnNfOR5BSaG0p8UQ_U2PczI2l'},NOTICE='1.0';
-const ICO_NUMBER='C2088950'; /* paste the ICO registration number here, e.g. 'ZB123456' */
+const ICO_NUMBER='ZC304334'; /* paste the ICO registration number here, e.g. 'ZB123456' */
 const LIVE=!!(BACKEND.url&&BACKEND.key);
 const INVITE=(new URLSearchParams(location.search).get('c')||'').trim();
 const MEM={};const store={get(k){if(k in MEM)return JSON.parse(MEM[k]);try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){MEM[k]=JSON.stringify(v);try{localStorage.setItem(k,MEM[k])}catch(e){}}};
@@ -253,7 +253,7 @@ function notice(){const s=$('div',{class:'sheet',role:'dialog','aria-modal':'tru
  const f=t=>'<span class="fill">'+t+'</span>';
  s.innerHTML='<div class="in"><button class="link" id="cl">Close</button>'+(ICO_NUMBER?'':'<div class="warn"><b>Not final.</b> The ICO registration number must be added before this is used with real participants.</div>')+'<h2>How Clinically Intelligent uses your answers</h2>'+
  '<p class="soft">Notice version '+NOTICE+'</p>'+
- '<h3>Who we are</h3><p>Learning to Practice is run by Clinically Intelligent Ltd, a company registered in England and Wales (company number 17420096), registered office Office 20677, 182-184 High Street North, London, England, E6 2JA. We are responsible for the information collected through this activity. You can contact us at hello@clinicallyintelligent.com. '+(ICO_NUMBER?'ICO registration reference '+ICO_NUMBER+'.':f('[ICO registration number to add before launch]'))+'</p>'+
+ '<h3>Who we are</h3><p>Learning to Practice is run by Clinically Intelligent Ltd, a company registered in England and Wales (company number 17420096), registered office Office 20677, 182-184 High Street North, London, England, E6 2JA. We are responsible for the information collected through this activity. You can contact us at hello@clinicallyintelligent.com. '+(ICO_NUMBER?'ICO registration number '+ICO_NUMBER+'.':f('[ICO registration number to add before launch]'))+'</p>'+
  '<h3>Taking part is your choice</h3><p>You can attend the teaching without completing the questionnaire. You can stop at any time, and optional questions can be skipped.</p>'+
  '<h3>What we collect</h3><p>We collect your answers to five short questions, your choice in a fictional workplace scenario, any optional note or feedback you provide, a random journey code, and the time and version of the notice shown. We do not ask for your name or email address. Please do not include patient details or anything that identifies you or a colleague. Website and database providers may also process technical information needed to operate the service.</p>'+
  '<h3>Why we use it</h3><p>We use your answers to understand the group’s starting point, tailor the teaching, support your learning journey and evaluate and improve this training. Our lawful basis is legitimate interests under Article 6(1)(f) UK GDPR. You can object by contacting us with your journey code.</p>'+
